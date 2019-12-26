@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">امان الشرق</string>
+    <string name="skip">تخطي</string>
+    <string name="email">البريد الالكتروني</string>
+    <string name="password">كلمة السر</string>
+    <string name="sigin">تسجيل الدخول</string>
+    <string name="next">فيما بعد</string>
+    <string name="name">الاسم</string>
+    <string name="phone">رقم الهاتف</string>
+    <string name="conferim_password">تأكيد كلمة السر</string>
+    <string name="submit">تسجيل</string>
+</resources>
