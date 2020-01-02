@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.PaymentActivity"></activity>
+        <activity android:name=".view.RegluarMainTenanceActivity" />
+        <activity android:name=".view.PaymentActivity" />
         <activity android:name=".view.AddWarrantyPeriodActivity" />
         <activity android:name=".view.AddCarActivity" />
         <activity android:name=".view.SplashActivity">
