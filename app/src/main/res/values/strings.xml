@@ -9,4 +9,7 @@
     <string name="phone">رقم الهاتف</string>
     <string name="conferim_password">تأكيد كلمة السر</string>
     <string name="submit">تسجيل</string>
+    <string name="sign_up">Dont have account? SignUp</string>
+    <string name="preference_file_key">keyfile</string>
+    <string name="token">token</string>
 </resources>

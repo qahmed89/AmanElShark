@@ -29,9 +29,9 @@ public class SliderAdapter extends PagerAdapter {
 
     // img Array
     public int[] image_slide = {
-            R.drawable.group_11,
-            R.drawable.group_10,
-            R.drawable.group_12
+            R.drawable.pexels_a,
+            R.drawable.pexels_g,
+            R.drawable.photo_3224164
     };
 
     // heading Array

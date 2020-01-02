@@ -1,7 +1,6 @@
 package com.example.amanelshark.viewmodel;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.pm.PermissionInfoCompat;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -24,7 +23,7 @@ public class ViewModelFactory implements ViewModelProvider.Factory {
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
         Provider<? extends ViewModel> creator = creators.get(modelClass);
-        if (creators == null) {
+        if (creator == null) {
             for (Map.Entry<Class<? extends ViewModel>, Provider<ViewModel>> entry : creators.entrySet()) {
                 if (modelClass.isAssignableFrom(entry.getKey())) {
                     creator = entry.getValue();

@@ -1,6 +1,7 @@
 package com.example.amanelshark.di.components;
 
 
+import com.example.amanelshark.view.AddCarActivity;
 import com.example.amanelshark.view.LoginActivity;
 import com.example.amanelshark.di.modules.ContextModel;
 import com.example.amanelshark.di.modules.NetworkModel;
@@ -19,6 +20,7 @@ public interface AppComponent {
 
 
   void inject(LoginActivity loginActivity);
+  void inject(AddCarActivity addCarActivity);
 
 //  //  void inject(SplashActivity splashActivity);
 //    void injectFragment(RequestFragment requestFragment);

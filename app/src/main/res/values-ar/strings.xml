@@ -10,4 +10,5 @@
     <string name="name">الاسم</string>
     <string name="phone">رقم الهاتف</string>
     <string name="submit">تسجيل</string>
+    <string name="sign_up">ليس لديك حساب ؟ حساب جديد</string>
 </resources>

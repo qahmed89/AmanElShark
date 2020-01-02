@@ -10,18 +10,18 @@
 
     <ImageView
         android:id="@+id/imageView1"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="100dp"
-        app:srcCompat="@drawable/group_10" />
+        android:scaleType="centerCrop"
+        android:src="@drawable/pexels_a" />
 
     <TextView
         android:id="@+id/tvHeading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/imageView1"
         android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
         android:layout_marginTop="20dp"
         android:padding="30dp"
         android:textSize="20sp"

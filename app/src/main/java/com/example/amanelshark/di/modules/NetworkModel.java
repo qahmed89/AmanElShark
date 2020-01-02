@@ -19,7 +19,7 @@ public class NetworkModel {
 
         return  new Retrofit.Builder()
 
-                .baseUrl("http://192.168.1.173:3200/api/")
+                .baseUrl("http://192.168.1.26:8000/api/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();

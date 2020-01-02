@@ -65,7 +65,7 @@ public class OnBoardActivity extends AppCompatActivity {
     }
 
     private void launchHomeScreen() {
-        startActivity(new Intent(this, RegisterActivity.class));
+        startActivity(new Intent(this, AddWarrantyPeriodActivity.class));
         finish();
     }
 

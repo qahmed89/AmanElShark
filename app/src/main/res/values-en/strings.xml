@@ -10,5 +10,6 @@
     <string name="phone">Phone</string>
     <string name="sigin">SigIn</string>
     <string name="skip">Skip</string>
-    <string name="submit">Submit</string>
+    <string name="submit">Submits</string>
+    <string name="sign_up">Dont have account? SignUp</string>
 </resources>

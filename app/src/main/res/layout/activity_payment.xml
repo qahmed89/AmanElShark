@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".view.PaymentActivity">
+<com.google.android.material.card.MaterialCardView
+    android:layout_margin="20dp"
+    android:layout_gravity="center_vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="#D4D4D4"
+
+    >
+<LinearLayout
+    android:layout_margin="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <TextView
+        android:layout_margin="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Pay Rs. 25 to Mobikwlk"
+        android:textAlignment="center">
+
+    </TextView>
+    <TextView
+        android:layout_margin="5dp"
+        android:layout_width="match_parent"
+        android:textColor="#000"
+        android:layout_height="wrap_content"
+        android:text="Pay Rs. 25 to Mobikwlk"
+        android:textAlignment="textStart">
+
+    </TextView>
+    <TextView
+        android:layout_margin="5dp"
+        android:layout_width="match_parent"
+        android:textColor="#000"
+        android:layout_height="wrap_content"
+        android:text="we Accepted "
+        android:textAlignment="textStart">
+
+    </TextView>
+    <ImageView
+        android:layout_margin="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/download"
+        >
+
+    </ImageView>
+    <TextView
+        android:layout_margin="5dp"
+        android:layout_width="match_parent"
+        android:textColor="#000"
+        android:layout_height="wrap_content"
+        android:text="Card Number "
+        android:textAlignment="textStart">
+
+    </TextView>
+    <EditText
+        android:layout_marginLeft="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+
+    </EditText>
+    <TextView
+        android:layout_margin="5dp"
+        android:layout_width="match_parent"
+        android:textColor="#000"
+        android:layout_height="wrap_content"
+        android:text="Expiration date "
+        android:textAlignment="textStart">
+
+    </TextView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <Spinner
+            android:layout_marginLeft="5dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/white"
+            android:layout_height="30dp"
+            android:layout_marginRight="9dp"
+            android:background="@color/white">
+
+        </Spinner>
+        <Spinner
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="30dp"
+            android:background="@color/white">
+
+        </Spinner>
+    </LinearLayout>
+    <TextView
+        android:layout_margin="5dp"
+        android:layout_width="match_parent"
+        android:textColor="#000"
+        android:layout_height="wrap_content"
+        android:text="CVV Code"
+        android:textAlignment="textStart">
+
+    </TextView>
+    <EditText
+        android:layout_marginLeft="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+
+    </EditText>
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pay"
+        android:layout_margin="20dp"
+        android:textColor="@color/white"
+        android:background="#0277BD"
+        android:layout_gravity="center">
+
+    </androidx.appcompat.widget.AppCompatButton>
+</LinearLayout>
+</com.google.android.material.card.MaterialCardView>
+</LinearLayout>
