@@ -13,6 +13,7 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -24,24 +25,36 @@ import com.example.amanelshark.databinding.ActivityLoginBinding;
 import com.example.amanelshark.model.login.Login;
 import com.example.amanelshark.viewmodel.AmanElsharkViewModel;
 import com.example.amanelshark.viewmodel.NewViewModel;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 
+import org.reactivestreams.Subscriber;
+
+import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 
 import javax.inject.Inject;
 
+import io.reactivex.Flowable;
+import io.reactivex.FlowableEmitter;
+import io.reactivex.FlowableOnSubscribe;
+
 public class LoginActivity extends AppCompatActivity {
     @Inject
     ViewModelProvider.Factory viewModelProvider;
-    private AmanElsharkViewModel userViewModel;
-Context context;
-String mLanguageCode = "ar";
+    Context context;
+    String mLanguageCode = "ar";
     TextInputEditText email;
     TextInputEditText password;
     SharedPreferences sharedPref;
     SharedPreferences.Editor editor;
-ActivityLoginBinding activityLoginBinding;
+    List<Login> login;
+    ActivityLoginBinding activityLoginBinding;
+    int i = 0;
+    String x = "";
+    private AmanElsharkViewModel userViewModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         LocaleHelper.setLocale(LoginActivity.this, mLanguageCode);
@@ -51,40 +64,53 @@ ActivityLoginBinding activityLoginBinding;
 
         ((BaseApplication) getApplication()).getAppComponent().inject(this);
         activityLoginBinding = DataBindingUtil.setContentView(this, R.layout.activity_login);
-
         userViewModel = ViewModelProviders.of(this, viewModelProvider).get(AmanElsharkViewModel.class);
-        // password =findViewById(R.id.password_login);
-        sharedPref =getSharedPreferences( getString(R.string.preference_file_key),Context.MODE_PRIVATE);
-        editor=sharedPref.edit();
+        sharedPref = getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+        editor = sharedPref.edit();
         //It is required to recreate the activity to reflect the change in UI.
-        LocaleHelper.setLocale(LoginActivity.this, mLanguageCode);
+        activityLoginBinding.button.setOnClickListener(v -> {
+            activityLoginBinding.progressBar.setVisibility(View.VISIBLE);
+            userViewModel.errorMessage().observe(this, new Observer<String>() {
 
-
-        Button button = findViewById(R.id.button);
-
-        button.setOnClickListener(v -> {
-            userViewModel.getloginRequests(getApplicationContext(),activityLoginBinding.emailLogin.getText().toString(),activityLoginBinding.passwordLogin.getText().toString()).observe(this, new Observer<Login>() {
                 @Override
-                public void onChanged(Login login) {
-                    editor.putString(getString(R.string.token),"Bearer "+login.getToken()).apply();
-                    Intent intent = new Intent(LoginActivity.this,OnBoardActivity.class);
-                    startActivity(intent);
+                public void onChanged(String s) {
+                    if (s != null) {
+                        x = s;
+                        Snackbar.make(v, "error", Snackbar.LENGTH_LONG).show();
+                        userViewModel.clear(LoginActivity.this);
+                        activityLoginBinding.progressBar.setVisibility(View.GONE);
+                        userViewModel.errorMessage().removeObservers(LoginActivity.this);
+                    } else activityLoginBinding.progressBar.setVisibility(View.GONE);
+
                 }
             });
-          //  String emails =(String) email.getText()).toString();
+            i = 0;
+            userViewModel.getloginRequests(getApplicationContext(), activityLoginBinding.emailLogin.getText().toString(), activityLoginBinding.passwordLogin.getText().toString(), getCurrentFocus()).observe(this, new Observer<Login>() {
+                @Override
+                public void onChanged(Login login) {
+
+                    editor.putString(getString(R.string.token), "Bearer " + login.getToken()).apply();
+                    i++;
+                    activityLoginBinding.progressBar.setVisibility(View.GONE);
+                    // Snackbar.make(v, "sccess", Snackbar.LENGTH_LONG).show();
+//                    Intent intent = new Intent(LoginActivity.this,OnBoardActivity.class);
+//                    startActivity(intent);
+//                    finish();
+                }
+            });
 
         });
-        TextView x = findViewById(R.id.textView);
-        x.setOnClickListener(new View.OnClickListener() {
+        activityLoginBinding.textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this,RegisterActivity.class);
+                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
                 startActivity(intent);
                 finish();
             }
         });
 
     }
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
@@ -95,4 +121,5 @@ ActivityLoginBinding activityLoginBinding;
         finish();
 
 
-}}
+    }
+}

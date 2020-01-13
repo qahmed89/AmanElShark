@@ -1,12 +1,18 @@
 package com.example.amanelshark.di.modules;
 
 
+import android.provider.SyncStateContract;
+
 import com.example.amanelshark.remote.AmanElSharkServices;
+
+import java.util.concurrent.TimeUnit;
 
 import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import okhttp3.Dispatcher;
+import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -17,9 +23,10 @@ public class NetworkModel {
     @Singleton
     static Retrofit provideRetrofit (){
 
+
         return  new Retrofit.Builder()
 
-                .baseUrl("http://192.168.1.26:8000/api/")
+                .baseUrl("http://aman.reaya.xyz/api/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();

@@ -27,6 +27,7 @@ public class ViewModelFactory implements ViewModelProvider.Factory {
             for (Map.Entry<Class<? extends ViewModel>, Provider<ViewModel>> entry : creators.entrySet()) {
                 if (modelClass.isAssignableFrom(entry.getKey())) {
                     creator = entry.getValue();
+
                     break;
                 }
             }

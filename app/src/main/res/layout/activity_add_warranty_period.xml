@@ -38,8 +38,10 @@
                 <RadioGroup
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:id="@+id/radiogroup"
                     >
                     <RadioButton
+                        android:id="@+id/radioone"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="6 Mouth"
@@ -47,16 +49,20 @@
 
                     </RadioButton>
                     <RadioButton
+                        android:id="@+id/radiotwo"
+
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="6 Mouth"
+                        android:text="12 Mouth"
                         android:textSize="17sp">
 
                     </RadioButton>
                     <RadioButton
+                        android:id="@+id/radiothree"
+
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="6 Mouth"
+                        android:text="24 Mouth"
                         android:textSize="17sp">
 
                     </RadioButton>
@@ -69,6 +75,8 @@
     android:orientation="vertical"
     android:layout_height="match_parent">
     <Spinner
+        android:id="@+id/one"
+        android:enabled="false"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="3"
@@ -77,6 +85,8 @@
 
     </Spinner>
     <Spinner
+        android:id="@+id/two"
+        android:enabled="false"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="3"
@@ -85,6 +95,8 @@
 
     </Spinner>
     <Spinner
+        android:id="@+id/three"
+        android:enabled="false"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="3"

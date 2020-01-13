@@ -3,6 +3,7 @@
     package="com.example.amanelshark">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA"> </uses-permission>
 
     <application
         android:name=".BaseApplication"
@@ -12,6 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".view.DetailsServicesActivity"></activity>
+        <activity android:name=".view.ServicesActivity" />
         <activity android:name=".view.RegluarMainTenanceActivity" />
         <activity android:name=".view.PaymentActivity" />
         <activity android:name=".view.AddWarrantyPeriodActivity" />

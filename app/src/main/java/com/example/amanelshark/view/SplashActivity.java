@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.text.TextUtils;
 
 import com.example.amanelshark.R;
+import com.example.amanelshark.model.login.Login;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -24,7 +25,7 @@ public class SplashActivity extends AppCompatActivity {
                  */
 
 //                if (str_login_test != null && !str_login_test.toString().trim().equals("")) {
-                Intent intent = new Intent(SplashActivity.this,LoginActivity.class);
+                Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
                 startActivity(intent);
                 finish();
                 //   }
