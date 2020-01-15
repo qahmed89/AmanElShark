@@ -70,21 +70,36 @@ public class LoginActivity extends AppCompatActivity {
         //It is required to recreate the activity to reflect the change in UI.
         activityLoginBinding.button.setOnClickListener(v -> {
             activityLoginBinding.progressBar.setVisibility(View.VISIBLE);
-            userViewModel.errorMessage().observe(this, new Observer<String>() {
+            userViewModel.isLoading().observe(this, isLoading -> {
+                if(isLoading == true) {
+                    activityLoginBinding.progressBar.setVisibility(View.VISIBLE);
+                }else   activityLoginBinding.progressBar.setVisibility(View.GONE);
 
-                @Override
-                public void onChanged(String s) {
-                    if (s != null) {
-                        x = s;
-                        Snackbar.make(v, "error", Snackbar.LENGTH_LONG).show();
-                        userViewModel.clear(LoginActivity.this);
-                        activityLoginBinding.progressBar.setVisibility(View.GONE);
-                        userViewModel.errorMessage().removeObservers(LoginActivity.this);
-                    } else activityLoginBinding.progressBar.setVisibility(View.GONE);
-
-                }
             });
-            i = 0;
+            userViewModel.errorMessage().observe(this, errorMessage -> {
+                if (errorMessage != null) {
+                   // activityLoginBinding.progressBar.setVisibility(View.VISIBLE);
+                    Snackbar.make(v, "error", Snackbar.LENGTH_LONG).show();
+
+
+                } else { //activityLoginBinding.progressBar.setVisibility(View.GONE);
+                Snackbar.make(v, "done", Snackbar.LENGTH_LONG).show();}
+            });
+
+//            userViewModel.errorMessage().observe(this, new Observer<String>() {
+//
+//                @Override
+//                public void onChanged(String s) {
+//                    if (s != null) {
+//                        x = s;
+//                        Snackbar.make(v, "error", Snackbar.LENGTH_LONG).show();
+//                        userViewModel.clear(LoginActivity.this);
+//                        activityLoginBinding.progressBar.setVisibility(View.GONE);
+//                        userViewModel.errorMessage().removeObservers(LoginActivity.this);
+//                    } else activityLoginBinding.progressBar.setVisibility(View.GONE);
+//
+//                }
+//            });
             userViewModel.getloginRequests(getApplicationContext(), activityLoginBinding.emailLogin.getText().toString(), activityLoginBinding.passwordLogin.getText().toString(), getCurrentFocus()).observe(this, new Observer<Login>() {
                 @Override
                 public void onChanged(Login login) {
@@ -92,10 +107,10 @@ public class LoginActivity extends AppCompatActivity {
                     editor.putString(getString(R.string.token), "Bearer " + login.getToken()).apply();
                     i++;
                     activityLoginBinding.progressBar.setVisibility(View.GONE);
-                    // Snackbar.make(v, "sccess", Snackbar.LENGTH_LONG).show();
-//                    Intent intent = new Intent(LoginActivity.this,OnBoardActivity.class);
-//                    startActivity(intent);
-//                    finish();
+                     Snackbar.make(v, "sccess", Snackbar.LENGTH_LONG).show();
+                    Intent intent = new Intent(LoginActivity.this,OnBoardActivity.class);
+                    startActivity(intent);
+                    finish();
                 }
             });
 

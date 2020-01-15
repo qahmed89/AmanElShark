@@ -28,7 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:layout_margin="20dp"
-        android:text="Scan Invoies"
+        android:text="@string/scan_invoies"
          />
 </LinearLayout>
 </ScrollView>

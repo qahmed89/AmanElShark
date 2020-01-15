@@ -11,4 +11,14 @@
     <string name="phone">رقم الهاتف</string>
     <string name="submit">تسجيل</string>
     <string name="sign_up">ليس لديك حساب ؟ حساب جديد</string>
+    <string name="chassis_no">رقم الهيكل</string>
+    <string name="done">تم</string>
+    <string name="km_number">قراءة العداد</string>
+    <string name="model">موديل</string>
+    <string name="motor_number">رقم المحرك</string>
+    <string name="number_plate_car">رقم لوحة السيارة</string>
+    <string name="shape">نمط</string>
+    <string name="type">النوع</string>
+    <string name="scan_invoies">تصوير الفاتورة</string>
+    <string name="production_year">سنة الانتاج</string>
 </resources>

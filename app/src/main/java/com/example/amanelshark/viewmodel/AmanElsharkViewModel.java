@@ -139,6 +139,9 @@ public class AmanElsharkViewModel extends ViewModel {
                     @Override
                     public void onNext(Login login) {
                         loginModel.setValue(login);
+                        isLoading.setValue(false);
+                        errorMessage.setValue(null);
+
                     }
 
                     @Override
@@ -146,21 +149,22 @@ public class AmanElsharkViewModel extends ViewModel {
                         HttpException exception = (HttpException) e;
 
                         errorMessage.setValue(String.valueOf(exception.code()));
-                        AlertDialog alertDialog = new AlertDialog.Builder(v.getContext()).create();
-                        alertDialog.setTitle("Alert");
-                        alertDialog.setMessage("Alert message to be shown");
-                        alertDialog.setButton( AlertDialog.BUTTON_POSITIVE,"OK",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        dialog.dismiss();
-                                    }
-                                });
-
-                        alertDialog.show();
-
-
-                        Button buttonbackground1 = alertDialog.getButton(AlertDialog.BUTTON_POSITIVE);
-                        buttonbackground1.setTextColor(Color.WHITE);
+                        isLoading.setValue(false);
+//                        AlertDialog alertDialog = new AlertDialog.Builder(v.getContext()).create();
+//                        alertDialog.setTitle("Alert");
+//                        alertDialog.setMessage("Alert message to be shown");
+//                        alertDialog.setButton( AlertDialog.BUTTON_POSITIVE,"OK",
+//                                new DialogInterface.OnClickListener() {
+//                                    public void onClick(DialogInterface dialog, int which) {
+//                                        dialog.dismiss();
+//                                    }
+//                                });
+//
+//                        alertDialog.show();
+//
+//
+//                        Button buttonbackground1 = alertDialog.getButton(AlertDialog.BUTTON_POSITIVE);
+//                        buttonbackground1.setTextColor(Color.WHITE);
 
                     }
 

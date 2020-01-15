@@ -12,4 +12,14 @@
     <string name="skip">Skip</string>
     <string name="submit">Submits</string>
     <string name="sign_up">Dont have account? SignUp</string>
+    <string name="chassis_no">Chassis Num</string>
+    <string name="done">Done</string>
+    <string name="km_number">KM Reading</string>
+    <string name="model">Model</string>
+    <string name="motor_number">Motor Number</string>
+    <string name="number_plate_car">Number Plate car</string>
+    <string name="shape">Shape</string>
+    <string name="type">Type</string>
+    <string name="scan_invoies">Scan Invoies</string>
+    <string name="production_year">Production Year</string>
 </resources>

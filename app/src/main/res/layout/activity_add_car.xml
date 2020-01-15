@@ -48,7 +48,7 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:layout_gravity="center"
-                android:hint="رقم لوحة السيارة"
+                android:hint="@string/number_plate_car"
                 style="@style/LoginTextInputLayoutStyle"
                 android:layout_height="wrap_content">
                 <com.google.android.material.textfield.TextInputEditText
@@ -63,7 +63,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginRight="16dp"
                 android:layout_gravity="center"
-                android:hint="قراءة العداد"
+                android:hint="@string/km_number"
                 style="@style/LoginTextInputLayoutStyle"
                 android:layout_height="wrap_content">
                 <com.google.android.material.textfield.TextInputEditText
@@ -79,7 +79,7 @@
 android:id="@+id/layout_namt"
                 android:layout_marginRight="16dp"
                 android:layout_gravity="center"
-                android:hint="نمط"
+                android:hint="@string/shape"
                 app:startIconDrawable="@drawable/ic_arrow_downward"
                 style="@style/LoginTextInputLayoutStyle"
                 android:layout_height="wrap_content">
@@ -96,7 +96,7 @@ android:id="@+id/layout_namt"
 
                 android:layout_marginRight="16dp"
                 android:layout_gravity="center"
-                android:hint="رقم المحرك"
+                android:hint="@string/motor_number"
                 style="@style/LoginTextInputLayoutStyle"
                 android:layout_height="wrap_content">
                 <com.google.android.material.textfield.TextInputEditText
@@ -112,7 +112,7 @@ android:id="@+id/layout_namt"
                 style="@style/LoginTextInputLayoutStyle"
                 android:layout_marginTop="16dp"
                 android:layout_height="wrap_content"
-                android:hint=" موديل "
+                android:hint="@string/model"
                 android:layout_marginRight="16dp"
                 app:startIconDrawable="@drawable/ic_arrow_downward"
 
@@ -131,7 +131,7 @@ android:id="@+id/layout_namt"
 android:id="@+id/my_type_layout"
                 android:layout_marginRight="16dp"
                 android:layout_gravity="center"
-                android:hint=" النوع"
+                android:hint="@string/type"
                 app:startIconDrawable="@drawable/ic_arrow_downward"
                 android:enabled="false"
                 style="@style/LoginTextInputLayoutStyle"
@@ -153,7 +153,7 @@ android:id="@+id/my_type_layout"
                 app:startIconDrawable="@drawable/ic_arrow_downward"
                 android:layout_marginRight="16dp"
                 android:layout_gravity="center"
-                android:hint="سنة الانتاج"
+                android:hint="@string/production_year"
                 style="@style/LoginTextInputLayoutStyle"
                 android:layout_height="wrap_content">
                 <AutoCompleteTextView
@@ -171,7 +171,7 @@ android:layout_gravity="center"
 
                 android:layout_marginRight="16dp"
                 android:layout_gravity="center"
-                android:hint="رقم الهيكل"
+                android:hint="@string/chassis_no"
                 style="@style/LoginTextInputLayoutStyle"
                 android:layout_height="wrap_content">
                 <com.google.android.material.textfield.TextInputEditText
@@ -188,7 +188,7 @@ android:layout_gravity="center"
                 android:layout_marginTop="16dp"
                 android:layout_marginRight="16dp"
                 android:textSize="18sp"
-                android:text="تم"
+                android:text="@string/done"
                 android:id="@+id/button">
 
             </Button>

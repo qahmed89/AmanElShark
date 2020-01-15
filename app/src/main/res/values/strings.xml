@@ -12,4 +12,14 @@
     <string name="sign_up">Dont have account? SignUp</string>
     <string name="preference_file_key">keyfile</string>
     <string name="token">token</string>
+    <string name="number_plate_car">رقم لوحة السيارة</string>
+    <string name="km_number">قراءة العداد</string>
+    <string name="shape">نمط</string>
+    <string name="motor_number">رقم المحرك</string>
+    <string name="model">موديل</string>
+    <string name="type">النوع</string>
+    <string name="production_year">سنة الانتاج</string>
+    <string name="chassis_no">رقم الهيكل</string>
+    <string name="done">تم</string>
+    <string name="scan_invoies">تصوير الفاتورة</string>
 </resources>
