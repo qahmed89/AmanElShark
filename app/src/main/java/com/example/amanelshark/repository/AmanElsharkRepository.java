@@ -1,6 +1,7 @@
 package com.example.amanelshark.repository;
 
 
+import com.example.amanelshark.model.addcar.AddCars;
 import com.example.amanelshark.model.brands.Brands;
 import com.example.amanelshark.model.categories.Categories;
 import com.example.amanelshark.model.login.Login;
@@ -39,6 +40,9 @@ public Observable<Login> Login (String email , String password){
     }
     public Single<Categories> Categories (String token, String id ){
         return amanElSharkServices.getCategories(token,id);
+    }
+    public Single<AddCars> AddCars (String token, String model_category_id ,String motor_number,String chassis_number,String plate_number, String meter_reading, String year){
+        return amanElSharkServices.addCarsRequest(token,model_category_id,motor_number,chassis_number,plate_number,meter_reading,year);
     }
 
 //    public Single<RequestVocation> sendvocationRequestmodelSingle(String type , String description, String from , String to , String id){

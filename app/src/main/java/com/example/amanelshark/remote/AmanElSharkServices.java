@@ -1,6 +1,7 @@
 package com.example.amanelshark.remote;
 
 
+import com.example.amanelshark.model.addcar.AddCars;
 import com.example.amanelshark.model.brands.Brands;
 import com.example.amanelshark.model.categories.Categories;
 import com.example.amanelshark.model.login.Login;
@@ -30,6 +31,17 @@ public interface AmanElSharkServices {
                                          @Field("c_password") String c_password,
                                          @Field("mobile") String phone,
                                          @Field("name") String name);
+    @POST("addCar")
+    @FormUrlEncoded
+    Single<AddCars> addCarsRequest(@Header("Authorization") String token,
+                                   @Field("model_category_id") String model_category_id,
+                                        @Field("motor_number") String motor_number,
+                                        @Field("chassis_number") String chassis_number,
+                                        @Field("plate_number") String plate_number,
+                                        @Field("meter_reading") String meter_reading,
+                                         @Field("year") String year
+
+    );
     @GET("brands")
     Single<Brands> getbrands(@Header("Authorization") String id);
 

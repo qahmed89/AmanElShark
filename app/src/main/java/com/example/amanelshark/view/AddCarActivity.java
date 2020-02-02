@@ -12,6 +12,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -20,6 +21,7 @@ import com.developer.kalert.KAlertDialog;
 import com.example.amanelshark.BaseApplication;
 import com.example.amanelshark.R;
 import com.example.amanelshark.databinding.ActivityAddCarBinding;
+import com.example.amanelshark.model.addcar.AddCars;
 import com.example.amanelshark.model.brands.Brands;
 import com.example.amanelshark.model.brands.DataItemBrands;
 import com.example.amanelshark.model.categories.Categories;
@@ -73,6 +75,7 @@ public class AddCarActivity extends AppCompatActivity {
     ArrayAdapter arrayAdapter_models;
     ArrayAdapter arrayAdapter_type;
     ArrayAdapter arrayAdapter_categories;
+    String years_string;
 
 
 
@@ -92,12 +95,13 @@ public class AddCarActivity extends AppCompatActivity {
         sharedPref = getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
         editor = sharedPref.edit();
         token = sharedPref.getString(getString(R.string.token), "null");
-
+        InputMethodManager imm = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
         arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, brandslist);
         arrayAdapter_models = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, lis_model);
         arrayAdapter_type = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, list_types);
         arrayAdapter_categories = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, list_categories);
 
+        arrayAdapter_year = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, yearTemp);
 
         brands_method();
 
@@ -176,9 +180,20 @@ public class AddCarActivity extends AppCompatActivity {
 
 
         });
+activityAddCarBinding.categories.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        ids = list_categories.get(position).getId();
+        sid = String.valueOf(ids);
+    }
+});
 
-
-
+activityAddCarBinding.myProductionYear.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+         years_string=arrayAdapter_year.getItem(position);
+    }
+});
             activityAddCarBinding.layoutModel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -238,10 +253,16 @@ public class AddCarActivity extends AppCompatActivity {
         activityAddCarBinding.button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+                userViewModel.getAddcarsRequests(v,token,sid,activityAddCarBinding.numMotor.getText().toString(),activityAddCarBinding.chassisNum.getText().toString(),activityAddCarBinding.plateNum.getText().toString(),activityAddCarBinding.kmReading.getText().toString(),years_string).observe(AddCarActivity.this, new Observer<AddCars>() {
+                   @Override
+                   public void onChanged(AddCars addCars) {
 
-                Intent intent = new Intent(AddCarActivity.this,RegluarMainTenanceActivity.class);
-                startActivity(intent);
-                finish();
+                   }
+               });
+//                Intent intent = new Intent(AddCarActivity.this,RegluarMainTenanceActivity.class);
+//                startActivity(intent);
+//                finish();
             }
         });
 

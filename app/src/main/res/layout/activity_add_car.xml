@@ -58,6 +58,7 @@
                         android:hint="@string/number_plate_car">
 
                         <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/plate_num"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:autoMirrored="true">
@@ -77,6 +78,7 @@
                         android:hint="@string/km_number">
 
                         <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/km_reading"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:inputType="number">
@@ -97,6 +99,7 @@
                         android:hint="@string/motor_number">
 
                         <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/num_motor"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent">
 
@@ -229,10 +232,11 @@
                         android:hint="@string/chassis_no">
 
                         <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/chassis_num"
                             android:layout_width="match_parent"
-
                             android:layout_height="match_parent"
-                            android:inputType="number">
+                            android:inputType="number"
+                            >
 
                         </com.google.android.material.textfield.TextInputEditText>
 
