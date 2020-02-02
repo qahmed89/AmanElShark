@@ -2,10 +2,12 @@ package com.example.amanelshark.remote;
 
 
 import com.example.amanelshark.model.brands.Brands;
+import com.example.amanelshark.model.categories.Categories;
 import com.example.amanelshark.model.login.Login;
+import com.example.amanelshark.model.models.Model;
+import com.example.amanelshark.model.register.Register;
 import com.example.amanelshark.model.subbrands.SubBreand;
-
-import java.util.List;
+import com.example.amanelshark.model.types.Types;
 
 import io.reactivex.Observable;
 import io.reactivex.Single;
@@ -17,21 +19,24 @@ import retrofit2.http.POST;
 import retrofit2.http.Path;
 
 public interface AmanElSharkServices {
-
+    @POST("login")
+    @FormUrlEncoded
+    Observable<Login> loginRequest(@Field("email") String email,
+                                   @Field("password") String password);
+    @POST("register")
+    @FormUrlEncoded
+    Observable<Register> registerRequest(@Field("email") String email,
+                                         @Field("password") String password,
+                                         @Field("c_password") String c_password,
+                                         @Field("mobile") String phone,
+                                         @Field("name") String name);
     @GET("brands")
-    Single<Brands> getbrands(@Header("Authorization") String id );
-    @GET("sub_brands/{id}")
-    Single<SubBreand> getsub_brands(@Header("Authorization") String token , @Path(value = "id", encoded = true) String id);
-//    @POST     ("requests")
-//   @FormUrlEncoded
-//    Single<RequestVocation> sendVocationRequest(@Field("type") String type, @Field("description") String description, @Field("from") String from, @Field("to") String to, @Field("employee_id") String token);
-//    @POST("checkIn")
-//    @FormUrlEncoded
-//    Single<CheckIn> sendcheckin(@Header("Authorization") String id, @Field("date") String date);
-//    @POST("checkOut")
-//    @FormUrlEncoded
-//    Single<CheckOut> sendcheckout(@Header("Authorization") String id, @Field("date") String date);
-   @POST("login/mobile")
-  @FormUrlEncoded
-   Observable<Login> loginRequest(@Field("email") String email, @Field("password") String password);
+    Single<Brands> getbrands(@Header("Authorization") String id);
+
+    @GET("brand/{id}/models")
+    Single<Model> getModels(@Header("Authorization") String token, @Path(value = "id", encoded = true) String id);
+    @GET("model/{id}/types")
+    Single<Types> getTypes(@Header("Authorization") String token, @Path(value = "id", encoded = true) String id);
+    @GET("type/{id}/categories")
+    Single<Categories> getCategories(@Header("Authorization") String token, @Path(value = "id", encoded = true) String id);
 }

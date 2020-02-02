@@ -6,58 +6,83 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
+import android.view.ViewGroup;
 
+import com.developer.kalert.KAlertDialog;
 import com.example.amanelshark.BaseApplication;
-import com.example.amanelshark.LocaleHelper;
 import com.example.amanelshark.R;
 import com.example.amanelshark.databinding.ActivityLoginBinding;
 import com.example.amanelshark.model.login.Login;
 import com.example.amanelshark.viewmodel.AmanElsharkViewModel;
-import com.example.amanelshark.viewmodel.NewViewModel;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
-
-import org.reactivestreams.Subscriber;
+import com.shreyaspatil.MaterialDialog.AbstractDialog;
+import com.shreyaspatil.MaterialDialog.MaterialDialog;
+import com.shreyaspatil.MaterialDialog.interfaces.DialogInterface;
 
 import java.util.List;
 import java.util.Locale;
-import java.util.Objects;
+import java.util.regex.Pattern;
 
 import javax.inject.Inject;
 
-import io.reactivex.Flowable;
-import io.reactivex.FlowableEmitter;
-import io.reactivex.FlowableOnSubscribe;
-
 public class LoginActivity extends AppCompatActivity {
+    private static final Pattern PASSWORD_PATTERN =
+            Pattern.compile("^" +
+                    //"(?=.*[0-9])" +         //at least 1 digit
+                    //"(?=.*[a-z])" +         //at least 1 lower case letter
+                    //"(?=.*[A-Z])" +         //at least 1 upper case letter
+                    //at least 1 special character
+                    "(?=\\S+$)" +           //no white spaces
+                    ".{8,}" +               //at least 4 characters
+                    "$");
     @Inject
     ViewModelProvider.Factory viewModelProvider;
-    Context context;
-    String mLanguageCode = "ar";
-    TextInputEditText email;
-    TextInputEditText password;
     SharedPreferences sharedPref;
     SharedPreferences.Editor editor;
-    List<Login> login;
     ActivityLoginBinding activityLoginBinding;
     int i = 0;
     String x = "";
     private AmanElsharkViewModel userViewModel;
 
+    private static void disable(ViewGroup layout) {
+        layout.setEnabled(false);
+        for (int i = 0; i < layout.getChildCount(); i++) {
+            View child = layout.getChildAt(i);
+            if (child instanceof ViewGroup) {
+                disable((ViewGroup) child);
+            } else {
+                child.setEnabled(false);
+            }
+        }
+    }
+
+    private static void enable(ViewGroup layout) {
+        layout.setEnabled(true);
+        for (int i = 0; i < layout.getChildCount(); i++) {
+            View child = layout.getChildAt(i);
+            if (child instanceof ViewGroup) {
+                enable((ViewGroup) child);
+            } else {
+                child.setEnabled(true);
+            }
+        }
+    }
+
+    @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        LocaleHelper.setLocale(LoginActivity.this, mLanguageCode);
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_login);
@@ -67,63 +92,76 @@ public class LoginActivity extends AppCompatActivity {
         userViewModel = ViewModelProviders.of(this, viewModelProvider).get(AmanElsharkViewModel.class);
         sharedPref = getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
         editor = sharedPref.edit();
-        //It is required to recreate the activity to reflect the change in UI.
+
         activityLoginBinding.button.setOnClickListener(v -> {
-            activityLoginBinding.progressBar.setVisibility(View.VISIBLE);
-            userViewModel.isLoading().observe(this, isLoading -> {
-                if(isLoading == true) {
-                    activityLoginBinding.progressBar.setVisibility(View.VISIBLE);
-                }else   activityLoginBinding.progressBar.setVisibility(View.GONE);
+                    if (!validateEmail() | !validatePassword()) {
+                        activityLoginBinding.placeholderLogin.layout.setVisibility(View.GONE);
+                        return;
+                    } else
+                        activityLoginBinding.placeholderLogin.layout.setVisibility(View.VISIBLE);
+                    userViewModel.isLoading().observe(this, isLoading -> {
+                        if (isLoading == true) {
+                            activityLoginBinding.placeholderLogin.layout.setVisibility(View.VISIBLE);
+                            disable(activityLoginBinding.loginConstraint);
+                        } else {
+                            activityLoginBinding.placeholderLogin.layout.setVisibility(View.GONE);
+                            enable(activityLoginBinding.loginConstraint);
+                        }
 
-            });
-            userViewModel.errorMessage().observe(this, errorMessage -> {
-                if (errorMessage != null) {
-                   // activityLoginBinding.progressBar.setVisibility(View.VISIBLE);
-                    Snackbar.make(v, "error", Snackbar.LENGTH_LONG).show();
+                    });
+                    userViewModel.errorMessage().observe(this, errorMessage -> {
+                        if (errorMessage != null) {
+                            activityLoginBinding.placeholderLogin.layout.setVisibility(View.VISIBLE);
 
 
-                } else { //activityLoginBinding.progressBar.setVisibility(View.GONE);
-                Snackbar.make(v, "done", Snackbar.LENGTH_LONG).show();}
-            });
+                        } else {
+                            activityLoginBinding.placeholderLogin.layout.setVisibility(View.GONE);
+                        }
+                    });
 
-//            userViewModel.errorMessage().observe(this, new Observer<String>() {
-//
-//                @Override
-//                public void onChanged(String s) {
-//                    if (s != null) {
-//                        x = s;
-//                        Snackbar.make(v, "error", Snackbar.LENGTH_LONG).show();
-//                        userViewModel.clear(LoginActivity.this);
-//                        activityLoginBinding.progressBar.setVisibility(View.GONE);
-//                        userViewModel.errorMessage().removeObservers(LoginActivity.this);
-//                    } else activityLoginBinding.progressBar.setVisibility(View.GONE);
-//
-//                }
-//            });
-            userViewModel.getloginRequests(getApplicationContext(), activityLoginBinding.emailLogin.getText().toString(), activityLoginBinding.passwordLogin.getText().toString(), getCurrentFocus()).observe(this, new Observer<Login>() {
-                @Override
-                public void onChanged(Login login) {
 
-                    editor.putString(getString(R.string.token), "Bearer " + login.getToken()).apply();
-                    i++;
-                    activityLoginBinding.progressBar.setVisibility(View.GONE);
-                     Snackbar.make(v, "sccess", Snackbar.LENGTH_LONG).show();
-                    Intent intent = new Intent(LoginActivity.this,OnBoardActivity.class);
-                    startActivity(intent);
-                    finish();
-                }
-            });
+                    userViewModel.getloginRequests(v, activityLoginBinding.emailLogin.getText().toString(), activityLoginBinding.passwordLogin.getText().toString()).observe(this, new Observer<Login>() {
+                        @Override
+                        public void onChanged(Login login) {
 
-        });
+                            if (login.getClientAccount().getToken() != null) {
+                                editor.putString(getString(R.string.token), "Bearer " + login.getClientAccount().getToken()).apply();
+                                i++;
+                                activityLoginBinding.placeholderLogin.layout.setVisibility(View.GONE);
+                                Intent intent = new Intent(LoginActivity.this, OnBoardActivity.class);
+                                startActivity(intent);
+                                finish();
+                            }
+
+                        }
+                    });
+//            new KAlertDialog(this, KAlertDialog.SUCCESS_TYPE)
+//                    .setTitleText("Good job!")
+//                    .show();
+       });
+
+
         activityLoginBinding.textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
                 startActivity(intent);
-                finish();
             }
         });
 
+
+    }
+
+    public void setLocale(String lang) {
+        Locale myLocale = new Locale(lang);
+        Resources res = getResources();
+        DisplayMetrics dm = res.getDisplayMetrics();
+        Configuration conf = res.getConfiguration();
+        conf.locale = myLocale;
+        res.updateConfiguration(conf, dm);
+        Intent refresh = new Intent(this, LoginActivity.class);
+        finish();
+        startActivity(refresh);
     }
 
     @Override
@@ -136,5 +174,35 @@ public class LoginActivity extends AppCompatActivity {
         finish();
 
 
+    }
+
+    private boolean validateEmail() {
+        String emailInput = activityLoginBinding.emailLogin.getText().toString().trim();
+
+        if (emailInput.isEmpty()) {
+            activityLoginBinding.emailLogin.setError(getString(R.string.field_empty_email));
+            return false;
+        } else if (!Patterns.EMAIL_ADDRESS.matcher(emailInput).matches()) {
+            activityLoginBinding.emailLogin.setError(getString(R.string.vaild_email));
+            return false;
+        } else {
+            activityLoginBinding.emailLogin.setError(null);
+            return true;
+        }
+    }
+
+    private boolean validatePassword() {
+        String passwordInput = activityLoginBinding.passwordLogin.getText().toString().trim();
+
+        if (passwordInput.isEmpty()) {
+            activityLoginBinding.passwordLogin.setError(getString(R.string.field_empty_password));
+            return false;
+        } else if (!PASSWORD_PATTERN.matcher(passwordInput).matches()) {
+            activityLoginBinding.passwordLogin.setError(getString(R.string.password_8_charaters));
+            return false;
+        } else {
+            activityLoginBinding.passwordLogin.setError(null);
+            return true;
+        }
     }
 }

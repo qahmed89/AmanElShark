@@ -26,7 +26,7 @@ public class NetworkModel {
 
         return  new Retrofit.Builder()
 
-                .baseUrl("http://aman.reaya.xyz/api/")
+                .baseUrl("http://192.168.1.172:5001/api/client/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();

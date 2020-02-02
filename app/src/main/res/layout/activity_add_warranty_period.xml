@@ -32,7 +32,7 @@
             android:orientation="horizontal">
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_weight="1"
+                android:layout_weight="4.5"
                 android:orientation="vertical"
                 android:layout_height="wrap_content">
                 <RadioGroup
@@ -44,7 +44,7 @@
                         android:id="@+id/radioone"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="6 Mouth"
+                        android:text="@string/_6_mouth"
                         android:textSize="17sp">
 
                     </RadioButton>
@@ -53,7 +53,7 @@
 
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="12 Mouth"
+                        android:text="@string/_12_mouth"
                         android:textSize="17sp">
 
                     </RadioButton>
@@ -62,7 +62,7 @@
 
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="24 Mouth"
+                        android:text="@string/_24_mouth"
                         android:textSize="17sp">
 
                     </RadioButton>
@@ -71,7 +71,7 @@
         </LinearLayout>
 <LinearLayout
     android:layout_width="0dp"
-    android:layout_weight="1"
+    android:layout_weight="4.5"
     android:orientation="vertical"
     android:layout_height="match_parent">
     <Spinner
@@ -107,7 +107,6 @@
 </LinearLayout>
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_marginTop="10dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_vertical"
                 android:orientation="vertical"
@@ -116,24 +115,29 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
+                    android:textAlignment="center"
+                    android:gravity="center"
                     android:layout_weight="3"
-                    android:text="KM">
+                    android:text="@string/km">
 
                 </TextView>
                 <TextView
 
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
+                    android:textAlignment="center"
+                    android:gravity="center"
                     android:layout_weight="3"
-                    android:text="KM">
+                    android:text="@string/km">
 
                 </TextView>
-                <TextView                    android:layout_gravity="center"
-
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
+                    android:textAlignment="center"
+                    android:gravity="center"
                     android:layout_weight="3"
-                    android:text="KM">
+                    android:text="@string/km">
 
                 </TextView>
             </LinearLayout>

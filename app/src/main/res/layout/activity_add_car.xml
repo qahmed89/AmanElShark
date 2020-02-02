@@ -1,199 +1,256 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/group_24"
-    android:orientation="vertical"
-    tools:context=".view.AddCarActivity">
-
-<LinearLayout
-    
-    android:layout_width="match_parent"
-    android:layout_height="0dp"
-    android:layout_weight="2"
-    android:layout_gravity="center"
-    >
-</LinearLayout>
-
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="8">
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/design3"
-            android:layout_gravity="center"
-            android:visibility="gone"
-            android:scaleType="centerCrop">
 
-        </ImageView>
-    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:animateLayoutChanges="true"
+        android:background="@drawable/group_24"
+        android:orientation="vertical"
+        tools:context=".view.AddCarActivity">
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="2">
+
+        </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:orientation="vertical"
-            android:layout_height="match_parent"
-            >
+            android:layout_height="0dp"
+            android:layout_weight="8"
+            android:orientation="vertical">
 
-        <com.google.android.material.textfield.TextInputLayout
+            <ImageView
                 android:layout_width="match_parent"
-                android:layout_marginTop="16dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
+                android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:hint="@string/number_plate_car"
-                style="@style/LoginTextInputLayoutStyle"
-                android:layout_height="wrap_content">
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                    
-                </com.google.android.material.textfield.TextInputEditText>
-            </com.google.android.material.textfield.TextInputLayout>
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_gravity="center"
-                android:hint="@string/km_number"
-                style="@style/LoginTextInputLayoutStyle"
-                android:layout_height="wrap_content">
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                android:scaleType="centerCrop"
+                android:src="@drawable/design3"
+                android:visibility="gone">
 
-                </com.google.android.material.textfield.TextInputEditText>
-            </com.google.android.material.textfield.TextInputLayout>
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="16dp"
-android:id="@+id/layout_namt"
-                android:layout_marginRight="16dp"
-                android:layout_gravity="center"
-                android:hint="@string/shape"
-                app:startIconDrawable="@drawable/ic_arrow_downward"
-                style="@style/LoginTextInputLayoutStyle"
-                android:layout_height="wrap_content">
-                <AutoCompleteTextView
-                    android:id="@+id/namt"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    />
-            </com.google.android.material.textfield.TextInputLayout>
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="16dp"
+            </ImageView>
 
-                android:layout_marginRight="16dp"
-                android:layout_gravity="center"
-                android:hint="@string/motor_number"
-                style="@style/LoginTextInputLayoutStyle"
-                android:layout_height="wrap_content">
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                </com.google.android.material.textfield.TextInputEditText>
-            </com.google.android.material.textfield.TextInputLayout>
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/layout_model"
+            <ScrollView
                 android:layout_width="match_parent"
-                android:layout_marginLeft="16dp"
-                style="@style/LoginTextInputLayoutStyle"
-                android:layout_marginTop="16dp"
-                android:layout_height="wrap_content"
-                android:hint="@string/model"
-                android:layout_marginRight="16dp"
-                app:startIconDrawable="@drawable/ic_arrow_downward"
+                android:layout_height="match_parent">
 
-                android:layout_gravity="center">
-                <!-- Google themselves instruct us to use the deprecated editable attribute -->
-                <AutoCompleteTextView
-                    android:id="@+id/model"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    />
-            </com.google.android.material.textfield.TextInputLayout>
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="16dp"
-android:id="@+id/my_type_layout"
-                android:layout_marginRight="16dp"
-                android:layout_gravity="center"
-                android:hint="@string/type"
-                app:startIconDrawable="@drawable/ic_arrow_downward"
-                android:enabled="false"
-                style="@style/LoginTextInputLayoutStyle"
-                android:layout_height="wrap_content">
-                <AutoCompleteTextView
-                    android:layout_gravity="center"
-                    android:id="@+id/my_type"
-                    android:enabled="false"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    />
-            </com.google.android.material.textfield.TextInputLayout>
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:id="@+id/layout_production_year"
+                    android:orientation="vertical">
 
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="16dp"
-                app:startIconDrawable="@drawable/ic_arrow_downward"
-                android:layout_marginRight="16dp"
-                android:layout_gravity="center"
-                android:hint="@string/production_year"
-                style="@style/LoginTextInputLayoutStyle"
-                android:layout_height="wrap_content">
-                <AutoCompleteTextView
-                    android:id="@+id/my_production_year"
-                    android:layout_width="match_parent"
-android:layout_gravity="center"
-                    android:layout_height="wrap_content"
-                    />
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/LoginTextInputLayoutStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginRight="16dp"
+                        android:autoMirrored="true"
+                        android:hint="@string/number_plate_car">
 
-            </com.google.android.material.textfield.TextInputLayout>
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="16dp"
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:autoMirrored="true">
 
-                android:layout_marginRight="16dp"
-                android:layout_gravity="center"
-                android:hint="@string/chassis_no"
-                style="@style/LoginTextInputLayoutStyle"
-                android:layout_height="wrap_content">
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                        </com.google.android.material.textfield.TextInputEditText>
+                    </com.google.android.material.textfield.TextInputLayout>
 
-                </com.google.android.material.textfield.TextInputEditText>
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/LoginTextInputLayoutStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="16dp"
 
-            </com.google.android.material.textfield.TextInputLayout>
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginRight="16dp"
-                android:textSize="18sp"
-                android:text="@string/done"
-                android:id="@+id/button">
+                        android:layout_marginRight="16dp"
+                        android:hint="@string/km_number">
 
-            </Button>
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:inputType="number">
+
+                        </com.google.android.material.textfield.TextInputEditText>
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/LoginTextInputLayoutStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginRight="16dp"
+                        android:hint="@string/motor_number">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                        </com.google.android.material.textfield.TextInputEditText>
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/layout_brands"
+                        style="@style/LoginTextInputLayoutStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginRight="16dp"
+                        android:autoMirrored="true"
+                        android:hint="@string/brands"
+                        app:endIconMode="dropdown_menu"
+
+                        >
+
+                        <AutoCompleteTextView
+                            android:id="@+id/brands"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="10dp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/layout_model"
+                        style="@style/LoginTextInputLayoutStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginRight="16dp"
+                        android:enabled="false"
+                        android:hint="@string/model"
+
+                        app:endIconMode="dropdown_menu"
+
+                        >
+                        <!-- Google themselves instruct us to use the deprecated editable attribute -->
+                        <AutoCompleteTextView
+                            android:id="@+id/model"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:ems="10"
+                            android:enabled="false"
+                            android:padding="10dp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/my_type_layout"
+                        style="@style/LoginTextInputLayoutStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginRight="16dp"
+                        android:enabled="false"
+                        android:hint="@string/type"
+                        app:endIconMode="dropdown_menu">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/my_type"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+
+                            android:enabled="false"
+                            android:padding="10dp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/layout_categories"
+                        style="@style/LoginTextInputLayoutStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginRight="16dp"
+                        android:enabled="false"
+                        android:hint="@string/shape"
+
+                        app:endIconMode="dropdown_menu">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/categories"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:enabled="false"
+
+                            android:padding="10dp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/layout_production_year"
+                        style="@style/LoginTextInputLayoutStyle"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginRight="16dp"
+                        android:hint="@string/production_year"
+                        app:endIconMode="dropdown_menu">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/my_production_year"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="10dp" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/LoginTextInputLayoutStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginRight="16dp"
+                        android:hint="@string/chassis_no">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+
+                            android:layout_height="match_parent"
+                            android:inputType="number">
+
+                        </com.google.android.material.textfield.TextInputEditText>
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <Button
+                        android:id="@+id/button"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginRight="16dp"
+                        android:text="@string/done"
+                        android:textSize="18sp">
+
+                    </Button>
+                </LinearLayout>
+            </ScrollView>
         </LinearLayout>
-    </ScrollView>
-</LinearLayout>
     </LinearLayout>
 </layout>

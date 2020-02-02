@@ -31,21 +31,21 @@ public class KMadpater extends RecyclerView.Adapter<KMadpater.KMHolder> {
     @NonNull
     @Override
     public KMHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.km_layout,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.km_layout, parent, false);
         return new KMHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull KMHolder holder, int position) {
 
-holder.requesttype_textview.setText(""+requestsItems.get(position).toString());
-holder.cardView.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        Intent intent = new Intent(context, ServicesActivity.class);
-        context.startActivity(intent);
-    }
-});
+        holder.requesttype_textview.setText("" + requestsItems.get(position));
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, ServicesActivity.class);
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -55,11 +55,12 @@ holder.cardView.setOnClickListener(new View.OnClickListener() {
 
     class KMHolder extends RecyclerView.ViewHolder {
         TextView requesttype_textview;
-CardView cardView;
+        CardView cardView;
+
         public KMHolder(@NonNull View itemView) {
             super(itemView);
             requesttype_textview = itemView.findViewById(R.id.km);
-cardView= itemView.findViewById(R.id.cardview);
+            cardView = itemView.findViewById(R.id.cardview);
 
 
         }

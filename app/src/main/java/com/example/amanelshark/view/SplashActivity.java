@@ -3,14 +3,18 @@ package com.example.amanelshark.view;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Handler;
-import android.text.TextUtils;
+import android.util.DisplayMetrics;
 
 import com.example.amanelshark.R;
-import com.example.amanelshark.model.login.Login;
+
+import java.util.Locale;
 
 public class SplashActivity extends AppCompatActivity {
+    String lang_Defualt="en";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,9 +29,10 @@ public class SplashActivity extends AppCompatActivity {
                  */
 
 //                if (str_login_test != null && !str_login_test.toString().trim().equals("")) {
-                Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
-                startActivity(intent);
-                finish();
+                setLocale(lang_Defualt);
+//                Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
+//                startActivity(intent);
+//                finish();
                 //   }
                 /*
                  * if user login test is false on oncreate then redirect the
@@ -41,5 +46,16 @@ public class SplashActivity extends AppCompatActivity {
         },3000); // 3000 = 3seconds
 
 
+    }
+    public void setLocale(String lang) {
+        Locale myLocale = new Locale(lang);
+        Resources res = getResources();
+        DisplayMetrics dm = res.getDisplayMetrics();
+        Configuration conf = res.getConfiguration();
+        conf.locale = myLocale;
+        res.updateConfiguration(conf, dm);
+        Intent refresh = new Intent(this, LoginActivity.class);
+        finish();
+        startActivity(refresh);
     }
 }

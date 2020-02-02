@@ -17,8 +17,18 @@
     <string name="model">موديل</string>
     <string name="motor_number">رقم المحرك</string>
     <string name="number_plate_car">رقم لوحة السيارة</string>
-    <string name="shape">نمط</string>
+    <string name="shape">فئة</string>
     <string name="type">النوع</string>
     <string name="scan_invoies">تصوير الفاتورة</string>
     <string name="production_year">سنة الانتاج</string>
+    <string name="_12_mouth">12 شهر</string>
+    <string name="_24_mouth">24 شهر</string>
+    <string name="_6_mouth">6 اشهر</string>
+    <string name="km">ك.م</string>
+    <string name="field_empty_email">يرجي ادخال البريد الالكتروني</string>
+    <string name="vaild_email">يرجي ادخال البريد بشكل صحيح</string>
+    <string name="field_empty_password">يرجي ادخال كلمة السر</string>
+    <string name="password_8_charaters">لقد ادخلت عدد حروف اقل من ثمانية</string>
+    <string name="pasword_match">كلمة السر غير متوافقة</string>
+    <string name="brands">الماركة</string>
 </resources>

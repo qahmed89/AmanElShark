@@ -16,71 +16,11 @@ import com.example.amanelshark.adapter.SliderAdapter;
 
 public class OnBoardActivity extends AppCompatActivity {
 
+    SliderAdapter sliderAdapter;
     private Button btnSkip, btnNext;
     private ViewPager sViewPager;
     private LinearLayout dotsLayout;
-    private TextView dots[];
-
-    SliderAdapter sliderAdapter;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_on_board);
-
-        // find view id
-        initView();
-
-        // create Adapter object
-        sliderAdapter = new SliderAdapter(this);
-        // set adapter in ViewPager
-        sViewPager.setAdapter(sliderAdapter);
-        // set PageChangeListener
-        sViewPager.addOnPageChangeListener(viewPagerPageChangeListener);
-
-        // adding bottom dots -> addBottomDots(0);
-//      addDotIndicator(0);
-        addBottomDots(0);
-
-    }
-
-
-    // btnSkipClick
-    public  void btnSkipClick(View v) {
-        launchHomeScreen();
-    }
-
-    //btnNextClick
-    public  void btnNextClick(View v) {
-        // checking for last page
-        // if last page home screen will be launched
-        int current = getItem(1);
-//        if (current < layouts.length) {
-        if (current < sliderAdapter.image_slide.length) {
-            // move to next screen
-            sViewPager.setCurrentItem(current);
-        } else {
-            launchHomeScreen();
-        }
-    }
-
-    private void launchHomeScreen() {
-        startActivity(new Intent(this, AddWarrantyPeriodActivity.class));
-        finish();
-    }
-
-    private int getItem(int i) {
-        return sViewPager.getCurrentItem() + i;
-    }
-
-    private void initView() {
-        sViewPager = (ViewPager) findViewById(R.id.sViewPager);
-        dotsLayout = (LinearLayout) findViewById(R.id.layoutDots);
-        btnSkip = (Button) findViewById(R.id.btn_skip);
-        btnNext = (Button) findViewById(R.id.btn_next);
-    }
-
-
+    private TextView[] dots;
     // viewPagerPage ChangeListener according to Dots-Points
     ViewPager.OnPageChangeListener viewPagerPageChangeListener = new ViewPager.OnPageChangeListener() {
 
@@ -111,12 +51,66 @@ public class OnBoardActivity extends AppCompatActivity {
         }
     };
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_on_board);
 
+        // find view id
+        initView();
+
+        // create Adapter object
+        sliderAdapter = new SliderAdapter(this);
+        // set adapter in ViewPager
+        sViewPager.setAdapter(sliderAdapter);
+        // set PageChangeListener
+        sViewPager.addOnPageChangeListener(viewPagerPageChangeListener);
+
+        // adding bottom dots -> addBottomDots(0);
+//      addDotIndicator(0);
+        addBottomDots(0);
+
+    }
+
+    // btnSkipClick
+    public void btnSkipClick(View v) {
+        launchHomeScreen();
+    }
+
+    //btnNextClick
+    public void btnNextClick(View v) {
+        // checking for last page
+        // if last page home screen will be launched
+        int current = getItem(1);
+//        if (current < layouts.length) {
+        if (current < sliderAdapter.image_slide.length) {
+            // move to next screen
+            sViewPager.setCurrentItem(current);
+        } else {
+            launchHomeScreen();
+        }
+    }
+
+    private void launchHomeScreen() {
+        startActivity(new Intent(this, AddWarrantyPeriodActivity.class));
+        finish();
+    }
+
+    private int getItem(int i) {
+        return sViewPager.getCurrentItem() + i;
+    }
+
+    private void initView() {
+        sViewPager = findViewById(R.id.sViewPager);
+        dotsLayout = findViewById(R.id.layoutDots);
+        btnSkip = findViewById(R.id.btn_skip);
+        btnNext = findViewById(R.id.btn_next);
+    }
 
     // add dot indicator
-    public void addDotIndicator(){
+    public void addDotIndicator() {
         dots = new TextView[3];
-        for (int i=0; i<dots.length; i++){
+        for (int i = 0; i < dots.length; i++) {
             dots[i] = new TextView(this);
             dots[i].setText(Html.fromHtml("&#8266;"));
             dots[i].setTextSize(35);
@@ -143,5 +137,10 @@ public class OnBoardActivity extends AppCompatActivity {
             dots[currentPage].setTextColor(getResources().getColor(R.color.colorAccent)); // dot_active
     }
 
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
 }
+
