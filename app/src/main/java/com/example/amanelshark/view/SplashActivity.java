@@ -2,7 +2,9 @@ package com.example.amanelshark.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -14,12 +16,18 @@ import com.example.amanelshark.R;
 import java.util.Locale;
 
 public class SplashActivity extends AppCompatActivity {
-    String lang_Defualt="en";
+    String lang_Defualt = "ar";
+    SharedPreferences sharedPref;
+    SharedPreferences.Editor editor;
+    String token;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+        sharedPref = getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+        editor = sharedPref.edit();
+        token = sharedPref.getString(getString(R.string.token), "null");
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -27,12 +35,21 @@ public class SplashActivity extends AppCompatActivity {
                  * if user login test is true on oncreate then redirect the user
                  * to result page
                  */
-
+                if (!token.equals("null")) {
 //                if (str_login_test != null && !str_login_test.toString().trim().equals("")) {
-                setLocale(lang_Defualt);
+                    setLocale(lang_Defualt);
+                    Intent refresh = new Intent(getApplicationContext(), AddCarActivity.class);
+                    finish();
+                    startActivity(refresh);
 //                Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
 //                startActivity(intent);
 //                finish();
+                } else {
+                    Intent refresh = new Intent(getApplicationContext(), LoginActivity.class);
+                    finish();
+                    startActivity(refresh);
+                }
+
                 //   }
                 /*
                  * if user login test is false on oncreate then redirect the
@@ -43,10 +60,11 @@ public class SplashActivity extends AppCompatActivity {
 //                    startActivity(send);
                 //   }
             }
-        },3000); // 3000 = 3seconds
+        }, 2000); // 3000 = 3seconds
 
 
     }
+
     public void setLocale(String lang) {
         Locale myLocale = new Locale(lang);
         Resources res = getResources();
@@ -54,8 +72,6 @@ public class SplashActivity extends AppCompatActivity {
         Configuration conf = res.getConfiguration();
         conf.locale = myLocale;
         res.updateConfiguration(conf, dm);
-        Intent refresh = new Intent(this, LoginActivity.class);
-        finish();
-        startActivity(refresh);
+
     }
 }

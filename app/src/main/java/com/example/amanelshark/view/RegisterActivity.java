@@ -40,7 +40,29 @@ public class RegisterActivity extends AppCompatActivity {
     ActivityRegisterBinding activityRegisterBinding;
     private AmanElsharkViewModel userViewModel;
 
+    private static void disable(ViewGroup layout) {
+        layout.setEnabled(false);
+        for (int i = 0; i < layout.getChildCount(); i++) {
+            View child = layout.getChildAt(i);
+            if (child instanceof ViewGroup) {
+                disable((ViewGroup) child);
+            } else {
+                child.setEnabled(false);
+            }
+        }
+    }
 
+    private static void enable(ViewGroup layout) {
+        layout.setEnabled(true);
+        for (int i = 0; i < layout.getChildCount(); i++) {
+            View child = layout.getChildAt(i);
+            if (child instanceof ViewGroup) {
+                enable((ViewGroup) child);
+            } else {
+                child.setEnabled(true);
+            }
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,7 +106,8 @@ public class RegisterActivity extends AppCompatActivity {
                 userViewModel.getregisterRequests(activityRegisterBinding.emailRegister.getText().toString(), activityRegisterBinding.passwordRegister.getText().toString(), activityRegisterBinding.cPasswordRegister.getText().toString(), activityRegisterBinding.phoneRegister.getText().toString(), activityRegisterBinding.nameRegister.getText().toString(), v).observe(RegisterActivity.this, new Observer<Register>() {
                     @Override
                     public void onChanged(Register register) {
-
+                        Intent intent = new Intent(getApplicationContext(), OnBoardActivity.class);
+                        startActivity(intent);
                     }
                 });
 
@@ -136,29 +159,6 @@ public class RegisterActivity extends AppCompatActivity {
         }
 
 
-    }
-    private static void disable(ViewGroup layout) {
-        layout.setEnabled(false);
-        for (int i = 0; i < layout.getChildCount(); i++) {
-            View child = layout.getChildAt(i);
-            if (child instanceof ViewGroup) {
-                disable((ViewGroup) child);
-            } else {
-                child.setEnabled(false);
-            }
-        }
-    }
-
-    private static void enable(ViewGroup layout) {
-        layout.setEnabled(true);
-        for (int i = 0; i < layout.getChildCount(); i++) {
-            View child = layout.getChildAt(i);
-            if (child instanceof ViewGroup) {
-                enable((ViewGroup) child);
-            } else {
-                child.setEnabled(true);
-            }
-        }
     }
 
     @Override

@@ -96,6 +96,7 @@ dependencies {
     implementation "com.airbnb.android:lottie:$lottieVersion"
     implementation 'com.shreyaspatil:MaterialDialog:2.0'
     implementation 'com.github.TutorialsAndroid:KAlertDialog:v7.0.19'
+    implementation 'com.pranavpandey.android:dynamic-toasts:3.1.0'
 
 
 

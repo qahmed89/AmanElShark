@@ -1,6 +1,7 @@
 package com.example.amanelshark.viewmodel;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -13,10 +14,15 @@ import androidx.lifecycle.ViewModel;
 import com.example.amanelshark.model.addcar.AddCars;
 import com.example.amanelshark.model.brands.Brands;
 import com.example.amanelshark.model.categories.Categories;
+import com.example.amanelshark.model.center.Centers;
+import com.example.amanelshark.model.centerDetails.CenterDetails;
 import com.example.amanelshark.model.login.Login;
 import com.example.amanelshark.model.models.Model;
 import com.example.amanelshark.model.register.Register;
 import com.example.amanelshark.model.types.Types;
+import com.example.amanelshark.model.warranty.Warranty;
+import com.example.amanelshark.model.warranty.Warrenty;
+import com.example.amanelshark.model.warrantyresponse.WarrantyResponse;
 import com.example.amanelshark.repository.AmanElsharkRepository;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -38,12 +44,14 @@ public class AmanElsharkViewModel extends ViewModel {
     private MutableLiveData<Login> loginModel = new MutableLiveData<>();
     private MutableLiveData<Register> registerModel = new MutableLiveData<>();
     private MutableLiveData<AddCars> addCarsModel = new MutableLiveData<>();
+    private MutableLiveData<WarrantyResponse> warrentyModel = new MutableLiveData<>();
 
     private MutableLiveData<Brands> brandsModel = new MutableLiveData<>();
     private MutableLiveData<Model> ModelsModel = new MutableLiveData<>();
     private MutableLiveData<Types> TypesModel = new MutableLiveData<>();
     private MutableLiveData<Categories> CategoriesModel = new MutableLiveData<>();
-
+    private MutableLiveData<Centers> centersModel = new MutableLiveData<>();
+    private MutableLiveData<CenterDetails> centersDetailsModel = new MutableLiveData<>();
 
     //   private MutableLiveData<Requests> modelMutableLiveRequests = new MutableLiveData<>();
 
@@ -81,6 +89,13 @@ public class AmanElsharkViewModel extends ViewModel {
 
     }
 
+    public LiveData<WarrantyResponse> getWarrentyRequests(String token, Warrenty warranty, View v) {
+        requestWarrenty(token, warranty, v);
+        return warrentyModel;
+
+    }
+
+
     public LiveData<AddCars> getAddcarsRequests(View v, String token, String model_category_id, String motor_number, String chassis_number, String plate_number, String meter_reading, String year) {
         requestAddCars(v, token, model_category_id, motor_number, chassis_number, plate_number, meter_reading, year);
         return addCarsModel;
@@ -108,6 +123,52 @@ public class AmanElsharkViewModel extends ViewModel {
         return CategoriesModel;
     }
 
+    public LiveData<Centers> getCentersRequests(Context context, String token) {
+        requestCenters(context, token);
+        return centersModel;
+    }
+
+    public LiveData<CenterDetails> getCentersDetailsRequests(Context context, String token, String id) {
+        requestCentersDetails(context, token, id);
+        return centersDetailsModel;
+    }
+
+    private void requestCentersDetails(Context context, String token, String id) {
+        disposable.add(amanElsharkRepository.CentersDetails(token, id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableSingleObserver<CenterDetails>() {
+                    @Override
+                    public void onSuccess(CenterDetails centerDetails) {
+                        centersDetailsModel.setValue(centerDetails);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Toast.makeText(context, "Maybe You lost Your Connection", Toast.LENGTH_SHORT).show();
+
+                    }
+                }));
+    }
+
+    private void requestCenters(Context context, String token) {
+        disposable.add(amanElsharkRepository.Centers(token)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableSingleObserver<Centers>() {
+                    @Override
+                    public void onSuccess(Centers centers) {
+                        centersModel.setValue(centers);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Toast.makeText(context, "Maybe You lost Your Connection", Toast.LENGTH_SHORT).show();
+
+                    }
+                }));
+    }
+
     private void requestModels(Context context, String token, String id) {
         disposable.add(amanElsharkRepository.Models(token, id)
                 .subscribeOn(Schedulers.io())
@@ -116,7 +177,7 @@ public class AmanElsharkViewModel extends ViewModel {
                     @Override
                     public void onSuccess(Model model) {
                         if (model.getData().isEmpty()) {
-                            Toast.makeText(context, "No Data in ModelList Choose Another choice ", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "No DataCenter in ModelList Choose Another choice ", Toast.LENGTH_SHORT).show();
 
                         } else ModelsModel.setValue(model);
                     }
@@ -139,7 +200,7 @@ public class AmanElsharkViewModel extends ViewModel {
                     @Override
                     public void onSuccess(Categories categories) {
                         if (categories.getData().isEmpty()) {
-                            Toast.makeText(context, "No Data in CategoriesList Choose Another choice ", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "No DataCenter in CategoriesList Choose Another choice ", Toast.LENGTH_SHORT).show();
 
                         } else
                             CategoriesModel.setValue(categories);
@@ -189,7 +250,7 @@ public class AmanElsharkViewModel extends ViewModel {
                     @Override
                     public void onSuccess(Types types) {
                         if (types.getData().isEmpty()) {
-                            Toast.makeText(context, "No Data in typesList Choose Another choice ", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "No DataCenter in typesList Choose Another choice ", Toast.LENGTH_SHORT).show();
 
                         } else
 
@@ -305,7 +366,8 @@ public class AmanElsharkViewModel extends ViewModel {
 
                         errorMessage.setValue("Maybe You lost Your Connection");
                         isLoading.setValue(false);
-                        Snackbar.make(v, "Maybe You lost Your Connection", Snackbar.LENGTH_LONG).show();
+                        //   DynamicToast.makeSuccess(v.getContext(), "Maybe You lost Your Connection").show();
+                        Snackbar.make(v, "Maybe You lost Your Connection", Snackbar.LENGTH_LONG).setBackgroundTint(Color.RED).show();
                         Log.e("error requestLogin", e.getLocalizedMessage());
 
                     }
@@ -316,9 +378,33 @@ public class AmanElsharkViewModel extends ViewModel {
                 })
 
         );
-
     }
 
+    private void requestWarrenty(String token, Warrenty warrenty, View v) {
+
+        isLoading.setValue(true);
+        disposable.add(amanElsharkRepository.Warrenty(token, warrenty)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableSingleObserver<WarrantyResponse>() {
+
+                    @Override
+                    public void onSuccess(WarrantyResponse warrantyResponse) {
+                        warrentyModel.setValue(warrantyResponse);
+                        Snackbar.make(v, "Success", Snackbar.LENGTH_LONG).setBackgroundTint(Color.GREEN).show();
+
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Snackbar.make(v, "Maybe You lost Your Connection", Snackbar.LENGTH_LONG).setBackgroundTint(Color.RED).show();
+                    }
+                })
+
+        );
+
+    }
 
     @Override
     protected void onCleared() {
