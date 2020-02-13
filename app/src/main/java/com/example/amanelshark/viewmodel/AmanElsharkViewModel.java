@@ -13,16 +13,20 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.amanelshark.model.addcar.AddCars;
 import com.example.amanelshark.model.brands.Brands;
+import com.example.amanelshark.model.cardetails.CarDetails;
 import com.example.amanelshark.model.categories.Categories;
 import com.example.amanelshark.model.center.Centers;
 import com.example.amanelshark.model.centerDetails.CenterDetails;
+import com.example.amanelshark.model.listcars.ListCars;
 import com.example.amanelshark.model.login.Login;
 import com.example.amanelshark.model.models.Model;
+import com.example.amanelshark.model.packages.Packages;
+import com.example.amanelshark.model.profile.Profile;
 import com.example.amanelshark.model.register.Register;
 import com.example.amanelshark.model.types.Types;
-import com.example.amanelshark.model.warranty.Warranty;
 import com.example.amanelshark.model.warranty.Warrenty;
 import com.example.amanelshark.model.warrantyresponse.WarrantyResponse;
+import com.example.amanelshark.model.years.Years;
 import com.example.amanelshark.repository.AmanElsharkRepository;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -51,7 +55,13 @@ public class AmanElsharkViewModel extends ViewModel {
     private MutableLiveData<Types> TypesModel = new MutableLiveData<>();
     private MutableLiveData<Categories> CategoriesModel = new MutableLiveData<>();
     private MutableLiveData<Centers> centersModel = new MutableLiveData<>();
+    private MutableLiveData<Years> yearsModel = new MutableLiveData<>();
+    private MutableLiveData<CarDetails> carDetailsModel = new MutableLiveData<>();
+
     private MutableLiveData<CenterDetails> centersDetailsModel = new MutableLiveData<>();
+    private MutableLiveData<Packages> packagesModel = new MutableLiveData<>();
+    private MutableLiveData<Profile> profileModel = new MutableLiveData<>();
+    private MutableLiveData<ListCars> listCarsModel = new MutableLiveData<>();
 
     //   private MutableLiveData<Requests> modelMutableLiveRequests = new MutableLiveData<>();
 
@@ -96,7 +106,7 @@ public class AmanElsharkViewModel extends ViewModel {
     }
 
 
-    public LiveData<AddCars> getAddcarsRequests(View v, String token, String model_category_id, String motor_number, String chassis_number, String plate_number, String meter_reading, String year) {
+    public LiveData<AddCars> getAddcarsRequests(View v, String token, String model_category_id, String motor_number, String chassis_number, String plate_number, String meter_reading, int year) {
         requestAddCars(v, token, model_category_id, motor_number, chassis_number, plate_number, meter_reading, year);
         return addCarsModel;
 
@@ -122,6 +132,12 @@ public class AmanElsharkViewModel extends ViewModel {
         requestCategories(context, token, id);
         return CategoriesModel;
     }
+    public LiveData<Years> getyearsRequests(Context context, String token) {
+        requestYears(context, token);
+        return yearsModel;
+    }
+
+
 
     public LiveData<Centers> getCentersRequests(Context context, String token) {
         requestCenters(context, token);
@@ -131,6 +147,97 @@ public class AmanElsharkViewModel extends ViewModel {
     public LiveData<CenterDetails> getCentersDetailsRequests(Context context, String token, String id) {
         requestCentersDetails(context, token, id);
         return centersDetailsModel;
+    }
+    public LiveData<CarDetails> getCarDetailsRequests(Context context, String token, int id) {
+        requestCarDetails(context, token, id);
+        return carDetailsModel;
+    }
+
+
+    public LiveData<Packages> getpackagesRequests(Context context, String token) {
+        requestPackages(context, token);
+        return packagesModel;
+    }
+
+    public LiveData<Profile> getpofileRequests(Context context, String token) {
+        requestProfile(context, token);
+        return profileModel;
+    }
+
+    public LiveData<ListCars> getLisCarsRequests(Context context, String token) {
+        requestListCars(context, token);
+        return listCarsModel;
+    }
+    private void requestCarDetails(Context context, String token, int id) {
+        disposable.add(amanElsharkRepository.CarDetails(token, id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableSingleObserver<CarDetails>() {
+                    @Override
+                    public void onSuccess(CarDetails carDetails) {
+carDetailsModel.setValue(carDetails);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Toast.makeText(context, "Maybe You lost Your Connection", Toast.LENGTH_SHORT).show();
+
+                    }
+                }));
+    }
+
+    private void requestYears(Context context, String token) {
+        disposable.add(amanElsharkRepository.Years(token)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableSingleObserver<Years>() {
+                    @Override
+                    public void onSuccess(Years years) {
+yearsModel.setValue(years);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Toast.makeText(context, "Maybe You lost Your Connection", Toast.LENGTH_SHORT).show();
+
+                    }
+                }));
+    }
+
+    private void requestListCars(Context context, String token) {
+        disposable.add(amanElsharkRepository.CarsList(token)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableSingleObserver<ListCars>() {
+                    @Override
+                    public void onSuccess(ListCars listCars) {
+                        listCarsModel.setValue(listCars);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Toast.makeText(context, "Maybe You lost Your Connection", Toast.LENGTH_SHORT).show();
+
+                    }
+                }));
+    }
+
+    private void requestPackages(Context context, String token) {
+        disposable.add(amanElsharkRepository.Packages(token)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableSingleObserver<Packages>() {
+                    @Override
+                    public void onSuccess(Packages packages) {
+                        packagesModel.setValue(packages);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Toast.makeText(context, "Maybe You lost Your Connection", Toast.LENGTH_SHORT).show();
+
+                    }
+                }));
     }
 
     private void requestCentersDetails(Context context, String token, String id) {
@@ -268,7 +375,7 @@ public class AmanElsharkViewModel extends ViewModel {
         );
     }
 
-    private void requestAddCars(View v, String token, String model_category_id, String motor_number, String chassis_number, String plate_number, String meter_reading, String year) {
+    private void requestAddCars(View v, String token, String model_category_id, String motor_number, String chassis_number, String plate_number, String meter_reading, int year) {
         isLoading.setValue(true);
         disposable.add(amanElsharkRepository.AddCars(token, model_category_id, motor_number, chassis_number, plate_number, meter_reading, year)
                 .subscribeOn(Schedulers.io())
@@ -403,8 +510,27 @@ public class AmanElsharkViewModel extends ViewModel {
                 })
 
         );
-
     }
+
+    private void requestProfile(Context context, String token) {
+        disposable.add(amanElsharkRepository.Profile(token)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableSingleObserver<Profile>() {
+                    @Override
+                    public void onSuccess(Profile profile) {
+                        profileModel.setValue(profile);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Toast.makeText(context, "Maybe You lost Your Connection", Toast.LENGTH_SHORT).show();
+
+                    }
+                })
+        );
+    }
+
 
     @Override
     protected void onCleared() {

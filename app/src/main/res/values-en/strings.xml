@@ -32,4 +32,8 @@
     <string name="password_8_charaters">password must be at least 8 characters</string>
     <string name="pasword_match">Password not matching</string>
     <string name="brands">Brand</string>
+    <string name="price">Price :</string>
+    <string name="km_package">KM :</string>
+    <string name="car_name">Car Name :</string>
+    <string name="warranty">Warranty :</string>
 </resources>

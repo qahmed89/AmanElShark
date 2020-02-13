@@ -31,4 +31,8 @@
     <string name="password_8_charaters">لقد ادخلت عدد حروف اقل من ثمانية</string>
     <string name="pasword_match">كلمة السر غير متوافقة</string>
     <string name="brands">الماركة</string>
+    <string name="car_name">اسم السيارة:</string>
+    <string name="km_package">ك.م :</string>
+    <string name="price">سعر:</string>
+    <string name="warranty">ضمان:</string>
 </resources>

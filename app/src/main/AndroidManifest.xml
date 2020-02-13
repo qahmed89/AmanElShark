@@ -3,18 +3,21 @@
     package="com.example.amanelshark">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.CAMERA"> </uses-permission>
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:name=".BaseApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
         android:configChanges="locale|orientation"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".view.DetailsServicesActivity"></activity>
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".view.DetailsCarActivity"></activity>
+        <activity android:name=".view.MainHomeActivity" />
+        <activity android:name=".view.DetailsServicesActivity" />
         <activity android:name=".view.ServicesActivity" />
         <activity android:name=".view.RegluarMainTenanceActivity" />
         <activity android:name=".view.PaymentActivity" />

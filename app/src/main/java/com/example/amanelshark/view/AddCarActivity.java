@@ -33,6 +33,8 @@ import com.example.amanelshark.model.subbrands.SubBreand;
 import com.example.amanelshark.model.subbrands.SubDataItem;
 import com.example.amanelshark.model.types.DataItemTypes;
 import com.example.amanelshark.model.types.Types;
+import com.example.amanelshark.model.years.DataItemYears;
+import com.example.amanelshark.model.years.Years;
 import com.example.amanelshark.viewmodel.AmanElsharkViewModel;
 
 import java.util.ArrayList;
@@ -43,7 +45,6 @@ import javax.inject.Inject;
 import static com.google.gson.reflect.TypeToken.get;
 
 public class AddCarActivity extends AppCompatActivity {
-    private static final String[] vans = new String[]{"فان", "هاتشباك", "كابورليه", "ستيشن", "سيدان", "كوبيه", "رياضية", "مينى-باص", "كروس-أوفر"};
     @Inject
     ViewModelProvider.Factory viewModelProvider;
     String[] yearTemp = new String[]
@@ -67,16 +68,16 @@ public class AddCarActivity extends AppCompatActivity {
     List<DataItemModels> lis_model;
     List<DataItemTypes> list_types;
     List<DataItemCategories> list_categories;
+    List<DataItemYears> itemYearsList;
     int ids;
     String token;
     ActivityAddCarBinding activityAddCarBinding;
     ArrayAdapter arrayAdapter;
-    ArrayAdapter<String> arrayAdapter_namt;
     ArrayAdapter<String> arrayAdapter_year;
     ArrayAdapter arrayAdapter_models;
     ArrayAdapter arrayAdapter_type;
     ArrayAdapter arrayAdapter_categories;
-    String years_string;
+    int years_string;
     private AmanElsharkViewModel userViewModel;
 
     @Override
@@ -90,7 +91,7 @@ public class AddCarActivity extends AppCompatActivity {
         InputMethodManager imm = getInputMethodManager();
 
         brands_method();
-
+        getYears();
         activityAddCarBinding.myProductionYear.setAdapter(arrayAdapter_year);
 
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -170,7 +171,7 @@ public class AddCarActivity extends AppCompatActivity {
         activityAddCarBinding.myProductionYear.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                years_string = arrayAdapter_year.getItem(position);
+                years_string = itemYearsList.get(position).getId();
             }
         });
         activityAddCarBinding.layoutModel.setOnClickListener(new View.OnClickListener() {
@@ -243,18 +244,18 @@ public class AddCarActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-//                vaildationtion();
-//
-//                imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
-//                userViewModel.getAddcarsRequests(v, token, sid, activityAddCarBinding.numMotor.getText().toString(), activityAddCarBinding.chassisNum.getText().toString(), activityAddCarBinding.plateNum.getText().toString(), activityAddCarBinding.kmReading.getText().toString(), years_string).observe(AddCarActivity.this, new Observer<AddCars>() {
-//                    @Override
-//                    public void onChanged(AddCars addCars) {
-//
-//                    }
-//                });
-                Intent intent = new Intent(AddCarActivity.this,AddWarrantyPeriodActivity.class);
-                startActivity(intent);
-                finish();
+                vaildationtion();
+
+                imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+                userViewModel.getAddcarsRequests(v, token, sid, activityAddCarBinding.numMotor.getText().toString(), activityAddCarBinding.chassisNum.getText().toString(), activityAddCarBinding.plateNum.getText().toString(), activityAddCarBinding.kmReading.getText().toString(), years_string).observe(AddCarActivity.this, new Observer<AddCars>() {
+                    @Override
+                    public void onChanged(AddCars addCars) {
+                        Intent intent = new Intent(AddCarActivity.this,MainHomeActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                });
+
             }
 
         });
@@ -262,11 +263,21 @@ public class AddCarActivity extends AppCompatActivity {
 
     }
 
+    private void getYears() {
+        userViewModel.getyearsRequests(this,token).observe(this, new Observer<Years>() {
+            @Override
+            public void onChanged(Years years) {
+                itemYearsList.addAll(years.getData());
+            }
+        });
+    }
+
     private InputMethodManager getInputMethodManager() {
         brandslist = new ArrayList<>();
         lis_model = new ArrayList<>();
         list_types = new ArrayList<>();
         list_categories = new ArrayList<>();
+        itemYearsList=new ArrayList<>();
 
         sharedPref = getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
         editor = sharedPref.edit();
@@ -277,7 +288,7 @@ public class AddCarActivity extends AppCompatActivity {
         arrayAdapter_type = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, list_types);
         arrayAdapter_categories = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, list_categories);
 
-        arrayAdapter_year = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, yearTemp);
+        arrayAdapter_year = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, itemYearsList);
         return imm;
     }
 

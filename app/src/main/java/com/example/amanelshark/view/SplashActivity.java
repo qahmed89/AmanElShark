@@ -38,13 +38,15 @@ public class SplashActivity extends AppCompatActivity {
                 if (!token.equals("null")) {
 //                if (str_login_test != null && !str_login_test.toString().trim().equals("")) {
                     setLocale(lang_Defualt);
-                    Intent refresh = new Intent(getApplicationContext(), AddCarActivity.class);
+                    Intent refresh = new Intent(getApplicationContext(), MainHomeActivity.class);
                     finish();
                     startActivity(refresh);
 //                Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
 //                startActivity(intent);
 //                finish();
                 } else {
+                    setLocale(lang_Defualt);
+
                     Intent refresh = new Intent(getApplicationContext(), LoginActivity.class);
                     finish();
                     startActivity(refresh);

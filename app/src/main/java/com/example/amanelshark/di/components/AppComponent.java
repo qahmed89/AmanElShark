@@ -1,14 +1,17 @@
 package com.example.amanelshark.di.components;
 
 
+import com.example.amanelshark.model.cardetails.CarDetails;
 import com.example.amanelshark.view.AddCarActivity;
 import com.example.amanelshark.view.AddWarrantyPeriodActivity;
+import com.example.amanelshark.view.DetailsCarActivity;
 import com.example.amanelshark.view.DetailsServicesActivity;
 import com.example.amanelshark.view.LoginActivity;
 import com.example.amanelshark.di.modules.ContextModel;
 import com.example.amanelshark.di.modules.NetworkModel;
 import com.example.amanelshark.view.RegisterActivity;
 import com.example.amanelshark.view.ServicesActivity;
+import com.example.amanelshark.view.fragment.ProfileFragment;
 
 
 import javax.inject.Singleton;
@@ -29,7 +32,10 @@ public interface AppComponent {
   void inject(AddCarActivity addCarActivity);
   void inject(ServicesActivity servicesActivity);
   void inject(DetailsServicesActivity detailsServicesActivity);
+  void inject(DetailsCarActivity detailsCarActivity);
+
   void inject(AddWarrantyPeriodActivity addWarrantyPeriodActivity);
+  void injectFragment(ProfileFragment profileFragment);
 
 //  //  void inject(SplashActivity splashActivity);
 //    void injectFragment(RequestFragment requestFragment);

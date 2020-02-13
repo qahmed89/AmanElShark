@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView android:layout_margin="20dp"
+    app:cardElevation="10dp"
+    app:cardCornerRadius="16dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+app:rippleColor="@color/colorPrimary"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+<LinearLayout
+
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_margin="20dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="5">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="4"
+            android:layout_height="wrap_content"
+            android:text="Car Name :"
+            android:textSize="15sp"
+            >
+
+        </TextView>
+        <TextView
+            android:textColor="@color/black"
+            android:id="@+id/carname_listcar"
+            android:layout_width="0dp"
+            android:layout_weight="6"
+            android:layout_height="wrap_content"
+            android:textAlignment="viewStart"
+
+            android:text="انسيجنيا"
+            android:textSize="20sp"
+            >
+
+        </TextView>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_margin="20dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="5">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="4"
+            android:layout_height="wrap_content"
+            android:text="Warranty :"
+            android:textSize="15sp"
+            >
+
+        </TextView>
+        <TextView
+            android:textColor="@color/black"
+android:textAlignment="viewStart"
+            android:id="@+id/warranty_listcar"
+            android:layout_width="0dp"
+            android:layout_weight="6"
+            android:layout_height="wrap_content"
+            tools:text="Not yet"
+            android:textSize="20sp"
+            >
+
+        </TextView>
+    </LinearLayout>
+</LinearLayout>
+</com.google.android.material.card.MaterialCardView>
