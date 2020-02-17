@@ -13,20 +13,31 @@ import com.example.amanelshark.model.models.Model;
 import com.example.amanelshark.model.packages.Packages;
 import com.example.amanelshark.model.profile.Profile;
 import com.example.amanelshark.model.register.Register;
+import com.example.amanelshark.model.requestwarranty.RequestWarranty;
+import com.example.amanelshark.model.responsrequest.ResponsRequest;
 import com.example.amanelshark.model.types.Types;
+import com.example.amanelshark.model.uploadimage.UploadImage;
 import com.example.amanelshark.model.warranty.Warrenty;
 import com.example.amanelshark.model.warrantyresponse.WarrantyResponse;
 import com.example.amanelshark.model.years.Years;
 
+import java.io.File;
+
 import io.reactivex.Observable;
 import io.reactivex.Single;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import retrofit2.Response;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
+import retrofit2.http.Multipart;
+import retrofit2.http.PATCH;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 import retrofit2.http.Path;
 
 public interface AmanElSharkServices {
@@ -63,7 +74,23 @@ public interface AmanElSharkServices {
 
 
     );
+    @POST("requests")
+    @FormUrlEncoded
+    Single<RequestWarranty> makeWarrentyRequest(@Header("Authorization") String token,
+                                                @Field("package_id")int package_id,
+                                                @Field("car_center_id")int center_id,
+                                                @Field("client_car_id")int client_car_id
 
+
+
+    );
+    @Multipart
+    @POST ("request/{id}/uploadfiles")
+    Single<UploadImage> uploadInvoiceRequest(@Header("Authorization") String token,
+                                             @Path(value = "id", encoded = true) int id,
+                                             @Part MultipartBody.Part file
+                                             //  @Part("image") RequestBody name
+                                             );
     @GET("brands")
     Single<Brands> getbrands(@Header("Authorization") String id);
 
@@ -80,7 +107,7 @@ public interface AmanElSharkServices {
     Single<Centers> getCenters(@Header("Authorization") String token);
 
     @GET("centers/{id}")
-    Single<CenterDetails> getCentersDetails(@Header("Authorization") String token, @Path(value = "id", encoded = true) String id);
+    Single<CenterDetails> getCentersDetails(@Header("Authorization") String token, @Path(value = "id", encoded = true) int id);
 
     @GET("years")
     Single<Years> getYears(@Header("Authorization") String token);
@@ -95,4 +122,6 @@ public interface AmanElSharkServices {
     Single<ListCars> getListCars(@Header("Authorization") String token);
     @GET("listCar/{id}")
     Single<CarDetails> getcarDetails(@Header("Authorization") String token, @Path(value = "id", encoded = true) int id);
+    @GET("requests")
+    Single<ResponsRequest> getResponsRequest(@Header("Authorization") String token);
 }

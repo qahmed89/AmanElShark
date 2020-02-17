@@ -46,6 +46,7 @@ public class AddWarrantyPeriodActivity extends AppCompatActivity  implements Pac
    List <DataItemPackages> itemPackagesList;
    PackageAdapter packageAdapter;
    String toDate;
+    int car_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +58,8 @@ public class AddWarrantyPeriodActivity extends AppCompatActivity  implements Pac
         sharedPref = getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
         editor = sharedPref.edit();
         token = sharedPref.getString(getString(R.string.token), "null");
+        Intent intent = getIntent();
+         car_id = intent.getIntExtra("id_car",0);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         activityAddWarrantyPeriodBinding.recycleviewPackage.setLayoutManager(layoutManager);
         userViewModel.getpackagesRequests(this,token).observe(this, new Observer<Packages>() {
@@ -77,12 +80,15 @@ public class AddWarrantyPeriodActivity extends AppCompatActivity  implements Pac
         Date c = Calendar.getInstance().getTime();
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
         toDate= df.format(c);
-        warranty=new Warranty(itemPackagesList.get(postion).getId(),toDate);
+        warranty=new Warranty(toDate,itemPackagesList.get(postion).getId(),car_id);
         warrenties=new Warrenty(warranty);
-        userViewModel.getWarrentyRequests(token,warrenties,getCurrentFocus()).observe(this, new Observer<WarrantyResponse>() {
+        userViewModel.getWarrentyRequests(token,warrenties,activityAddWarrantyPeriodBinding.recycleviewPackage.findFocus()).observe(this, new Observer<WarrantyResponse>() {
             @Override
             public void onChanged(WarrantyResponse warrantyResponse) {
+
                 Intent intent = new Intent(getApplicationContext(),ServicesActivity.class);
+                intent.putExtra("package_id",itemPackagesList.get(postion).getId());
+                intent.putExtra("client_car_id",car_id);
                 startActivity(intent);
             }
         });

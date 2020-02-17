@@ -12,6 +12,7 @@ import com.example.amanelshark.di.modules.NetworkModel;
 import com.example.amanelshark.view.RegisterActivity;
 import com.example.amanelshark.view.ServicesActivity;
 import com.example.amanelshark.view.fragment.ProfileFragment;
+import com.example.amanelshark.view.fragment.RequestFragment;
 
 
 import javax.inject.Singleton;
@@ -36,6 +37,7 @@ public interface AppComponent {
 
   void inject(AddWarrantyPeriodActivity addWarrantyPeriodActivity);
   void injectFragment(ProfileFragment profileFragment);
+  void injectFragment(RequestFragment requestFragment);
 
 //  //  void inject(SplashActivity splashActivity);
 //    void injectFragment(RequestFragment requestFragment);

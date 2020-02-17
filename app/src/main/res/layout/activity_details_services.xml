@@ -233,6 +233,16 @@ app:expandedTitleTextAppearance="@style/CollapsingToolbarLayoutExpandedTextStyle
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
             <Button
+                android:id="@+id/request_details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:text="Choose This Center?"
+                android:layout_gravity="center">
+
+            </Button>
+            <Button
+                android:visibility="gone"
                 android:id="@+id/scan_details"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

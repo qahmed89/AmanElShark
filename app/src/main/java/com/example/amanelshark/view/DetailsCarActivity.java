@@ -10,6 +10,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
 
 import com.example.amanelshark.BaseApplication;
 import com.example.amanelshark.R;
@@ -55,14 +56,32 @@ public class DetailsCarActivity extends AppCompatActivity {
                 activityDetailsCarBinding.motorNmCar.setText(carDetails.getData().getMotorNumber());
                 activityDetailsCarBinding.meterreadingCar.setText(carDetails.getData().getMeterReading());
                 activityDetailsCarBinding.yearCar.setText(String.valueOf(carDetails.getData().getYear()));
+
                 if (carDetails.getData().getWarranty() == null) {
                     activityDetailsCarBinding.startCar.setText("you dont have Warranty Yet");
                     activityDetailsCarBinding.endCar.setText("you dont have Warranty Yet");
+                    activityDetailsCarBinding.warrantyDetailscar.setVisibility(View.VISIBLE);
+
+
+                }else {
+                    activityDetailsCarBinding.endCar.setText(carDetails.getData().getWarranty().getPackages().getName());
+                    activityDetailsCarBinding.startCar.setText(carDetails.getData().getWarranty().getPackages().getCreatedAt());
 
                 }
 
 
             }
         });
+        activityDetailsCarBinding.warrantyDetailscar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),AddWarrantyPeriodActivity.class);
+                intent.putExtra("id_car",id_car);
+                startActivity(intent);
+            }
+        });
+
+
+
     }
 }

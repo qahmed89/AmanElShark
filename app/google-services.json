@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1005086114623",
+    "firebase_url": "https://amanelshark.firebaseio.com",
+    "project_id": "amanelshark",
+    "storage_bucket": "amanelshark.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1005086114623:android:e15fce3d9f02795484c98a",
+        "android_client_info": {
+          "package_name": "com.example.amanelshark"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1005086114623-dsv0gp3ko9q7nc5evffntfc0vj6b4926.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.amanelshark",
+            "certificate_hash": "2de446956f12d5c78150e23163f3b632daa2bc17"
+          }
+        },
+        {
+          "client_id": "1005086114623-a2o8ohjuqf277us8mfamavijdcgmnbq9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAv81Cs_aKw1rs6-ZqMu7WCKQONqXAzAsQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1005086114623-a2o8ohjuqf277us8mfamavijdcgmnbq9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

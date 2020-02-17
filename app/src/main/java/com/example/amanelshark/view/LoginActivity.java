@@ -128,7 +128,7 @@ public class LoginActivity extends AppCompatActivity {
                                 editor.putString(getString(R.string.token), "Bearer " + login.getClientAccount().getToken()).apply();
                                 i++;
                                 activityLoginBinding.placeholderLogin.layout.setVisibility(View.GONE);
-                                Intent intent = new Intent(LoginActivity.this, AddCarActivity.class);
+                                Intent intent = new Intent(LoginActivity.this, MainHomeActivity.class);
                                 startActivity(intent);
                                 finish();
                             }

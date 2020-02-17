@@ -23,13 +23,18 @@ import com.example.amanelshark.model.models.Model;
 import com.example.amanelshark.model.packages.Packages;
 import com.example.amanelshark.model.profile.Profile;
 import com.example.amanelshark.model.register.Register;
+import com.example.amanelshark.model.requestwarranty.RequestWarranty;
+import com.example.amanelshark.model.responsrequest.ResponsRequest;
 import com.example.amanelshark.model.types.Types;
+import com.example.amanelshark.model.uploadimage.UploadImage;
 import com.example.amanelshark.model.warranty.Warrenty;
 import com.example.amanelshark.model.warrantyresponse.WarrantyResponse;
 import com.example.amanelshark.model.years.Years;
 import com.example.amanelshark.repository.AmanElsharkRepository;
 import com.google.android.material.snackbar.Snackbar;
 
+
+import java.io.File;
 
 import javax.inject.Inject;
 
@@ -38,6 +43,10 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.observers.DisposableSingleObserver;
 import io.reactivex.schedulers.Schedulers;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import retrofit2.Response;
+import retrofit2.http.Multipart;
 
 public class AmanElsharkViewModel extends ViewModel {
     Context context;
@@ -49,6 +58,7 @@ public class AmanElsharkViewModel extends ViewModel {
     private MutableLiveData<Register> registerModel = new MutableLiveData<>();
     private MutableLiveData<AddCars> addCarsModel = new MutableLiveData<>();
     private MutableLiveData<WarrantyResponse> warrentyModel = new MutableLiveData<>();
+    private MutableLiveData<RequestWarranty> makewarrentyModel = new MutableLiveData<>();
 
     private MutableLiveData<Brands> brandsModel = new MutableLiveData<>();
     private MutableLiveData<Model> ModelsModel = new MutableLiveData<>();
@@ -62,6 +72,8 @@ public class AmanElsharkViewModel extends ViewModel {
     private MutableLiveData<Packages> packagesModel = new MutableLiveData<>();
     private MutableLiveData<Profile> profileModel = new MutableLiveData<>();
     private MutableLiveData<ListCars> listCarsModel = new MutableLiveData<>();
+    private MutableLiveData<ResponsRequest> responseRequestModel = new MutableLiveData<>();
+    private MutableLiveData<UploadImage> uploadInvoiceModel = new MutableLiveData<>();
 
     //   private MutableLiveData<Requests> modelMutableLiveRequests = new MutableLiveData<>();
 
@@ -132,11 +144,11 @@ public class AmanElsharkViewModel extends ViewModel {
         requestCategories(context, token, id);
         return CategoriesModel;
     }
+
     public LiveData<Years> getyearsRequests(Context context, String token) {
         requestYears(context, token);
         return yearsModel;
     }
-
 
 
     public LiveData<Centers> getCentersRequests(Context context, String token) {
@@ -144,10 +156,11 @@ public class AmanElsharkViewModel extends ViewModel {
         return centersModel;
     }
 
-    public LiveData<CenterDetails> getCentersDetailsRequests(Context context, String token, String id) {
+    public LiveData<CenterDetails> getCentersDetailsRequests(Context context, String token, int id) {
         requestCentersDetails(context, token, id);
         return centersDetailsModel;
     }
+
     public LiveData<CarDetails> getCarDetailsRequests(Context context, String token, int id) {
         requestCarDetails(context, token, id);
         return carDetailsModel;
@@ -168,6 +181,80 @@ public class AmanElsharkViewModel extends ViewModel {
         requestListCars(context, token);
         return listCarsModel;
     }
+
+    public LiveData<RequestWarranty> makeWarantyRequests(Context context, String token, int package_id, int center_id,int client_car_id) {
+        makeWarrantyRequest(context, token, package_id, center_id,client_car_id);
+        return makewarrentyModel;
+    }
+    public LiveData<ResponsRequest> getRespnseRequests(Context context, String token) {
+        respnseRequests(context, token);
+        return responseRequestModel;
+    }
+    public LiveData<UploadImage> uploadImageRequests(Context context, String token, int id, MultipartBody.Part file) {
+        uploadImageRequest(context, token,id,file);
+        return uploadInvoiceModel;
+    }
+
+    private void uploadImageRequest(Context context, String token, int id, MultipartBody.Part file) {
+        disposable.add(amanElsharkRepository.UpladFileRequest(token, id, file)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableSingleObserver<UploadImage>() {
+
+
+                    @Override
+                    public void onSuccess(UploadImage uploadImage) {
+                        uploadInvoiceModel.setValue(uploadImage);
+                        Toast.makeText(context, "done", Toast.LENGTH_SHORT).show();
+
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Toast.makeText(context, "Maybe You lost Your Connection", Toast.LENGTH_SHORT).show();
+
+                    }
+                }));
+    }
+
+
+    private void respnseRequests(Context context, String token) {
+        disposable.add(amanElsharkRepository.ResponsRequest(token)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableSingleObserver<ResponsRequest>() {
+                    @Override
+                    public void onSuccess(ResponsRequest responsRequest) {
+                        responseRequestModel.setValue(responsRequest);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Toast.makeText(context, "Maybe You lost Your Connection", Toast.LENGTH_SHORT).show();
+
+                    }
+                }));
+    }
+
+    private void makeWarrantyRequest(Context context, String token, int package_id, int center_id,int client_car_id ){
+        disposable.add(amanElsharkRepository.ReqestWarranty(token, package_id, center_id,client_car_id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableSingleObserver<RequestWarranty>() {
+                    @Override
+                    public void onSuccess(RequestWarranty requestWarranty) {
+                        makewarrentyModel.setValue(requestWarranty);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Toast.makeText(context, "Maybe You lost Your Connection", Toast.LENGTH_SHORT).show();
+
+                    }
+                }));
+    }
+
     private void requestCarDetails(Context context, String token, int id) {
         disposable.add(amanElsharkRepository.CarDetails(token, id)
                 .subscribeOn(Schedulers.io())
@@ -175,7 +262,7 @@ public class AmanElsharkViewModel extends ViewModel {
                 .subscribeWith(new DisposableSingleObserver<CarDetails>() {
                     @Override
                     public void onSuccess(CarDetails carDetails) {
-carDetailsModel.setValue(carDetails);
+                        carDetailsModel.setValue(carDetails);
                     }
 
                     @Override
@@ -193,7 +280,7 @@ carDetailsModel.setValue(carDetails);
                 .subscribeWith(new DisposableSingleObserver<Years>() {
                     @Override
                     public void onSuccess(Years years) {
-yearsModel.setValue(years);
+                        yearsModel.setValue(years);
                     }
 
                     @Override
@@ -211,6 +298,7 @@ yearsModel.setValue(years);
                 .subscribeWith(new DisposableSingleObserver<ListCars>() {
                     @Override
                     public void onSuccess(ListCars listCars) {
+
                         listCarsModel.setValue(listCars);
                     }
 
@@ -240,7 +328,7 @@ yearsModel.setValue(years);
                 }));
     }
 
-    private void requestCentersDetails(Context context, String token, String id) {
+    private void requestCentersDetails(Context context, String token, int id) {
         disposable.add(amanElsharkRepository.CentersDetails(token, id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -498,7 +586,7 @@ yearsModel.setValue(years);
                     @Override
                     public void onSuccess(WarrantyResponse warrantyResponse) {
                         warrentyModel.setValue(warrantyResponse);
-                        Snackbar.make(v, "Success", Snackbar.LENGTH_LONG).setBackgroundTint(Color.GREEN).show();
+                      //  Snackbar.make(v, "Success", Snackbar.LENGTH_LONG).setBackgroundTint(Color.GREEN).show();
 
 
                     }

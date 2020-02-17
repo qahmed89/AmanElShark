@@ -17,24 +17,27 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-@Module (includes = ViewModelModule.class)
+@Module(includes = ViewModelModule.class)
 public class NetworkModel {
     @Provides
     @Singleton
-    static Retrofit provideRetrofit (){
+    static Retrofit provideRetrofit() {
 
+        OkHttpClient okHttpClient = new OkHttpClient.Builder().build();
 
-        return  new Retrofit.Builder()
+        return new Retrofit.Builder()
 
-                .baseUrl("http://192.168.1.172:5000/api/client/")
+                .baseUrl("http://192.168.1.172:5001/api/client/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .client(okHttpClient)
                 .build();
 
     }
+
     @Provides
     @Singleton
-    static AmanElSharkServices provideUserServices(Retrofit retrofit){
+    static AmanElSharkServices provideUserServices(Retrofit retrofit) {
         return retrofit.create(AmanElSharkServices.class);
     }
 }

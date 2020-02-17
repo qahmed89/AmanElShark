@@ -3,6 +3,10 @@
     package="com.example.amanelshark">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_INTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
 
     <application
@@ -15,7 +19,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".view.DetailsCarActivity"></activity>
+        <service
+            android:name=".Services"
+            android:enabled="true"
+            android:exported="true"></service>
+        <service
+            android:name=".Service"
+            android:enabled="true"
+            android:exported="true" />
+
+        <activity android:name=".view.DetailsCarActivity" />
         <activity android:name=".view.MainHomeActivity" />
         <activity android:name=".view.DetailsServicesActivity" />
         <activity android:name=".view.ServicesActivity" />
@@ -33,6 +46,7 @@
         <activity android:name=".view.OnBoardActivity" />
         <activity android:name=".view.RegisterActivity" />
         <activity android:name=".view.LoginActivity" />
+
     </application>
 
 </manifest>

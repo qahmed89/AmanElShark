@@ -13,16 +13,24 @@ import com.example.amanelshark.model.models.Model;
 import com.example.amanelshark.model.packages.Packages;
 import com.example.amanelshark.model.profile.Profile;
 import com.example.amanelshark.model.register.Register;
+import com.example.amanelshark.model.requestwarranty.RequestWarranty;
+import com.example.amanelshark.model.responsrequest.ResponsRequest;
 import com.example.amanelshark.model.types.Types;
+import com.example.amanelshark.model.uploadimage.UploadImage;
 import com.example.amanelshark.model.warranty.Warrenty;
 import com.example.amanelshark.model.warrantyresponse.WarrantyResponse;
 import com.example.amanelshark.model.years.Years;
 import com.example.amanelshark.remote.AmanElSharkServices;
 
+import java.io.File;
+
 import javax.inject.Inject;
 
 import io.reactivex.Observable;
 import io.reactivex.Single;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import retrofit2.Response;
 
 public class AmanElsharkRepository {
     private AmanElSharkServices amanElSharkServices;
@@ -64,7 +72,7 @@ public class AmanElsharkRepository {
         return amanElSharkServices.getCenters(token);
     }
 
-    public Single<CenterDetails> CentersDetails(String token, String id) {
+    public Single<CenterDetails> CentersDetails(String token, int id) {
         return amanElSharkServices.getCentersDetails(token, id);
     }
     public Single<Years> Years(String token) {
@@ -88,6 +96,15 @@ public class AmanElsharkRepository {
     }
     public Single<CarDetails> CarDetails(String token,int id) {
         return amanElSharkServices.getcarDetails(token,id);
+    }
+    public Single<RequestWarranty> ReqestWarranty(String token, int center_id,int package_id,int client_car_id) {
+        return amanElSharkServices.makeWarrentyRequest(token,center_id,package_id,client_car_id);
+    }
+    public Single<ResponsRequest> ResponsRequest(String token) {
+        return amanElSharkServices.getResponsRequest(token);
+    }
+    public Single<UploadImage> UpladFileRequest(String token, int id, MultipartBody.Part  image) {
+        return amanElSharkServices.uploadInvoiceRequest(token,id,image);
     }
 //    public Single<RequestVocation> sendvocationRequestmodelSingle(String type , String description, String from , String to , String id){
     //      return crmServices.sendVocationRequest(type,description,from,to,id);

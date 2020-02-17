@@ -41,7 +41,7 @@ public class CarListAdapter extends RecyclerView.Adapter<CarListAdapter.CarListh
 
 
         }else {
-            holder.warrenty.setText(listCarsList.get(position).getWarranty().getWarrantyPeriod());
+            holder.warrenty.setText(listCarsList.get(position).getWarranty().getPackages().getName());
         }
 
         holder.name.setText(listCarsList.get(position).getModel());

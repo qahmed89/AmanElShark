@@ -40,6 +40,9 @@ public class ServicesActivity extends AppCompatActivity implements ServiesAdpate
     SharedPreferences.Editor editor;
     ServiesAdpater serviesAdpater;
     String token;
+    Intent intent1;
+    int car_id;
+    int x;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +58,9 @@ public class ServicesActivity extends AppCompatActivity implements ServiesAdpate
         sharedPref = getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
         editor = sharedPref.edit();
         token = sharedPref.getString(getString(R.string.token), "null");
+      intent1 =getIntent();
+       x =  intent1.getIntExtra("package_id",0);
+       car_id=intent1.getIntExtra("client_car_id",0);
         servicesBinding.shimmer.startShimmer();
         userViewModel.getCentersRequests(getApplicationContext(), token).observe(this, new Observer<Centers>() {
             @Override
@@ -78,23 +84,17 @@ public class ServicesActivity extends AppCompatActivity implements ServiesAdpate
             }
         });
 
-//new Handler().postDelayed(new Runnable() {
-//    @Override
-//    public void run() {
-//if(!itemCentersList.isEmpty()) {
-//    serviesAdpater.setShowShimmer(false);
-//    serviesAdpater.notifyDataSetChanged();
-//}else {
-//    serviesAdpater.notifyDataSetChanged();}
-//    }
-//},1000);
+
 
     }
     @Override
     public void onServiesClick(int postion) {
-       String id = String.valueOf( itemCentersList.get(postion).getId());
+       int id =  itemCentersList.get(postion).getId();
        Intent intent = new Intent(this,DetailsServicesActivity.class);
+
        intent.putExtra("id_event",id);
+       intent.putExtra("package_id",x);
+       intent.putExtra("client_car_id",car_id);
        startActivity(intent);
 
     }
