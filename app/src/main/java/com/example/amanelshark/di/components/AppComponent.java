@@ -5,6 +5,7 @@ import com.example.amanelshark.model.cardetails.CarDetails;
 import com.example.amanelshark.view.AddCarActivity;
 import com.example.amanelshark.view.AddWarrantyPeriodActivity;
 import com.example.amanelshark.view.DetailsCarActivity;
+import com.example.amanelshark.view.DetailsPaymentActivity;
 import com.example.amanelshark.view.DetailsServicesActivity;
 import com.example.amanelshark.view.LoginActivity;
 import com.example.amanelshark.di.modules.ContextModel;
@@ -34,6 +35,7 @@ public interface AppComponent {
   void inject(ServicesActivity servicesActivity);
   void inject(DetailsServicesActivity detailsServicesActivity);
   void inject(DetailsCarActivity detailsCarActivity);
+  void inject(DetailsPaymentActivity detailsPaymentActivity);
 
   void inject(AddWarrantyPeriodActivity addWarrantyPeriodActivity);
   void injectFragment(ProfileFragment profileFragment);

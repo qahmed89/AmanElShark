@@ -24,6 +24,7 @@ import com.example.amanelshark.R;
 import com.example.amanelshark.adapter.ResponseRequstAdapter;
 import com.example.amanelshark.model.responsrequest.DataItemResponseRequest;
 import com.example.amanelshark.model.responsrequest.ResponsRequest;
+import com.example.amanelshark.view.DetailsPaymentActivity;
 import com.example.amanelshark.view.DetailsServicesActivity;
 import com.example.amanelshark.viewmodel.AmanElsharkViewModel;
 
@@ -81,9 +82,14 @@ RecyclerView recyclerView;
 
     @Override
     public void onResponseRequstClick(int postion) {
-        Intent intent=new Intent (Objects.requireNonNull(getContext()).getApplicationContext(), DetailsServicesActivity.class);
+
+
+        Intent intent=new Intent (Objects.requireNonNull(getContext()).getApplicationContext(), DetailsPaymentActivity.class);
         intent.putExtra("id_event",responseRequestList.get(postion).getCarCenterId());
         intent.putExtra("id_request",responseRequestList.get(postion).getId());
+        intent.putExtra("package_id",responseRequestList.get(postion).getPackageId());
+        intent.putExtra("status",responseRequestList.get(postion).getStatus());
+
         startActivity(intent);
 
     }

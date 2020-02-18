@@ -10,9 +10,11 @@ import com.example.amanelshark.model.centerDetails.CenterDetails;
 import com.example.amanelshark.model.listcars.ListCars;
 import com.example.amanelshark.model.login.Login;
 import com.example.amanelshark.model.models.Model;
+import com.example.amanelshark.model.packagedetails.PackageDetails;
 import com.example.amanelshark.model.packages.Packages;
 import com.example.amanelshark.model.profile.Profile;
 import com.example.amanelshark.model.register.Register;
+import com.example.amanelshark.model.requestpayment.RequestPayment;
 import com.example.amanelshark.model.requestwarranty.RequestWarranty;
 import com.example.amanelshark.model.responsrequest.ResponsRequest;
 import com.example.amanelshark.model.types.Types;
@@ -106,6 +108,12 @@ public class AmanElsharkRepository {
     public Single<UploadImage> UpladFileRequest(String token, int id, MultipartBody.Part  image) {
         return amanElSharkServices.uploadInvoiceRequest(token,id,image);
     }
+    public Single<PackageDetails> PackageDetails(String token, int id) {
+        return amanElSharkServices.getPackageDetails(token,id);
+    }
+//    public Single<RequestPayment> RequestPayment(String token, int id) {
+//        return amanElSharkServices.getPackageDetails(token,id);
+//    }
 //    public Single<RequestVocation> sendvocationRequestmodelSingle(String type , String description, String from , String to , String id){
     //      return crmServices.sendVocationRequest(type,description,from,to,id);
     // }

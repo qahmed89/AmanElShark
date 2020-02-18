@@ -10,9 +10,11 @@ import com.example.amanelshark.model.centerDetails.CenterDetails;
 import com.example.amanelshark.model.listcars.ListCars;
 import com.example.amanelshark.model.login.Login;
 import com.example.amanelshark.model.models.Model;
+import com.example.amanelshark.model.packagedetails.PackageDetails;
 import com.example.amanelshark.model.packages.Packages;
 import com.example.amanelshark.model.profile.Profile;
 import com.example.amanelshark.model.register.Register;
+import com.example.amanelshark.model.requestpayment.RequestPayment;
 import com.example.amanelshark.model.requestwarranty.RequestWarranty;
 import com.example.amanelshark.model.responsrequest.ResponsRequest;
 import com.example.amanelshark.model.types.Types;
@@ -67,10 +69,18 @@ public interface AmanElSharkServices {
 
     );
 
+
     @Headers("Content-Type: application/json")
     @POST("warranties")
     Single<WarrantyResponse> addWarrentyRequest(@Header("Authorization") String token,
                                                 @Body Warrenty warranty
+
+
+    );
+    @Headers("Content-Type: application/json")
+    @POST("payment")
+    Single<RequestPayment> addPaymentRequest(@Header("Authorization") String token,
+                                              @Body RequestPayment requestPayment
 
 
     );
@@ -122,6 +132,8 @@ public interface AmanElSharkServices {
     Single<ListCars> getListCars(@Header("Authorization") String token);
     @GET("listCar/{id}")
     Single<CarDetails> getcarDetails(@Header("Authorization") String token, @Path(value = "id", encoded = true) int id);
+    @GET("packages/{id}")
+    Single<PackageDetails> getPackageDetails(@Header("Authorization") String token, @Path(value = "id", encoded = true) int id);
     @GET("requests")
     Single<ResponsRequest> getResponsRequest(@Header("Authorization") String token);
 }

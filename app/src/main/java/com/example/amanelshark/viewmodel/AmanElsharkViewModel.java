@@ -20,6 +20,7 @@ import com.example.amanelshark.model.centerDetails.CenterDetails;
 import com.example.amanelshark.model.listcars.ListCars;
 import com.example.amanelshark.model.login.Login;
 import com.example.amanelshark.model.models.Model;
+import com.example.amanelshark.model.packagedetails.PackageDetails;
 import com.example.amanelshark.model.packages.Packages;
 import com.example.amanelshark.model.profile.Profile;
 import com.example.amanelshark.model.register.Register;
@@ -67,6 +68,7 @@ public class AmanElsharkViewModel extends ViewModel {
     private MutableLiveData<Centers> centersModel = new MutableLiveData<>();
     private MutableLiveData<Years> yearsModel = new MutableLiveData<>();
     private MutableLiveData<CarDetails> carDetailsModel = new MutableLiveData<>();
+    private MutableLiveData<PackageDetails> packageDetailsModel = new MutableLiveData<>();
 
     private MutableLiveData<CenterDetails> centersDetailsModel = new MutableLiveData<>();
     private MutableLiveData<Packages> packagesModel = new MutableLiveData<>();
@@ -194,6 +196,32 @@ public class AmanElsharkViewModel extends ViewModel {
         uploadImageRequest(context, token,id,file);
         return uploadInvoiceModel;
     }
+    public LiveData<PackageDetails> getPackagesDetailsRequests(Context context, String token, int id) {
+        PackagesDetailsRequests(context, token,id);
+        return packageDetailsModel;
+    }
+
+    private void PackagesDetailsRequests(Context context, String token, int id) {
+        disposable.add(amanElsharkRepository.PackageDetails(token, id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableSingleObserver<PackageDetails>() {
+                    @Override
+                    public void onSuccess(PackageDetails details) {
+                        packageDetailsModel.setValue(details);
+                        Toast.makeText(context, "done", Toast.LENGTH_SHORT).show();
+
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Toast.makeText(context, "Maybe You lost Your Connection", Toast.LENGTH_SHORT).show();
+
+                    }
+                }));
+                }
+
 
     private void uploadImageRequest(Context context, String token, int id, MultipartBody.Part file) {
         disposable.add(amanElsharkRepository.UpladFileRequest(token, id, file)

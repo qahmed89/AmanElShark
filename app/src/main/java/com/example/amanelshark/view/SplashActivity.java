@@ -1,7 +1,9 @@
 package com.example.amanelshark.view;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 
+import android.app.Notification;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,6 +14,16 @@ import android.os.Handler;
 import android.util.DisplayMetrics;
 
 import com.example.amanelshark.R;
+import com.google.firebase.messaging.RemoteMessage;
+import com.pusher.client.Pusher;
+import com.pusher.client.PusherOptions;
+import com.pusher.client.channel.Channel;
+import com.pusher.client.channel.PusherEvent;
+import com.pusher.client.channel.SubscriptionEventListener;
+import com.pusher.client.connection.ConnectionEventListener;
+import com.pusher.client.connection.ConnectionState;
+import com.pusher.client.connection.ConnectionStateChange;
+import com.pusher.pushnotifications.PushNotifications;
 
 import java.util.Locale;
 
@@ -28,6 +40,8 @@ public class SplashActivity extends AppCompatActivity {
         sharedPref = getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
         editor = sharedPref.edit();
         token = sharedPref.getString(getString(R.string.token), "null");
+
+
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -38,7 +52,7 @@ public class SplashActivity extends AppCompatActivity {
                 if (!token.equals("null")) {
 //                if (str_login_test != null && !str_login_test.toString().trim().equals("")) {
                     setLocale(lang_Defualt);
-                    Intent refresh = new Intent(getApplicationContext(), MainHomeActivity.class);
+                    Intent refresh = new Intent(getApplicationContext(), LoginActivity.class);
                     finish();
                     startActivity(refresh);
 //                Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
