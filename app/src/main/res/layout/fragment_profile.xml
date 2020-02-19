@@ -155,7 +155,12 @@
                     tools:listitem="@layout/carlist_item">
 
                 </androidx.recyclerview.widget.RecyclerView>
+
+
+
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
+
+
     </LinearLayout>
 </LinearLayout>

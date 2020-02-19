@@ -111,9 +111,9 @@ public class AmanElsharkRepository {
     public Single<PackageDetails> PackageDetails(String token, int id) {
         return amanElSharkServices.getPackageDetails(token,id);
     }
-//    public Single<RequestPayment> RequestPayment(String token, int id) {
-//        return amanElSharkServices.getPackageDetails(token,id);
-//    }
+    public Single<RequestPayment> RequestPayment(String token, RequestPayment requestPayment) {
+        return amanElSharkServices.addPaymentRequest(token,requestPayment);
+    }
 //    public Single<RequestVocation> sendvocationRequestmodelSingle(String type , String description, String from , String to , String id){
     //      return crmServices.sendVocationRequest(type,description,from,to,id);
     // }

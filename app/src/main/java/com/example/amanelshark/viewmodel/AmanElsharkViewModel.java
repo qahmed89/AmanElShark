@@ -24,6 +24,7 @@ import com.example.amanelshark.model.packagedetails.PackageDetails;
 import com.example.amanelshark.model.packages.Packages;
 import com.example.amanelshark.model.profile.Profile;
 import com.example.amanelshark.model.register.Register;
+import com.example.amanelshark.model.requestpayment.RequestPayment;
 import com.example.amanelshark.model.requestwarranty.RequestWarranty;
 import com.example.amanelshark.model.responsrequest.ResponsRequest;
 import com.example.amanelshark.model.types.Types;
@@ -76,6 +77,7 @@ public class AmanElsharkViewModel extends ViewModel {
     private MutableLiveData<ListCars> listCarsModel = new MutableLiveData<>();
     private MutableLiveData<ResponsRequest> responseRequestModel = new MutableLiveData<>();
     private MutableLiveData<UploadImage> uploadInvoiceModel = new MutableLiveData<>();
+    private MutableLiveData<RequestPayment> requestPaymentModel = new MutableLiveData<>();
 
     //   private MutableLiveData<Requests> modelMutableLiveRequests = new MutableLiveData<>();
 
@@ -199,6 +201,28 @@ public class AmanElsharkViewModel extends ViewModel {
     public LiveData<PackageDetails> getPackagesDetailsRequests(Context context, String token, int id) {
         PackagesDetailsRequests(context, token,id);
         return packageDetailsModel;
+    }
+    public LiveData<RequestPayment> makePaymentRequests(Context context, String token, RequestPayment requestPayment) {
+        PaymentRequests(context, token,requestPayment);
+        return requestPaymentModel;
+    }
+
+    private void PaymentRequests(Context context, String token, RequestPayment requestPayment) {
+        disposable.add(amanElsharkRepository.RequestPayment(token, requestPayment)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableSingleObserver<RequestPayment>() {
+                    @Override
+                    public void onSuccess(RequestPayment requestPayment) {
+                        requestPaymentModel.setValue(requestPayment);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Toast.makeText(context, "Maybe You lost Your Connection", Toast.LENGTH_SHORT).show();
+
+                    }
+                }));
     }
 
     private void PackagesDetailsRequests(Context context, String token, int id) {

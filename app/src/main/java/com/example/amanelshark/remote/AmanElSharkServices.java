@@ -78,7 +78,7 @@ public interface AmanElSharkServices {
 
     );
     @Headers("Content-Type: application/json")
-    @POST("payment")
+    @POST("payments")
     Single<RequestPayment> addPaymentRequest(@Header("Authorization") String token,
                                               @Body RequestPayment requestPayment
 
