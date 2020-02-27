@@ -32,7 +32,10 @@
     <string name="pasword_match">كلمة السر غير متوافقة</string>
     <string name="brands">الماركة</string>
     <string name="car_name">اسم السيارة:</string>
-    <string name="km_package">ك.م :</string>
-    <string name="price">سعر:</string>
-    <string name="warranty">ضمان:</string>
+    <string name="km_package">":ك.م "</string>
+    <string name="price">:سعر</string>
+    <string name="warranty">:ضمان</string>
+    <string name="period">": الفترة "</string>
+    <string name="add_car">اضافة سيارة</string>
+    <string name="warranty_package">باقات تأمين أمان الشرق</string>
 </resources>

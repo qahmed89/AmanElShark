@@ -22,7 +22,7 @@
     android:layout_width="0dp"
     android:layout_weight="5"
     android:layout_height="wrap_content"
-    android:text="period :"
+    android:text="@string/period"
     android:textAlignment="center"
     android:textSize="20dp"
     >
@@ -36,7 +36,7 @@
         android:textSize="20dp"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
-        tools:text=" BMW">
+        tools:text=" سيارة">
 
     </TextView>
     </LinearLayout>

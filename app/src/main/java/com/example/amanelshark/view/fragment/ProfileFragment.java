@@ -33,6 +33,7 @@ import com.example.amanelshark.model.listcars.ListCars;
 import com.example.amanelshark.model.profile.Profile;
 import com.example.amanelshark.view.DetailsCarActivity;
 import com.example.amanelshark.view.DetailsServicesActivity;
+import com.example.amanelshark.view.MainHomeActivity;
 import com.example.amanelshark.viewmodel.AmanElsharkViewModel;
 
 import java.util.ArrayList;
@@ -72,7 +73,7 @@ public class ProfileFragment extends Fragment implements CarListAdapter.OnCarLis
         token = sharedPref.getString(getString(R.string.token), "null");
         ((BaseApplication) getActivity().getApplication()).getAppComponent().injectFragment(this);
 
-        userViewModel = ViewModelProviders.of(this, viewModelProvider).get(AmanElsharkViewModel.class);
+        userViewModel = new ViewModelProvider(this, viewModelProvider).get(AmanElsharkViewModel.class);
         listCarsList = new ArrayList<>();
         profile();
 
@@ -92,7 +93,6 @@ public class ProfileFragment extends Fragment implements CarListAdapter.OnCarLis
         recyclerView.setLayoutManager(layoutManager);
 
 
-
         carListAdapter = new CarListAdapter(this, listCarsList, getContext());
         recyclerView.setAdapter(carListAdapter);
 
@@ -103,7 +103,8 @@ public class ProfileFragment extends Fragment implements CarListAdapter.OnCarLis
     public void onCarListClick(int postion) {
         Toast.makeText(getContext(), "" + postion, Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(getContext(), DetailsCarActivity.class);
-        intent.putExtra("id_car",listCarsList.get(postion).getId());
+        intent.putExtra("id_car", listCarsList.get(postion).getId());
+
         getActivity().startActivity(intent);
     }
 
@@ -117,6 +118,17 @@ public class ProfileFragment extends Fragment implements CarListAdapter.OnCarLis
                 //  carListAdapter.notifyDataSetChanged();
             }
         });
+
+//        phone.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//           Intent     intent= new Intent(getActivity(), MainHomeActivity.class);
+//                intent.putExtra("viewpager_position",1);
+//                getActivity().finish();
+//                startActivity(intent);
+//            }
+//        });
     }
 
     private void profile() {

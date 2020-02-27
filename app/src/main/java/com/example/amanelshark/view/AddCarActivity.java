@@ -86,7 +86,7 @@ public class AddCarActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_car);
         ((BaseApplication) getApplication()).getAppComponent().inject(this);
         activityAddCarBinding = DataBindingUtil.setContentView(this, R.layout.activity_add_car);
-        userViewModel = ViewModelProviders.of(this, viewModelProvider).get(AmanElsharkViewModel.class);
+        userViewModel = new ViewModelProvider(this, viewModelProvider).get(AmanElsharkViewModel.class);
 
         InputMethodManager imm = getInputMethodManager();
 
@@ -95,7 +95,12 @@ public class AddCarActivity extends AppCompatActivity {
         activityAddCarBinding.myProductionYear.setAdapter(arrayAdapter_year);
 
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
+activityAddCarBinding.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        finish();
+    }
+});
 
         activityAddCarBinding.brands.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 

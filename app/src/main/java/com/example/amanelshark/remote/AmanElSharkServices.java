@@ -7,9 +7,11 @@ import com.example.amanelshark.model.cardetails.CarDetails;
 import com.example.amanelshark.model.categories.Categories;
 import com.example.amanelshark.model.center.Centers;
 import com.example.amanelshark.model.centerDetails.CenterDetails;
+import com.example.amanelshark.model.detailsrequest.DetailsRequest;
 import com.example.amanelshark.model.listcars.ListCars;
 import com.example.amanelshark.model.login.Login;
 import com.example.amanelshark.model.models.Model;
+import com.example.amanelshark.model.notifications.Notifications;
 import com.example.amanelshark.model.packagedetails.PackageDetails;
 import com.example.amanelshark.model.packages.Packages;
 import com.example.amanelshark.model.profile.Profile;
@@ -25,6 +27,7 @@ import com.example.amanelshark.model.years.Years;
 
 import java.io.File;
 
+import io.reactivex.Notification;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import okhttp3.MultipartBody;
@@ -101,6 +104,8 @@ public interface AmanElSharkServices {
                                              @Part MultipartBody.Part file
                                              //  @Part("image") RequestBody name
                                              );
+    @GET("notifications")
+    Single<Notifications> getNotifications(@Header("Authorization") String id);
     @GET("brands")
     Single<Brands> getbrands(@Header("Authorization") String id);
 
@@ -134,6 +139,8 @@ public interface AmanElSharkServices {
     Single<CarDetails> getcarDetails(@Header("Authorization") String token, @Path(value = "id", encoded = true) int id);
     @GET("packages/{id}")
     Single<PackageDetails> getPackageDetails(@Header("Authorization") String token, @Path(value = "id", encoded = true) int id);
+    @GET("requests/{id}")
+    Single<DetailsRequest> getRequestDetails(@Header("Authorization") String token, @Path(value = "id", encoded = true) int id);
     @GET("requests")
     Single<ResponsRequest> getResponsRequest(@Header("Authorization") String token);
 }

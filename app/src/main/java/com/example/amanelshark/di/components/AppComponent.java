@@ -6,12 +6,14 @@ import com.example.amanelshark.view.AddCarActivity;
 import com.example.amanelshark.view.AddWarrantyPeriodActivity;
 import com.example.amanelshark.view.DetailsCarActivity;
 import com.example.amanelshark.view.DetailsPaymentActivity;
+import com.example.amanelshark.view.DetailsRequestActivity;
 import com.example.amanelshark.view.DetailsServicesActivity;
 import com.example.amanelshark.view.LoginActivity;
 import com.example.amanelshark.di.modules.ContextModel;
 import com.example.amanelshark.di.modules.NetworkModel;
 import com.example.amanelshark.view.RegisterActivity;
 import com.example.amanelshark.view.ServicesActivity;
+import com.example.amanelshark.view.fragment.NotificationFragment;
 import com.example.amanelshark.view.fragment.ProfileFragment;
 import com.example.amanelshark.view.fragment.RequestFragment;
 
@@ -36,10 +38,12 @@ public interface AppComponent {
   void inject(DetailsServicesActivity detailsServicesActivity);
   void inject(DetailsCarActivity detailsCarActivity);
   void inject(DetailsPaymentActivity detailsPaymentActivity);
+  void inject(DetailsRequestActivity detailsRequestActivity);
 
   void inject(AddWarrantyPeriodActivity addWarrantyPeriodActivity);
   void injectFragment(ProfileFragment profileFragment);
   void injectFragment(RequestFragment requestFragment);
+  void injectFragment(NotificationFragment notificationFragment);
 
 //  //  void inject(SplashActivity splashActivity);
 //    void injectFragment(RequestFragment requestFragment);

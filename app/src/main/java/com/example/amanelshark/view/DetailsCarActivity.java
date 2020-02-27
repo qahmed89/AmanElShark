@@ -43,7 +43,7 @@ public class DetailsCarActivity extends AppCompatActivity {
         ((BaseApplication) getApplication()).getAppComponent().inject(this);
 
         activityDetailsCarBinding = DataBindingUtil.setContentView(this, R.layout.activity_details_car);
-        userViewModel = ViewModelProviders.of(this, viewModelProvider).get(AmanElsharkViewModel.class);
+        userViewModel = new ViewModelProvider(this, viewModelProvider).get(AmanElsharkViewModel.class);
         userViewModel.getCarDetailsRequests(this, token, id_car).observe(this, new Observer<CarDetails>() {
             @Override
             public void onChanged(CarDetails carDetails) {

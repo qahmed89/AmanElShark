@@ -28,7 +28,7 @@ import com.pusher.pushnotifications.PushNotifications;
 import java.util.Locale;
 
 public class SplashActivity extends AppCompatActivity {
-    String lang_Defualt = "ar";
+    String lang_Defualt = "en";
     SharedPreferences sharedPref;
     SharedPreferences.Editor editor;
     String token;

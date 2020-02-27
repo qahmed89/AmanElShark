@@ -3,6 +3,7 @@ package com.example.amanelshark.adapter;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.example.amanelshark.view.fragment.RequestFragment;
 import com.example.amanelshark.view.fragment.SmartFragmentStatePagerAdapter;
 
 import java.util.ArrayList;
@@ -30,5 +31,10 @@ public class BottomBarAdapter extends SmartFragmentStatePagerAdapter {
     @Override
     public int getCount() {
         return fragments.size();
+    }
+
+    @Override
+    public Fragment getRegisteredFragment(int position) {
+        return super.getRegisteredFragment(position);
     }
 }

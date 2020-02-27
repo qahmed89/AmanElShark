@@ -6,6 +6,8 @@ import android.view.MotionEvent;
 
 import androidx.viewpager.widget.ViewPager;
 
+import static androidx.viewpager.widget.PagerAdapter.POSITION_NONE;
+
 public class NoSwipePager extends ViewPager {
     private boolean enabled;
 
@@ -33,4 +35,7 @@ public class NoSwipePager extends ViewPager {
     public void setPagingEnabled(boolean enabled) {
         this.enabled = enabled;
     }
+
+
 }
+

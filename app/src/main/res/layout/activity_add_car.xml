@@ -11,6 +11,25 @@
         android:background="@drawable/group_24"
         android:orientation="vertical"
         tools:context=".view.AddCarActivity">
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            app:title="@string/add_car"
+            app:titleTextColor="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            android:minHeight="?attr/actionBarSize"
+            app:navigationIcon="@drawable/ic_kebourd"
+            android:theme="?attr/actionBarTheme">
+
+        </com.google.android.material.appbar.MaterialToolbar>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:animateLayoutChanges="true"
+            android:background="@drawable/group_24"
+            android:orientation="vertical"
+            >
 
         <LinearLayout
 
@@ -256,5 +275,7 @@
                 </LinearLayout>
             </ScrollView>
         </LinearLayout>
+        </LinearLayout>
+
     </LinearLayout>
 </layout>

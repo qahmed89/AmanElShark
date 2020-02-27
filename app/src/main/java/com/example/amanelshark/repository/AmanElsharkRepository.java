@@ -7,9 +7,11 @@ import com.example.amanelshark.model.cardetails.CarDetails;
 import com.example.amanelshark.model.categories.Categories;
 import com.example.amanelshark.model.center.Centers;
 import com.example.amanelshark.model.centerDetails.CenterDetails;
+import com.example.amanelshark.model.detailsrequest.DetailsRequest;
 import com.example.amanelshark.model.listcars.ListCars;
 import com.example.amanelshark.model.login.Login;
 import com.example.amanelshark.model.models.Model;
+import com.example.amanelshark.model.notifications.Notifications;
 import com.example.amanelshark.model.packagedetails.PackageDetails;
 import com.example.amanelshark.model.packages.Packages;
 import com.example.amanelshark.model.profile.Profile;
@@ -99,6 +101,9 @@ public class AmanElsharkRepository {
     public Single<CarDetails> CarDetails(String token,int id) {
         return amanElSharkServices.getcarDetails(token,id);
     }
+    public Single<Notifications> Notifications(String token) {
+        return amanElSharkServices.getNotifications(token);
+    }
     public Single<RequestWarranty> ReqestWarranty(String token, int center_id,int package_id,int client_car_id) {
         return amanElSharkServices.makeWarrentyRequest(token,center_id,package_id,client_car_id);
     }
@@ -113,6 +118,9 @@ public class AmanElsharkRepository {
     }
     public Single<RequestPayment> RequestPayment(String token, RequestPayment requestPayment) {
         return amanElSharkServices.addPaymentRequest(token,requestPayment);
+    }
+    public Single<DetailsRequest> DetailsRequest(String token, int id) {
+        return amanElSharkServices.getRequestDetails(token,id);
     }
 //    public Single<RequestVocation> sendvocationRequestmodelSingle(String type , String description, String from , String to , String id){
     //      return crmServices.sendVocationRequest(type,description,from,to,id);

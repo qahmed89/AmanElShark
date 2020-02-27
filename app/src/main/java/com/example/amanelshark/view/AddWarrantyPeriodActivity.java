@@ -54,7 +54,7 @@ public class AddWarrantyPeriodActivity extends AppCompatActivity  implements Pac
         setContentView(R.layout.activity_add_warranty_period);
         ((BaseApplication) getApplication()).getAppComponent().inject(this);
         activityAddWarrantyPeriodBinding = DataBindingUtil.setContentView(this, R.layout.activity_add_warranty_period);
-        userViewModel = ViewModelProviders.of(this, viewModelProvider).get(AmanElsharkViewModel.class);
+        userViewModel = new ViewModelProvider(this, viewModelProvider).get(AmanElsharkViewModel.class);
         sharedPref = getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
         editor = sharedPref.edit();
         token = sharedPref.getString(getString(R.string.token), "null");

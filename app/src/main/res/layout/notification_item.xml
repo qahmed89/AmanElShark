@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="20dp"
+    app:cardElevation="16dp"
+    app:cardCornerRadius="10dp">
+    <LinearLayout
+
+        android:layout_margin="5dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_margin="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_gravity="start"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@mipmap/ic_launcher_round"
+            app:civ_border_color="#D84315"
+            app:civ_border_width="2dp">
+
+        </de.hdodenhof.circleimageview.CircleImageView>
+        <TextView
+            android:layout_weight="8"
+            android:layout_gravity="center"
+            android:textAlignment="center"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Notification "
+            android:textSize="20sp"
+            android:textColor="@color/black">
+
+        </TextView>
+        </LinearLayout>
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="2dp"
+            android:background="@color/black">
+
+        </View>
+
+        <LinearLayout
+            android:layout_margin="5dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Car name :">
+
+            </TextView>
+            <TextView
+                android:id="@+id/carname_notification"
+                android:textAlignment="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Car Name ">
+
+            </TextView>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_margin="5dp"
+
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Description :">
+
+            </TextView>
+            <TextView
+                android:id="@+id/description_notification"
+                android:textAlignment="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="center Services">
+
+            </TextView>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_margin="5dp"
+
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Status :">
+
+            </TextView>
+            <TextView
+                android:id="@+id/status_notification"
+                android:textAlignment="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="waiting">
+
+            </TextView>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_margin="5dp"
+
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="time :">
+
+            </TextView>
+            <TextView
+                android:id="@+id/time_notification"
+                android:textAlignment="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="waiting">
+
+            </TextView>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

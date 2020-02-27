@@ -50,7 +50,7 @@ public class ServicesActivity extends AppCompatActivity implements ServiesAdpate
         setContentView(R.layout.activity_services);
         ((BaseApplication) getApplication()).getAppComponent().inject(this);
         servicesBinding = DataBindingUtil.setContentView(this, R.layout.activity_services);
-        userViewModel = ViewModelProviders.of(this, viewModelProvider).get(AmanElsharkViewModel.class);
+        userViewModel = new ViewModelProvider(this, viewModelProvider).get(AmanElsharkViewModel.class);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         servicesBinding.recycleview.setLayoutManager(layoutManager);
         servicesBinding.recycleview.setHasFixedSize(true);
@@ -95,6 +95,7 @@ public class ServicesActivity extends AppCompatActivity implements ServiesAdpate
        intent.putExtra("id_event",id);
        intent.putExtra("package_id",x);
        intent.putExtra("client_car_id",car_id);
+       finish();
        startActivity(intent);
 
     }

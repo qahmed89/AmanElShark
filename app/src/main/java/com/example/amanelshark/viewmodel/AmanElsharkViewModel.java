@@ -17,9 +17,11 @@ import com.example.amanelshark.model.cardetails.CarDetails;
 import com.example.amanelshark.model.categories.Categories;
 import com.example.amanelshark.model.center.Centers;
 import com.example.amanelshark.model.centerDetails.CenterDetails;
+import com.example.amanelshark.model.detailsrequest.DetailsRequest;
 import com.example.amanelshark.model.listcars.ListCars;
 import com.example.amanelshark.model.login.Login;
 import com.example.amanelshark.model.models.Model;
+import com.example.amanelshark.model.notifications.Notifications;
 import com.example.amanelshark.model.packagedetails.PackageDetails;
 import com.example.amanelshark.model.packages.Packages;
 import com.example.amanelshark.model.profile.Profile;
@@ -40,6 +42,7 @@ import java.io.File;
 
 import javax.inject.Inject;
 
+import io.reactivex.Notification;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.observers.DisposableObserver;
@@ -70,6 +73,7 @@ public class AmanElsharkViewModel extends ViewModel {
     private MutableLiveData<Years> yearsModel = new MutableLiveData<>();
     private MutableLiveData<CarDetails> carDetailsModel = new MutableLiveData<>();
     private MutableLiveData<PackageDetails> packageDetailsModel = new MutableLiveData<>();
+    private MutableLiveData<DetailsRequest> requestDetailsModel = new MutableLiveData<>();
 
     private MutableLiveData<CenterDetails> centersDetailsModel = new MutableLiveData<>();
     private MutableLiveData<Packages> packagesModel = new MutableLiveData<>();
@@ -78,6 +82,7 @@ public class AmanElsharkViewModel extends ViewModel {
     private MutableLiveData<ResponsRequest> responseRequestModel = new MutableLiveData<>();
     private MutableLiveData<UploadImage> uploadInvoiceModel = new MutableLiveData<>();
     private MutableLiveData<RequestPayment> requestPaymentModel = new MutableLiveData<>();
+    private MutableLiveData<Notifications> notificationsModel = new MutableLiveData<>();
 
     //   private MutableLiveData<Requests> modelMutableLiveRequests = new MutableLiveData<>();
 
@@ -205,6 +210,51 @@ public class AmanElsharkViewModel extends ViewModel {
     public LiveData<RequestPayment> makePaymentRequests(Context context, String token, RequestPayment requestPayment) {
         PaymentRequests(context, token,requestPayment);
         return requestPaymentModel;
+    }
+    public LiveData<DetailsRequest> getrequestDetails(Context context, String token, int id) {
+        detailRequest(context, token,id);
+        return requestDetailsModel;
+    }
+    public LiveData<Notifications> getNotifications(Context context, String token) {
+        notificationsRequest(context, token);
+        return notificationsModel;
+    }
+
+    private void notificationsRequest(Context context, String token) {
+        disposable.add(amanElsharkRepository.Notifications(token)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableSingleObserver<Notifications>() {
+                    @Override
+                    public void onSuccess(Notifications notifications) {
+notificationsModel.setValue(notifications);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Toast.makeText(context, "Maybe You lost Your Connection", Toast.LENGTH_SHORT).show();
+
+
+
+                    }
+                }));
+    }
+    private void detailRequest(Context context, String token, int id) {
+        disposable.add(amanElsharkRepository.DetailsRequest(token, id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableSingleObserver<DetailsRequest>() {
+                    @Override
+                    public void onSuccess(DetailsRequest detailsRequest) {
+requestDetailsModel.setValue(detailsRequest);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Toast.makeText(context, "Maybe You lost Your Connection", Toast.LENGTH_SHORT).show();
+
+                    }
+                }));
     }
 
     private void PaymentRequests(Context context, String token, RequestPayment requestPayment) {
@@ -524,6 +574,7 @@ public class AmanElsharkViewModel extends ViewModel {
                     @Override
                     public void onSuccess(AddCars addCars) {
                         addCarsModel.setValue(addCars);
+                        Snackbar.make(v, "Success", Snackbar.LENGTH_LONG).show();
                         Snackbar.make(v, "Success", Snackbar.LENGTH_LONG).show();
 
                     }

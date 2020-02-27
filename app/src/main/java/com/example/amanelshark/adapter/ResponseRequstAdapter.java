@@ -35,7 +35,7 @@ public class ResponseRequstAdapter extends RecyclerView.Adapter<ResponseRequstAd
 
     @Override
     public void onBindViewHolder(@NonNull ResponseRequstAdapter.ResponseRequstHolder holder, int position) {
-        holder.car_name.setText(new StringBuilder().append(dataItemResponseRequestList.get(position).getCar().getBrand()).append(" ").append(dataItemResponseRequestList.get(position).getCar().getModel()).toString());
+        holder.car_name.setText(dataItemResponseRequestList.get(position).getCar().getBrand() + " " + dataItemResponseRequestList.get(position).getCar().getModel());
         holder.center_name.setText(String.valueOf(dataItemResponseRequestList.get(position).getCenterName()));
 
         holder.status.setText(String.valueOf(dataItemResponseRequestList.get(position).getStatus()));

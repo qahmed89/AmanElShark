@@ -41,7 +41,7 @@ public class DetailsPaymentActivity extends AppCompatActivity {
         setContentView(R.layout.activity_details_payment);
         ((BaseApplication) getApplication()).getAppComponent().inject(this);
         activityDetailsPaymentBinding = DataBindingUtil.setContentView(this, R.layout.activity_details_payment);
-        userViewModel = ViewModelProviders.of(this, viewModelProvider).get(AmanElsharkViewModel.class);
+        userViewModel = new ViewModelProvider(this, viewModelProvider).get(AmanElsharkViewModel.class);
         sharedPref = getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
         editor = sharedPref.edit();
         token = sharedPref.getString(getString(R.string.token), "null");

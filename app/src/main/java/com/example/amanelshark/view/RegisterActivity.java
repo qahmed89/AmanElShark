@@ -6,7 +6,9 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
@@ -39,7 +41,8 @@ public class RegisterActivity extends AppCompatActivity {
     ViewModelProvider.Factory viewModelProvider;
     ActivityRegisterBinding activityRegisterBinding;
     private AmanElsharkViewModel userViewModel;
-
+    SharedPreferences sharedPref;
+    SharedPreferences.Editor editor;
     private static void disable(ViewGroup layout) {
         layout.setEnabled(false);
         for (int i = 0; i < layout.getChildCount(); i++) {
@@ -70,8 +73,9 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
         ((BaseApplication) getApplication()).getAppComponent().inject(this);
         activityRegisterBinding = DataBindingUtil.setContentView(this, R.layout.activity_register);
-        userViewModel = ViewModelProviders.of(this, viewModelProvider).get(AmanElsharkViewModel.class);
-
+        userViewModel = new ViewModelProvider(this, viewModelProvider).get(AmanElsharkViewModel.class);
+        sharedPref = getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+        editor = sharedPref.edit();
 
         activityRegisterBinding.submitRegister.setOnClickListener(new View.OnClickListener() {
 
@@ -94,6 +98,15 @@ public class RegisterActivity extends AppCompatActivity {
                         }
 
                     });
+                userViewModel.getregisterRequests(activityRegisterBinding.emailRegister.getText().toString(), activityRegisterBinding.passwordRegister.getText().toString(), activityRegisterBinding.cPasswordRegister.getText().toString(), activityRegisterBinding.phoneRegister.getText().toString(), activityRegisterBinding.nameRegister.getText().toString(), v).observe(RegisterActivity.this, new Observer<Register>() {
+                    @Override
+                    public void onChanged(Register register) {
+                        editor.putString(getString(R.string.token), "Bearer " + register.getData().getToken()).apply();
+
+                        Intent intent = new Intent(getApplicationContext(), OnBoardActivity.class);
+                        startActivity(intent);
+                    }
+                });
                 userViewModel.errorMessage().observe(RegisterActivity.this, errorMessage -> {
                     if (errorMessage != null) {
                         activityRegisterBinding.placeholderRegister.layout.setVisibility(View.VISIBLE);
@@ -103,13 +116,7 @@ public class RegisterActivity extends AppCompatActivity {
                         activityRegisterBinding.placeholderRegister.layout.setVisibility(View.GONE);
                     }
                 });
-                userViewModel.getregisterRequests(activityRegisterBinding.emailRegister.getText().toString(), activityRegisterBinding.passwordRegister.getText().toString(), activityRegisterBinding.cPasswordRegister.getText().toString(), activityRegisterBinding.phoneRegister.getText().toString(), activityRegisterBinding.nameRegister.getText().toString(), v).observe(RegisterActivity.this, new Observer<Register>() {
-                    @Override
-                    public void onChanged(Register register) {
-                        Intent intent = new Intent(getApplicationContext(), OnBoardActivity.class);
-                        startActivity(intent);
-                    }
-                });
+
 
 
             }

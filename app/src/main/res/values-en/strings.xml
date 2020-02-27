@@ -36,4 +36,7 @@
     <string name="km_package">KM :</string>
     <string name="car_name">Car Name :</string>
     <string name="warranty">Warranty :</string>
+    <string name="period">period :</string>
+    <string name="add_car">Add Car</string>
+    <string name="warranty_package">Aman Asharq Warranty Package</string>
 </resources>

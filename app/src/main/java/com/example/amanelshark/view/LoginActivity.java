@@ -89,7 +89,7 @@ public class LoginActivity extends AppCompatActivity {
 
         ((BaseApplication) getApplication()).getAppComponent().inject(this);
         activityLoginBinding = DataBindingUtil.setContentView(this, R.layout.activity_login);
-        userViewModel = ViewModelProviders.of(this, viewModelProvider).get(AmanElsharkViewModel.class);
+        userViewModel = new ViewModelProvider(this, viewModelProvider).get(AmanElsharkViewModel.class);
         sharedPref = getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
         editor = sharedPref.edit();
 

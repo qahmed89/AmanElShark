@@ -32,12 +32,15 @@
     <string name="password_8_charaters">لقد ادخلت عدد حروف اقل من ثمانية</string>
     <string name="pasword_match">كلمة السر غير متوافقة</string>
     <string name="brands">الماركة</string>
-    <string name="price">سعر:</string>
-    <string name="km_package">ك.م :</string>
+    <string name="price">:سعر</string>
+    <string name="km_package">":ك.م "</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="car_name">اسم السيارة:</string>
-    <string name="warranty">ضمان:</string>
+    <string name="warranty">:ضمان</string>
     <string name="default_notification_channel_id">com.example.amanelshark.test</string>
+    <string name="period">": الفترة "</string>
+    <string name="add_car">اضافة سيارة</string>
+    <string name="warranty_package">باقات تأمين أمان الشرق</string>
 </resources>
