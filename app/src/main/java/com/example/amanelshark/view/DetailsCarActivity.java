@@ -44,43 +44,37 @@ public class DetailsCarActivity extends AppCompatActivity {
 
         activityDetailsCarBinding = DataBindingUtil.setContentView(this, R.layout.activity_details_car);
         userViewModel = new ViewModelProvider(this, viewModelProvider).get(AmanElsharkViewModel.class);
-        userViewModel.getCarDetailsRequests(this, token, id_car).observe(this, new Observer<CarDetails>() {
-            @Override
-            public void onChanged(CarDetails carDetails) {
-                activityDetailsCarBinding.brandCar.setText(carDetails.getData().getBrand());
-                activityDetailsCarBinding.modelCar.setText(carDetails.getData().getModel());
-                activityDetailsCarBinding.categoryCar.setText(carDetails.getData().getCategory());
-                activityDetailsCarBinding.typeCar.setText(carDetails.getData().getType());
-                activityDetailsCarBinding.chassiaCar.setText(carDetails.getData().getChassisNumber());
-                activityDetailsCarBinding.plateCar.setText(carDetails.getData().getPlateNumber());
-                activityDetailsCarBinding.motorNmCar.setText(carDetails.getData().getMotorNumber());
-                activityDetailsCarBinding.meterreadingCar.setText(carDetails.getData().getMeterReading());
-                activityDetailsCarBinding.yearCar.setText(String.valueOf(carDetails.getData().getYear()));
+        userViewModel.getCarDetailsRequests(this, token, id_car).observe(this, carDetails -> {
+            activityDetailsCarBinding.brandCar.setText(carDetails.getData().getBrand());
+            activityDetailsCarBinding.modelCar.setText(carDetails.getData().getModel());
+            activityDetailsCarBinding.categoryCar.setText(carDetails.getData().getCategory());
+            activityDetailsCarBinding.typeCar.setText(carDetails.getData().getType());
+            activityDetailsCarBinding.chassiaCar.setText(carDetails.getData().getChassisNumber());
+            activityDetailsCarBinding.plateCar.setText(carDetails.getData().getPlateNumber());
+            activityDetailsCarBinding.motorNmCar.setText(carDetails.getData().getMotorNumber());
+            activityDetailsCarBinding.meterreadingCar.setText(carDetails.getData().getMeterReading());
+            activityDetailsCarBinding.yearCar.setText(String.valueOf(carDetails.getData().getYear()));
 
-                if (carDetails.getData().getWarranty() == null) {
-                    activityDetailsCarBinding.startCar.setText("you dont have Warranty Yet");
-                    activityDetailsCarBinding.endCar.setText("you dont have Warranty Yet");
-                    activityDetailsCarBinding.warrantyDetailscar.setVisibility(View.VISIBLE);
+            if (carDetails.getData().getWarranty() == null) {
+                activityDetailsCarBinding.startCar.setText(R.string.havenot_warrenty_message);
+                activityDetailsCarBinding.endCar.setText(R.string.havenot_warrenty_message);
+                activityDetailsCarBinding.warrantyDetailscar.setVisibility(View.VISIBLE);
 
 
-                }else {
-                    activityDetailsCarBinding.endCar.setText(carDetails.getData().getWarranty().getPackages().getName());
-                    activityDetailsCarBinding.startCar.setText(carDetails.getData().getWarranty().getPackages().getCreatedAt());
-
-                }
-
+            } else {
+                activityDetailsCarBinding.endCar.setText(carDetails.getData().getWarranty().getPackages().getName());
+                activityDetailsCarBinding.startCar.setText(carDetails.getData().getWarranty().getPackages().getCreatedAt());
 
             }
-        });
-        activityDetailsCarBinding.warrantyDetailscar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),AddWarrantyPeriodActivity.class);
-                intent.putExtra("id_car",id_car);
-                startActivity(intent);
-            }
-        });
 
+
+        });
+        activityDetailsCarBinding.warrantyDetailscar.setOnClickListener(v -> {
+            Intent intent1 = new Intent(getApplicationContext(), AddWarrantyPeriodActivity.class);
+            intent1.putExtra("id_car", id_car);
+            startActivity(intent1);
+        });
+        activityDetailsCarBinding.toolbar.setNavigationOnClickListener(v -> finish());
 
 
     }

@@ -14,6 +14,7 @@ import android.os.Handler;
 import android.util.DisplayMetrics;
 
 import com.example.amanelshark.R;
+import com.example.amanelshark.model.login.Login;
 import com.google.firebase.messaging.RemoteMessage;
 import com.pusher.client.Pusher;
 import com.pusher.client.PusherOptions;
@@ -28,7 +29,7 @@ import com.pusher.pushnotifications.PushNotifications;
 import java.util.Locale;
 
 public class SplashActivity extends AppCompatActivity {
-    String lang_Defualt = "en";
+    String lang_Defualt = "ar";
     SharedPreferences sharedPref;
     SharedPreferences.Editor editor;
     String token;
@@ -83,12 +84,17 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     public void setLocale(String lang) {
-        Locale myLocale = new Locale(lang);
-        Resources res = getResources();
-        DisplayMetrics dm = res.getDisplayMetrics();
-        Configuration conf = res.getConfiguration();
-        conf.locale = myLocale;
-        res.updateConfiguration(conf, dm);
+//        Locale myLocale = new Locale(lang);
+//        Resources res = getResources();
+//        DisplayMetrics dm = res.getDisplayMetrics();
+//        Configuration conf = res.getConfiguration();
+//        conf.locale = myLocale;
+//        res.updateConfiguration(conf, dm);
+                        Locale locale = new Locale(lang);
+                Locale.setDefault(locale);
+                Configuration config = new Configuration();
+                config.locale = locale;
+                getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
 
     }
 }

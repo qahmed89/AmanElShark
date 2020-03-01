@@ -70,8 +70,8 @@ public class MainHomeActivity extends AppCompatActivity {
     String x, xx;
     int viewpager_postion = 5;
     BottomBarAdapter bottomBarAdapter;
-   // Pusher pusher;
-  //  Channel channel;
+    // Pusher pusher;
+    //  Channel channel;
     SharedPreferences sharedPref;
     SharedPreferences.Editor editor;
     String token;
@@ -101,19 +101,21 @@ public class MainHomeActivity extends AppCompatActivity {
             switch (menuItem.getItemId()) {
                 case R.id.home:
                     bottomBarAdapter.getRegisteredFragment(0);
+                    activityMainHomeBinding.swip.setEnabled(true);
 
                     activityMainHomeBinding.viewPager2.setCurrentItem(0);
                     activityMainHomeBinding.floatingbutton.setVisibility(View.VISIBLE);
-                    activityMainHomeBinding.toolbar.setTitle("Home");
+                    activityMainHomeBinding.toolbar.setTitle(R.string.home_title_bar);
                     BadgeDrawable badge = activityMainHomeBinding.bottomNavigationView.getOrCreateBadge(menuItem.getItemId());
                     badge.setVisible(false);
                     return true;
                 case R.id.request:
                     bottomBarAdapter.getRegisteredFragment(1);
+                    activityMainHomeBinding.swip.setEnabled(true);
 
                     activityMainHomeBinding.viewPager2.setCurrentItem(1);
                     activityMainHomeBinding.floatingbutton.setVisibility(View.GONE);
-                    activityMainHomeBinding.toolbar.setTitle("Requests");
+                    activityMainHomeBinding.toolbar.setTitle(R.string.requests_title_bar);
 
                     BadgeDrawable badges = activityMainHomeBinding.bottomNavigationView.getOrCreateBadge(menuItem.getItemId());
                     badges.setVisible(false);
@@ -122,10 +124,10 @@ public class MainHomeActivity extends AppCompatActivity {
                     return true;
                 case R.id.notification:
                     bottomBarAdapter.getRegisteredFragment(2);
-
+                    activityMainHomeBinding.swip.setEnabled(true);
                     activityMainHomeBinding.viewPager2.setCurrentItem(2);
                     activityMainHomeBinding.floatingbutton.setVisibility(View.GONE);
-                    activityMainHomeBinding.toolbar.setTitle("Notification");
+                    activityMainHomeBinding.toolbar.setTitle(R.string.notification_title_bar);
                     BadgeDrawable badgess = activityMainHomeBinding.bottomNavigationView.getOrCreateBadge(menuItem.getItemId());
                     badgess.setVisible(false);
 
@@ -137,8 +139,8 @@ public class MainHomeActivity extends AppCompatActivity {
 
                     activityMainHomeBinding.viewPager2.setCurrentItem(3);
                     activityMainHomeBinding.floatingbutton.setVisibility(View.GONE);
-                    activityMainHomeBinding.toolbar.setTitle("Settings");
-
+                    activityMainHomeBinding.toolbar.setTitle(R.string.settings_title_bar);
+activityMainHomeBinding.swip.setEnabled(false);
                     BadgeDrawable badgesss = activityMainHomeBinding.bottomNavigationView.getOrCreateBadge(menuItem.getItemId());
                     badgesss.setVisible(false);
 
@@ -170,7 +172,7 @@ public class MainHomeActivity extends AppCompatActivity {
 //        options.setAuthorizer(authorizer);
 //        options.setWsPort(5001);
 //        options.setEncrypted(true);
-       Pusher  pusher = new Pusher("db9e201a6ca245d31338", options);
+        Pusher pusher = new Pusher("db9e201a6ca245d31338", options);
 
 
         pusher.connect(new ConnectionEventListener() {
@@ -190,7 +192,7 @@ public class MainHomeActivity extends AppCompatActivity {
             }
         }, ConnectionState.ALL);
 
-       Channel  channel = pusher.subscribe("my-channel");
+        Channel channel = pusher.subscribe("my-channel");
 
         channel.bind("form-submitted", event -> {
             JSONObject reader = null;
@@ -251,18 +253,26 @@ public class MainHomeActivity extends AppCompatActivity {
             }
             if (activityMainHomeBinding.viewPager2.getCurrentItem() == 1) {
                 bottomBarAdapter.setFragmentsFragments(requestFragment, 1);
-              //  activityMainHomeBinding.viewPager2.getAdapter().startUpdate(requestFragment.getView());
+                //  activityMainHomeBinding.viewPager2.getAdapter().startUpdate(requestFragment.getView());
                 activityMainHomeBinding.viewPager2.setAdapter(bottomBarAdapter);
                 activityMainHomeBinding.swip.setRefreshing(false);
                 activityMainHomeBinding.bottomNavigationView.setSelectedItemId(R.id.request);
             }
+            if (activityMainHomeBinding.viewPager2.getCurrentItem() == 2) {
+                bottomBarAdapter.setFragmentsFragments(notificationFragment, 2);
+                //  activityMainHomeBinding.viewPager2.getAdapter().startUpdate(requestFragment.getView());
+                activityMainHomeBinding.viewPager2.setAdapter(bottomBarAdapter);
+                activityMainHomeBinding.swip.setRefreshing(false);
+                activityMainHomeBinding.bottomNavigationView.setSelectedItemId(R.id.notification);
+            }
+         
         });
 
         String instanceId = "b9efe592-ffe7-4aeb-8ecc-c049a3d33448";
 
         String secretKey = "00A040A7E47979367AAB853122B211765CFC6763CBBB8C90E3505BEFC21FE9F4";
 
-       //<<<<<<<<<<<<<<<<<<<<< subscribeToChannel();
+        //<<<<<<<<<<<<<<<<<<<<< subscribeToChannel();
         PushNotificationsInstance b = new PushNotificationsInstance(getApplicationContext(), instanceId);
         b.start();
         PushNotifications.addDeviceInterest("hello");
@@ -315,8 +325,8 @@ public class MainHomeActivity extends AppCompatActivity {
 //                }});
 
 
-        }}
-
+        }
+    }
 
 
     @Override

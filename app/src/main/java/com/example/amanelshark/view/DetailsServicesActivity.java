@@ -70,6 +70,7 @@ public class DetailsServicesActivity extends AppCompatActivity {
     Intent intent1;
 
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -112,20 +113,16 @@ public class DetailsServicesActivity extends AppCompatActivity {
             });
 
         });
-        activityDetailsServicesBinding.scanDetails.setOnClickListener(new OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.M)
-            @Override
-            public void onClick(View v) {
-                if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-                    requestPermissions(new String[]{Manifest.permission.CAMERA}, MY_CAMERA_PERMISSION_CODE);
-                }
-                else {
-                    Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
-                    photoPickerIntent.setType("image/*");
-                    startActivityForResult(photoPickerIntent, RESULT_LOAD_IMG);
-                     intent1 = new Intent(getApplicationContext(),MainHomeActivity.class);
-                    intent.putExtra("viewpager_position",0);
-                }
+        activityDetailsServicesBinding.scanDetails.setOnClickListener(v -> {
+            if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(new String[]{Manifest.permission.CAMERA}, MY_CAMERA_PERMISSION_CODE);
+            }
+            else {
+                Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+                photoPickerIntent.setType("image/*");
+                startActivityForResult(photoPickerIntent, RESULT_LOAD_IMG);
+                 intent1 = new Intent(getApplicationContext(),MainHomeActivity.class);
+                intent.putExtra("viewpager_position",0);
             }
         });
     }

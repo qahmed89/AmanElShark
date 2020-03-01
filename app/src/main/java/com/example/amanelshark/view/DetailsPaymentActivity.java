@@ -51,13 +51,10 @@ public class DetailsPaymentActivity extends AppCompatActivity {
         request_id=intent.getIntExtra("id_request",0);
         package_id=intent.getIntExtra("package_id",0);
 
-    userViewModel.getPackagesDetailsRequests(getApplication(),token,package_id).observe(this, new Observer<PackageDetails>() {
-        @Override
-        public void onChanged(PackageDetails details) {
-            activityDetailsPaymentBinding.pricePaymentd.setText(String.valueOf(details.getData().getPrice()));
-            activityDetailsPaymentBinding.requestidPaymentd.setText(String.valueOf(request_id));
-            activityDetailsPaymentBinding.statusPaymentd.setText(status);
-        }
+    userViewModel.getPackagesDetailsRequests(getApplication(),token,package_id).observe(this, details -> {
+        activityDetailsPaymentBinding.pricePaymentd.setText(String.valueOf(details.getData().getPrice()));
+        activityDetailsPaymentBinding.requestidPaymentd.setText(String.valueOf(request_id));
+        activityDetailsPaymentBinding.statusPaymentd.setText(status);
     });
 
     activityDetailsPaymentBinding.paymentButton.setOnClickListener(new View.OnClickListener() {
@@ -65,20 +62,12 @@ public class DetailsPaymentActivity extends AppCompatActivity {
         public void onClick(View v) {
             payment=new Payment(package_id,request_id);
             requestPayment=new RequestPayment(payment);
-            userViewModel.makePaymentRequests(getApplicationContext(),token,requestPayment).observe(DetailsPaymentActivity.this, new Observer<RequestPayment>() {
-                @Override
-                public void onChanged(RequestPayment requestPayment) {
+            userViewModel.makePaymentRequests(getApplicationContext(),token,requestPayment).observe(DetailsPaymentActivity.this, requestPayment -> {
 
-                }
             });
         }
     });
 
-        activityDetailsPaymentBinding.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        activityDetailsPaymentBinding.toolbar.setNavigationOnClickListener(v -> finish());
     }
 }

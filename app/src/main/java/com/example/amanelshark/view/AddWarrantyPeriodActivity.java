@@ -62,14 +62,11 @@ public class AddWarrantyPeriodActivity extends AppCompatActivity  implements Pac
          car_id = intent.getIntExtra("id_car",0);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         activityAddWarrantyPeriodBinding.recycleviewPackage.setLayoutManager(layoutManager);
-        userViewModel.getpackagesRequests(this,token).observe(this, new Observer<Packages>() {
-            @Override
-            public void onChanged(Packages packages) {
-                itemPackagesList=new ArrayList<>();
-                itemPackagesList.addAll(packages.getData());
-                packageAdapter= new PackageAdapter(AddWarrantyPeriodActivity.this,itemPackagesList,getApplicationContext());
-                activityAddWarrantyPeriodBinding.recycleviewPackage.setAdapter(packageAdapter);
-            }
+        userViewModel.getpackagesRequests(this,token).observe(this, packages -> {
+            itemPackagesList=new ArrayList<>();
+            itemPackagesList.addAll(packages.getData());
+            packageAdapter= new PackageAdapter(AddWarrantyPeriodActivity.this,itemPackagesList,getApplicationContext());
+            activityAddWarrantyPeriodBinding.recycleviewPackage.setAdapter(packageAdapter);
         });
 
     }

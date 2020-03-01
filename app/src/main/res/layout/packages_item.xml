@@ -22,7 +22,7 @@
     android:layout_width="0dp"
     android:layout_weight="5"
     android:layout_height="wrap_content"
-    android:text="@string/period"
+    android:text="@string/period_cardetails"
     android:textAlignment="center"
     android:textSize="20dp"
     >
@@ -70,7 +70,7 @@
             android:layout_width="0dp"
             android:layout_weight="5"
             android:layout_height="wrap_content"
-            android:text="@string/price"
+            android:text="@string/prices"
             android:textAlignment="center"
             android:textSize="20dp"
             >

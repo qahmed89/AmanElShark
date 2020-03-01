@@ -15,7 +15,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Request"
+        android:text="@string/requests_title_bar"
         android:textSize="20sp"
         android:textColor="@color/black">
 
@@ -33,15 +33,18 @@
         android:layout_height="wrap_content">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
+        android:layout_weight="4"
         android:layout_height="wrap_content"
-        android:text="Car name :">
+        android:text="@string/car_details">
 
     </TextView>
     <TextView
         android:id="@+id/carname_request"
         android:textAlignment="center"
-        android:layout_width="match_parent"
+        android:layout_weight="6"
+
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Car Name ">
 
@@ -56,15 +59,17 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="4"
             android:layout_height="wrap_content"
-            android:text="center Services :">
+            android:text="@string/center_services">
 
         </TextView>
         <TextView
             android:id="@+id/centername_request"
             android:textAlignment="center"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
+            android:layout_weight="6"
             android:layout_height="wrap_content"
             android:text="center Services">
 
@@ -79,15 +84,17 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="4"
             android:layout_height="wrap_content"
-            android:text="Status :">
+            android:text="@string/status">
 
         </TextView>
         <TextView
             android:id="@+id/status_request"
             android:textAlignment="center"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
+            android:layout_weight="6"
             android:layout_height="wrap_content"
             android:text="Warranty ">
 

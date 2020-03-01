@@ -11,7 +11,7 @@
 
 <com.google.android.material.appbar.MaterialToolbar
     android:id="@+id/toolbar"
-    app:title="DetailsPayment"
+    app:title="@string/details_payment"
     app:titleTextColor="@color/white"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -46,7 +46,7 @@
             android:textColor="@color/black"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Your Payment">
+            android:text="@string/your_payment">
 
         </TextView>
       <View
@@ -74,7 +74,7 @@
                 android:textColor="@color/black"
 
                 android:layout_margin="15dp"
-                android:text="Request Id :"
+                android:text="@string/request_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -83,7 +83,7 @@
                 android:textColor="@color/black"
 
                 android:layout_margin="15dp"
-                android:text="Prices :"
+                android:text="@string/prices"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -92,7 +92,7 @@
                 android:textColor="@color/black"
 
                 android:layout_margin="15dp"
-                android:text="Status :"
+                android:text="@string/status"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -105,6 +105,7 @@
             android:layout_weight="5"
             android:layout_height="wrap_content">
             <TextView
+                android:textAlignment="center"
                 android:id="@+id/requestid_paymentd"
                 android:layout_margin="15dp"
                 android:text="1"
@@ -113,6 +114,8 @@
 
             </TextView>
             <TextView
+                android:textAlignment="center"
+
                 android:id="@+id/price_paymentd"
                 android:layout_margin="15dp"
                 android:text="1000$ "
@@ -121,6 +124,8 @@
 
             </TextView>
             <TextView
+                android:textAlignment="center"
+
                 android:id="@+id/status_paymentd"
                 android:layout_margin="15dp"
                 android:text="Approve "
@@ -136,7 +141,7 @@
         android:id="@+id/payment_button"
         android:layout_width="wrap_content"
         android:layout_gravity="center"
-        android:text="Complet Your Payment"
+        android:text="@string/complet_your_payment"
         android:layout_height="wrap_content">
 
     </Button>

@@ -95,173 +95,117 @@ public class AddCarActivity extends AppCompatActivity {
         activityAddCarBinding.myProductionYear.setAdapter(arrayAdapter_year);
 
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-activityAddCarBinding.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        finish();
-    }
-});
+activityAddCarBinding.toolbar.setNavigationOnClickListener(v -> finish());
 
-        activityAddCarBinding.brands.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        activityAddCarBinding.brands.setOnItemClickListener((parent, view, position, id) -> {
+            lis_model.clear();
+            activityAddCarBinding.model.setAdapter(null);
+            arrayAdapter_models.clear();
+            activityAddCarBinding.model.clearListSelection();
+            ids = brandslist.get(position).getId();
+            sid = String.valueOf(ids);
+            activityAddCarBinding.model.setText("");
+            activityAddCarBinding.layoutModel.setEnabled(true);
+            activityAddCarBinding.model.setEnabled(true);
+            activityAddCarBinding.myTypeLayout.setEnabled(false);
+            activityAddCarBinding.myType.setEnabled(false);
+            activityAddCarBinding.layoutCategories.setEnabled(false);
+            activityAddCarBinding.categories.setEnabled(false);
+            subbrandRequest();
 
+        });
+        activityAddCarBinding.model.setOnItemClickListener((parent, view, position, id) -> {
+            list_types.clear();
+            activityAddCarBinding.myType.setAdapter(null);
+            arrayAdapter_type.clear();
+            activityAddCarBinding.myType.clearListSelection();
+            ids = lis_model.get(position).getId();
+            sid = String.valueOf(ids);
+            activityAddCarBinding.myType.setText("");
+            activityAddCarBinding.categories.setText("");
 
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                lis_model.clear();
-                activityAddCarBinding.model.setAdapter(null);
-                arrayAdapter_models.clear();
-                activityAddCarBinding.model.clearListSelection();
-                ids = brandslist.get(position).getId();
-                sid = String.valueOf(ids);
-                activityAddCarBinding.model.setText("");
-                activityAddCarBinding.layoutModel.setEnabled(true);
-                activityAddCarBinding.model.setEnabled(true);
-                activityAddCarBinding.myTypeLayout.setEnabled(false);
-                activityAddCarBinding.myType.setEnabled(false);
-                activityAddCarBinding.layoutCategories.setEnabled(false);
-                activityAddCarBinding.categories.setEnabled(false);
-                subbrandRequest();
+            activityAddCarBinding.myTypeLayout.setEnabled(true);
+            activityAddCarBinding.myType.setEnabled(true);
+            activityAddCarBinding.categories.setEnabled(false);
+            activityAddCarBinding.layoutCategories.setEnabled(false);
+            typesRequest();
+        });
 
-            }
+        activityAddCarBinding.myType.setOnItemClickListener((parent, view, position, id) -> {
+            list_categories.clear();
+            activityAddCarBinding.categories.setAdapter(null);
+            arrayAdapter_categories.clear();
+            activityAddCarBinding.categories.clearListSelection();
+            ids = list_types.get(position).getId();
+            sid = String.valueOf(ids);
+            activityAddCarBinding.categories.setText("");
+            activityAddCarBinding.layoutCategories.setEnabled(true);
+            activityAddCarBinding.categories.setEnabled(true);
+            categoriesRequest();
+        });
+        activityAddCarBinding.categories.setOnItemClickListener((parent, view, position, id) -> {
+            ids = list_categories.get(position).getId();
+            sid = String.valueOf(ids);
+        });
+
+        activityAddCarBinding.myProductionYear.setOnItemClickListener((parent, view, position, id) -> years_string = itemYearsList.get(position).getId());
+        activityAddCarBinding.layoutModel.setOnClickListener(v -> {
+            brands_method();
+            arrayAdapter.notifyDataSetChanged();
+
+        });
+        activityAddCarBinding.brands.setOnClickListener(v -> {
+            //   brands_method();
+
+            activityAddCarBinding.brands.showDropDown();
+            activityAddCarBinding.brands.setError(null);
+
+        });
+
+        activityAddCarBinding.categories.setOnClickListener(v -> {
+            //  subbrandRequest();
+            activityAddCarBinding.categories.showDropDown();
+            activityAddCarBinding.categories.setError(null);
+        });
+        activityAddCarBinding.model.setOnClickListener(v -> {
+            activityAddCarBinding.model.showDropDown();
+            activityAddCarBinding.model.setError(null);
 
 
         });
-        activityAddCarBinding.model.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                list_types.clear();
-                activityAddCarBinding.myType.setAdapter(null);
-                arrayAdapter_type.clear();
-                activityAddCarBinding.myType.clearListSelection();
-                ids = lis_model.get(position).getId();
-                sid = String.valueOf(ids);
-                activityAddCarBinding.myType.setText("");
-                activityAddCarBinding.categories.setText("");
 
-                activityAddCarBinding.myTypeLayout.setEnabled(true);
-                activityAddCarBinding.myType.setEnabled(true);
-                activityAddCarBinding.categories.setEnabled(false);
-                activityAddCarBinding.layoutCategories.setEnabled(false);
-                typesRequest();
-            }
+        activityAddCarBinding.myType.setOnClickListener(v -> {
+            //   subbrandRequest();
+            activityAddCarBinding.myType.showDropDown();
+            activityAddCarBinding.myType.setError(null);
+
 
 
         });
-
-        activityAddCarBinding.myType.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                list_categories.clear();
-                activityAddCarBinding.categories.setAdapter(null);
-                arrayAdapter_categories.clear();
-                activityAddCarBinding.categories.clearListSelection();
-                ids = list_types.get(position).getId();
-                sid = String.valueOf(ids);
-                activityAddCarBinding.categories.setText("");
-                activityAddCarBinding.layoutCategories.setEnabled(true);
-                activityAddCarBinding.categories.setEnabled(true);
-                categoriesRequest();
-            }
-
+        activityAddCarBinding.layoutProductionYear.setOnClickListener(v -> {
+            activityAddCarBinding.myProductionYear.showDropDown();
+            activityAddCarBinding.myProductionYear.setError(null);
 
         });
-        activityAddCarBinding.categories.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                ids = list_categories.get(position).getId();
-                sid = String.valueOf(ids);
-            }
+        activityAddCarBinding.myProductionYear.setOnClickListener(v -> {
+            activityAddCarBinding.myProductionYear.showDropDown();
+            activityAddCarBinding.myProductionYear.setError(null);
+
         });
 
-        activityAddCarBinding.myProductionYear.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                years_string = itemYearsList.get(position).getId();
-            }
-        });
-        activityAddCarBinding.layoutModel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                brands_method();
-                arrayAdapter.notifyDataSetChanged();
+        activityAddCarBinding.button.setOnClickListener(v -> {
 
-            }
-        });
-        activityAddCarBinding.brands.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //   brands_method();
+            vaildationtion();
 
-                activityAddCarBinding.brands.showDropDown();
-                activityAddCarBinding.brands.setError(null);
-
-            }
-        });
-
-        activityAddCarBinding.categories.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //  subbrandRequest();
-                activityAddCarBinding.categories.showDropDown();
-                activityAddCarBinding.categories.setError(null);
-            }
-        });
-        activityAddCarBinding.model.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                activityAddCarBinding.model.showDropDown();
-                activityAddCarBinding.model.setError(null);
-
-
-            }
-        });
-
-        activityAddCarBinding.myType.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                //   subbrandRequest();
-                activityAddCarBinding.myType.showDropDown();
-                activityAddCarBinding.myType.setError(null);
-
-
-
-            }
-        });
-        activityAddCarBinding.layoutProductionYear.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                activityAddCarBinding.myProductionYear.showDropDown();
-                activityAddCarBinding.myProductionYear.setError(null);
-
-            }
-        });
-        activityAddCarBinding.myProductionYear.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                activityAddCarBinding.myProductionYear.showDropDown();
-                activityAddCarBinding.myProductionYear.setError(null);
-
-            }
-        });
-
-        activityAddCarBinding.button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                vaildationtion();
-
-                imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
-                userViewModel.getAddcarsRequests(v, token, sid, activityAddCarBinding.numMotor.getText().toString(), activityAddCarBinding.chassisNum.getText().toString(), activityAddCarBinding.plateNum.getText().toString(), activityAddCarBinding.kmReading.getText().toString(), years_string).observe(AddCarActivity.this, new Observer<AddCars>() {
-                    @Override
-                    public void onChanged(AddCars addCars) {
-                        Intent intent = new Intent(AddCarActivity.this,MainHomeActivity.class);
-                        startActivity(intent);
-                        finish();
-                    }
-                });
-
-            }
+            imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+            userViewModel.getAddcarsRequests(v, token, sid, activityAddCarBinding.numMotor.getText().toString(), activityAddCarBinding.chassisNum.getText().toString(), activityAddCarBinding.plateNum.getText().toString(), activityAddCarBinding.kmReading.getText().toString(), years_string).observe(AddCarActivity.this, new Observer<AddCars>() {
+                @Override
+                public void onChanged(AddCars addCars) {
+                    Intent intent = new Intent(AddCarActivity.this,MainHomeActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+            });
 
         });
 
@@ -269,12 +213,7 @@ activityAddCarBinding.toolbar.setNavigationOnClickListener(new View.OnClickListe
     }
 
     private void getYears() {
-        userViewModel.getyearsRequests(this,token).observe(this, new Observer<Years>() {
-            @Override
-            public void onChanged(Years years) {
-                itemYearsList.addAll(years.getData());
-            }
-        });
+        userViewModel.getyearsRequests(this,token).observe(this, years -> itemYearsList.addAll(years.getData()));
     }
 
     private InputMethodManager getInputMethodManager() {
@@ -298,61 +237,47 @@ activityAddCarBinding.toolbar.setNavigationOnClickListener(new View.OnClickListe
     }
 
     private void subbrandRequest() {
-        userViewModel.getModelRequests(AddCarActivity.this, token, sid).observe(AddCarActivity.this, new Observer<Model>() {
-            @Override
-            public void onChanged(Model model) {
-                activityAddCarBinding.model.clearListSelection();
-                lis_model.clear();
-                lis_model.addAll(model.getData());
-                arrayAdapter_models.notifyDataSetChanged();
+        userViewModel.getModelRequests(AddCarActivity.this, token, sid).observe(AddCarActivity.this, model -> {
+            activityAddCarBinding.model.clearListSelection();
+            lis_model.clear();
+            lis_model.addAll(model.getData());
+            arrayAdapter_models.notifyDataSetChanged();
 
-                activityAddCarBinding.model.setAdapter(arrayAdapter_models);
+            activityAddCarBinding.model.setAdapter(arrayAdapter_models);
 
 
-            }
         });
     }
 
     private void brands_method() {
-        userViewModel.getbrandsRequests(AddCarActivity.this, token).observe(AddCarActivity.this, new Observer<Brands>() {
-            @Override
-            public void onChanged(Brands brands) {
-                brandslist.addAll(brands.getData());
-                activityAddCarBinding.brands.setAdapter(arrayAdapter);
-
-
-            }
+        userViewModel.getbrandsRequests(AddCarActivity.this, token).observe(AddCarActivity.this, brands -> {
+            brandslist.addAll(brands.getData());
+            activityAddCarBinding.brands.setAdapter(arrayAdapter);
 
 
         });
     }
 
     private void typesRequest() {
-        userViewModel.getTypeRequests(AddCarActivity.this, token, sid).observe(this, new Observer<Types>() {
-            @Override
-            public void onChanged(Types types) {
-                activityAddCarBinding.myType.clearListSelection();
-                list_types.clear();
-                list_types.addAll(types.getData());
-                arrayAdapter_type.notifyDataSetChanged();
+        userViewModel.getTypeRequests(AddCarActivity.this, token, sid).observe(this, types -> {
+            activityAddCarBinding.myType.clearListSelection();
+            list_types.clear();
+            list_types.addAll(types.getData());
+            arrayAdapter_type.notifyDataSetChanged();
 
-                activityAddCarBinding.myType.setAdapter(arrayAdapter_type);
-            }
+            activityAddCarBinding.myType.setAdapter(arrayAdapter_type);
         });
 
     }
 
     private void categoriesRequest() {
-        userViewModel.getCategoriesRequests(AddCarActivity.this, token, sid).observe(this, new Observer<Categories>() {
-            @Override
-            public void onChanged(Categories categories) {
-                activityAddCarBinding.categories.clearListSelection();
-                list_categories.clear();
-                list_categories.addAll(categories.getData());
-                arrayAdapter_categories.notifyDataSetChanged();
+        userViewModel.getCategoriesRequests(AddCarActivity.this, token, sid).observe(this, categories -> {
+            activityAddCarBinding.categories.clearListSelection();
+            list_categories.clear();
+            list_categories.addAll(categories.getData());
+            arrayAdapter_categories.notifyDataSetChanged();
 
-                activityAddCarBinding.categories.setAdapter(arrayAdapter_categories);
-            }
+            activityAddCarBinding.categories.setAdapter(arrayAdapter_categories);
         });
     }
 

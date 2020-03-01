@@ -39,15 +39,16 @@ import javax.inject.Inject;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class NotificationFragment extends Fragment  implements NotificationAdapter.OnNotificationlistener {
+public class NotificationFragment extends Fragment implements NotificationAdapter.OnNotificationlistener {
     @Inject
     ViewModelProvider.Factory viewModelProvider;
     SharedPreferences sharedPref;
     SharedPreferences.Editor editor;
-    private AmanElsharkViewModel userViewModel;
     List<DataItemNotifications> notificationsList;
     NotificationAdapter notificationAdapter;
     RecyclerView recyclerView;
+    private AmanElsharkViewModel userViewModel;
+
     public NotificationFragment() {
         // Required empty public constructor
     }
@@ -68,23 +69,19 @@ public class NotificationFragment extends Fragment  implements NotificationAdapt
         userViewModel = new ViewModelProvider(this, viewModelProvider).get(AmanElsharkViewModel.class);
         sharedPref = getContext().getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
         editor = sharedPref.edit();
-       String token = sharedPref.getString(getString(R.string.token), "null");
-         recyclerView= view.findViewById(R.id.recycleview);
+        String token = sharedPref.getString(getString(R.string.token), "null");
+        recyclerView = view.findViewById(R.id.recycleview);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
 
-        userViewModel.getNotifications(getContext(),token).observe(getActivity(), new Observer<Notifications>() {
-            @Override
-            public void onChanged(Notifications notifications) {
-notificationsList=new ArrayList<>();
-                notificationsList.addAll(notifications.getData());
-                notificationAdapter =new NotificationAdapter(notificationsList, NotificationFragment.this::onNotificationClick,getContext());
-                recyclerView.setAdapter(notificationAdapter);
+        userViewModel.getNotifications(getContext(), token).observe(getActivity(), notifications -> {
+            notificationsList = new ArrayList<>();
+            notificationsList.addAll(notifications.getData());
+            notificationAdapter = new NotificationAdapter(notificationsList, NotificationFragment.this, getContext());
+            recyclerView.setAdapter(notificationAdapter);
 
-              //  recycleview();
-              //  notificationAdapter.notifyDataSetChanged();
-            }
+
         });
     }
 
@@ -93,9 +90,8 @@ notificationsList=new ArrayList<>();
         Toast.makeText(getContext(), "asd", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent();
         if (notificationsList.get(postion).getStatus().equals("waiting")) {
-             intent = new Intent(getActivity(), DetailsRequestActivity.class);
+            intent = new Intent(getActivity(), DetailsRequestActivity.class);
 
-            //  intent.putExtra("id_event", responseRequestList.get(postion).getCarCenterId());
             intent.putExtra("id_request", notificationsList.get(postion).getRequestId());
             intent.putExtra("package_id", notificationsList.get(postion).getJsonMemberPackage().getId());
             intent.putExtra("status", notificationsList.get(postion).getStatus());
@@ -104,7 +100,6 @@ notificationsList=new ArrayList<>();
         if (notificationsList.get(postion).getStatus().equals("accepted")) {
             intent = new Intent(getActivity(), DetailsPaymentActivity.class);
 
-            //  intent.putExtra("id_event", responseRequestList.get(postion).getCarCenterId());
             intent.putExtra("id_request", notificationsList.get(postion).getId());
             intent.putExtra("package_id", notificationsList.get(postion).getJsonMemberPackage().getId());
             intent.putExtra("status", notificationsList.get(postion).getStatus());
@@ -113,9 +108,6 @@ notificationsList=new ArrayList<>();
         }
 
     }
-    public void  recycleview (){
-        notificationAdapter =new NotificationAdapter(notificationsList, this::onNotificationClick,getContext());
-        recyclerView.setAdapter(notificationAdapter);
 
-    }
+
 }

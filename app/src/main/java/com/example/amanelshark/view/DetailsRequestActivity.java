@@ -78,22 +78,18 @@ public class DetailsRequestActivity extends AppCompatActivity {
             activityDetailsRequestBinding.statusDetailsrequest.setText(detailsRequest.getData().getStatus());
             activityDetailsRequestBinding.requestidDetailsrequest.setText(String.valueOf(detailsRequest.getData().getId()));
         });
-        activityDetailsRequestBinding.ScaninvoiceDeatilsrequest.setOnClickListener(new View.OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.M)
-            @Override
-            public void onClick(View v) {
-                if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                }
-                if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                    //  ActivityCompat. requestPermissions(DetailsRequestActivity.this,new String[]{Manifest.permission.CAMERA},MY_CAMERA_PERMISSION_CODE);
-                    ActivityCompat.requestPermissions(DetailsRequestActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, MY_WRITE_PERMISSION_CODE);
+        activityDetailsRequestBinding.ScaninvoiceDeatilsrequest.setOnClickListener(v -> {
+            if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            }
+            if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                //  ActivityCompat. requestPermissions(DetailsRequestActivity.this,new String[]{Manifest.permission.CAMERA},MY_CAMERA_PERMISSION_CODE);
+                ActivityCompat.requestPermissions(DetailsRequestActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, MY_WRITE_PERMISSION_CODE);
 
-                } else {
-                    Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
-                    photoPickerIntent.setType("image/*");
-                    startActivityForResult(photoPickerIntent, RESULT_LOAD_IMG);
+            } else {
+                Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+                photoPickerIntent.setType("image/*");
+                startActivityForResult(photoPickerIntent, RESULT_LOAD_IMG);
 
-                }
             }
         });
     }

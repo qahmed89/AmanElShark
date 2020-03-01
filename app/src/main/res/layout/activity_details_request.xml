@@ -10,7 +10,7 @@
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
-            app:title="DetailsPayment"
+            app:title="@string/details_request"
             app:titleTextColor="@color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -45,7 +45,7 @@
                     android:textColor="@color/black"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Your Rquest">
+                    android:text="@string/your_rquest">
 
                 </TextView>
                 <View
@@ -73,7 +73,7 @@
                             android:textColor="@color/black"
 
                             android:layout_margin="15dp"
-                            android:text="Request Id :"
+                            android:text="@string/request_id"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
 
@@ -82,7 +82,7 @@
                             android:textColor="@color/black"
 
                             android:layout_margin="15dp"
-                            android:text="Package name :"
+                            android:text="@string/package_name"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
 
@@ -91,7 +91,7 @@
                             android:textColor="@color/black"
 
                             android:layout_margin="15dp"
-                            android:text="Center Name :"
+                            android:text="@string/center_services"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
 
@@ -100,7 +100,7 @@
                             android:textColor="@color/black"
 
                             android:layout_margin="15dp"
-                            android:text="Status :"
+                            android:text="@string/status"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
 
@@ -132,6 +132,8 @@
                             android:id="@+id/centern_detailsrequest"
                             android:layout_margin="15dp"
                             tools:text="Car Care "
+                            android:ellipsize="end"
+                            android:maxLines="1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
 

@@ -30,7 +30,7 @@ import java.util.Locale;
 public class SettingsFragment extends Fragment {
     SharedPreferences sharedPref;
     SharedPreferences.Editor editor;
-
+    String xx="ar";
     public SettingsFragment() {
         // Required empty public constructor
     }
@@ -61,35 +61,39 @@ public class SettingsFragment extends Fragment {
         });
 
         Button button1 = view.findViewById(R.id.lang_settings);
-        button1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String xx = LocaleHelper.getLanguage(getContext());
+        button1.setOnClickListener(v -> {
+          xx = LocaleHelper.getLanguage(getContext());
 
-                if( xx.equals("ar")){
-                    LocaleHelper.setLocale(getContext(),"ar");
+            if( xx.equals("ar")){
+          //      LocaleHelper.setLocale(getContext(),"ar");
 
-                    button1.setText("english");
-                    LocaleHelper.updateResources(getContext(),"en");
+                button1.setText("english");
+              //  xx="en";
 
-               }else {
-                    LocaleHelper.setLocale(getContext(),"en");
+                setLocale(xx);
 
-                    button1.setText("Arabic");
-                    LocaleHelper.updateResources(getContext(),"ar");
+               // LocaleHelper.updateResources(getContext(),"en");
 
-                }
+           }else {
+              //  LocaleHelper.setLocale(getContext(),"en");
+
+                button1.setText("Arabic");
+           //     xx="ar";
+
+                setLocale(xx);
+               // LocaleHelper.updateResources(getContext(),"ar");
+
             }
         });
 
     }
     public void setLocale(String lang) {
-        Locale myLocale = new Locale(lang);
-        Resources res = getResources();
-        DisplayMetrics dm = res.getDisplayMetrics();
-        Configuration conf = res.getConfiguration();
-        conf.locale = myLocale;
-        res.updateConfiguration(conf, dm);
+        Locale locale = new Locale(lang);
+        Locale.setDefault(locale);
+        Configuration config = new Configuration();
+        config.locale = locale;
+        getActivity().getBaseContext().getResources().updateConfiguration(config,  getActivity().getBaseContext().getResources().getDisplayMetrics());
+getActivity().recreate();
 
     }
 }

@@ -27,7 +27,7 @@ public class NetworkModel {
 
         return new Retrofit.Builder()
 
-                .baseUrl("http://192.168.1.172:5001/api/client/")
+                .baseUrl("http://192.168.1.172:5002/api/client/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(okHttpClient)

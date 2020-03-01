@@ -62,27 +62,18 @@ public class ServicesActivity extends AppCompatActivity implements ServiesAdpate
        x =  intent1.getIntExtra("package_id",0);
        car_id=intent1.getIntExtra("client_car_id",0);
         servicesBinding.shimmer.startShimmer();
-        userViewModel.getCentersRequests(getApplicationContext(), token).observe(this, new Observer<Centers>() {
-            @Override
-            public void onChanged(Centers centers) {
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        servicesBinding.shimmer.setVisibility(View.GONE);
-                        itemCentersList.addAll(centers.getData());
+        userViewModel.getCentersRequests(getApplicationContext(), token).observe(this, centers -> new Handler().postDelayed(() -> {
+            servicesBinding.shimmer.setVisibility(View.GONE);
+            itemCentersList.addAll(centers.getData());
 
-                        serviesAdpater = new ServiesAdpater(itemCentersList, getApplicationContext(), ServicesActivity.this::onServiesClick);
+            serviesAdpater = new ServiesAdpater(itemCentersList, getApplicationContext(), ServicesActivity.this::onServiesClick);
 
-                        servicesBinding.recycleview.setAdapter(serviesAdpater);
-                        serviesAdpater.setShowShimmer(false);
-                        serviesAdpater.notifyDataSetChanged();
+            servicesBinding.recycleview.setAdapter(serviesAdpater);
+            serviesAdpater.setShowShimmer(false);
+            serviesAdpater.notifyDataSetChanged();
 
-                        runLayoutAnimation(servicesBinding.recycleview);
-                    }
-                }, 1000);
-
-            }
-        });
+            runLayoutAnimation(servicesBinding.recycleview);
+        }, 1000));
 
 
 

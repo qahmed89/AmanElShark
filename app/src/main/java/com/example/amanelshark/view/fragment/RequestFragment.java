@@ -79,7 +79,7 @@ public class RequestFragment extends Fragment implements ResponseRequstAdapter.O
         recyclerView.setLayoutManager(layoutManager);
         userViewModel.getRespnseRequests(getContext(), token).observe(Objects.requireNonNull(getActivity()), responsRequest -> {
             responseRequestList.addAll(responsRequest.getData());
-            ResponseRequstAdapter responseRequstAdapter = new ResponseRequstAdapter(this::onResponseRequstClick, responseRequestList, getContext());
+            ResponseRequstAdapter responseRequstAdapter = new ResponseRequstAdapter(this, responseRequestList, getContext());
             recyclerView.setAdapter(responseRequstAdapter);
         });
 

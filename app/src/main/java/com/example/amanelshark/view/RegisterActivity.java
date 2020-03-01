@@ -77,49 +77,44 @@ public class RegisterActivity extends AppCompatActivity {
         sharedPref = getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
         editor = sharedPref.edit();
 
-        activityRegisterBinding.submitRegister.setOnClickListener(new View.OnClickListener() {
+        activityRegisterBinding.submitRegister.setOnClickListener(v -> {
+            activityRegisterBinding.placeholderRegister.layout.setVisibility(View.VISIBLE);
 
-
-            @Override
-            public void onClick(View v) {
-                activityRegisterBinding.placeholderRegister.layout.setVisibility(View.VISIBLE);
-
-                if (!validateEmail() | !validatePassword()) {
-                    activityRegisterBinding.placeholderRegister.layout.setVisibility(View.GONE);
-                    return;
-                } else
-                    userViewModel.isLoading().observe(RegisterActivity.this, isLoading -> {
-                        if (isLoading == true) {
-                            activityRegisterBinding.placeholderRegister.layout.setVisibility(View.VISIBLE);
-                            disable(activityRegisterBinding.registerLayout);
-                        } else {
-                            activityRegisterBinding.placeholderRegister.layout.setVisibility(View.GONE);
-                            enable(activityRegisterBinding.registerLayout);
-                        }
-
-                    });
-                userViewModel.getregisterRequests(activityRegisterBinding.emailRegister.getText().toString(), activityRegisterBinding.passwordRegister.getText().toString(), activityRegisterBinding.cPasswordRegister.getText().toString(), activityRegisterBinding.phoneRegister.getText().toString(), activityRegisterBinding.nameRegister.getText().toString(), v).observe(RegisterActivity.this, new Observer<Register>() {
-                    @Override
-                    public void onChanged(Register register) {
-                        editor.putString(getString(R.string.token), "Bearer " + register.getData().getToken()).apply();
-
-                        Intent intent = new Intent(getApplicationContext(), OnBoardActivity.class);
-                        startActivity(intent);
-                    }
-                });
-                userViewModel.errorMessage().observe(RegisterActivity.this, errorMessage -> {
-                    if (errorMessage != null) {
+            if (!validateEmail() | !validatePassword()) {
+                activityRegisterBinding.placeholderRegister.layout.setVisibility(View.GONE);
+                return;
+            } else
+                userViewModel.isLoading().observe(RegisterActivity.this, isLoading -> {
+                    if (isLoading == true) {
                         activityRegisterBinding.placeholderRegister.layout.setVisibility(View.VISIBLE);
-
-
+                        disable(activityRegisterBinding.registerLayout);
                     } else {
                         activityRegisterBinding.placeholderRegister.layout.setVisibility(View.GONE);
+                        enable(activityRegisterBinding.registerLayout);
                     }
+
                 });
+            userViewModel.getregisterRequests(activityRegisterBinding.emailRegister.getText().toString(), activityRegisterBinding.passwordRegister.getText().toString(), activityRegisterBinding.cPasswordRegister.getText().toString(), activityRegisterBinding.phoneRegister.getText().toString(), activityRegisterBinding.nameRegister.getText().toString(), v).observe(RegisterActivity.this, new Observer<Register>() {
+                @Override
+                public void onChanged(Register register) {
+                    editor.putString(getString(R.string.token), "Bearer " + register.getData().getToken()).apply();
+
+                    Intent intent = new Intent(getApplicationContext(), OnBoardActivity.class);
+                    startActivity(intent);
+                }
+            });
+            userViewModel.errorMessage().observe(RegisterActivity.this, errorMessage -> {
+                if (errorMessage != null) {
+                    activityRegisterBinding.placeholderRegister.layout.setVisibility(View.VISIBLE);
+
+
+                } else {
+                    activityRegisterBinding.placeholderRegister.layout.setVisibility(View.GONE);
+                }
+            });
 
 
 
-            }
         });
 
     }

@@ -109,39 +109,22 @@ public class ProfileFragment extends Fragment implements CarListAdapter.OnCarLis
     }
 
     private void getlistCar() {
-        userViewModel.getLisCarsRequests(getActivity(), token).observe(getActivity(), new Observer<ListCars>() {
-            @Override
-            public void onChanged(ListCars listCars) {
-                listCarsList.addAll(listCars.getData());
-                recyclerView.setAdapter(carListAdapter);
-
-                //  carListAdapter.notifyDataSetChanged();
-            }
+        userViewModel.getLisCarsRequests(getActivity(), token).observe(getActivity(), listCars -> {
+            listCarsList.addAll(listCars.getData());
+            recyclerView.setAdapter(carListAdapter);
         });
 
-//        phone.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//           Intent     intent= new Intent(getActivity(), MainHomeActivity.class);
-//                intent.putExtra("viewpager_position",1);
-//                getActivity().finish();
-//                startActivity(intent);
-//            }
-//        });
+
     }
 
     private void profile() {
-        userViewModel.getpofileRequests(getActivity(), token).observe(Objects.requireNonNull(getActivity()), new Observer<Profile>() {
-            @Override
-            public void onChanged(Profile profile) {
-                name_s = profile.getName();
-                phone_s = profile.getMobile();
-                email_s = profile.getEmail();
-                name.setText(name_s);
-                phone.setText(phone_s);
-                email.setText(email_s);
-            }
+        userViewModel.getpofileRequests(getActivity(), token).observe(Objects.requireNonNull(getActivity()), profile -> {
+            name_s = profile.getName();
+            phone_s = profile.getMobile();
+            email_s = profile.getEmail();
+            name.setText(name_s);
+            phone.setText(phone_s);
+            email.setText(email_s);
         });
     }
 

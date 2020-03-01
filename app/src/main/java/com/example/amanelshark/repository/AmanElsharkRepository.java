@@ -79,6 +79,7 @@ public class AmanElsharkRepository {
     public Single<CenterDetails> CentersDetails(String token, int id) {
         return amanElSharkServices.getCentersDetails(token, id);
     }
+
     public Single<Years> Years(String token) {
         return amanElSharkServices.getYears(token);
     }
@@ -98,29 +99,37 @@ public class AmanElsharkRepository {
     public Single<ListCars> CarsList(String token) {
         return amanElSharkServices.getListCars(token);
     }
-    public Single<CarDetails> CarDetails(String token,int id) {
-        return amanElSharkServices.getcarDetails(token,id);
+
+    public Single<CarDetails> CarDetails(String token, int id) {
+        return amanElSharkServices.getcarDetails(token, id);
     }
+
     public Single<Notifications> Notifications(String token) {
         return amanElSharkServices.getNotifications(token);
     }
-    public Single<RequestWarranty> ReqestWarranty(String token, int center_id,int package_id,int client_car_id) {
-        return amanElSharkServices.makeWarrentyRequest(token,center_id,package_id,client_car_id);
+
+    public Single<RequestWarranty> ReqestWarranty(String token, int center_id, int package_id, int client_car_id) {
+        return amanElSharkServices.makeWarrentyRequest(token, center_id, package_id, client_car_id);
     }
+
     public Single<ResponsRequest> ResponsRequest(String token) {
         return amanElSharkServices.getResponsRequest(token);
     }
-    public Single<UploadImage> UpladFileRequest(String token, int id, MultipartBody.Part  image) {
-        return amanElSharkServices.uploadInvoiceRequest(token,id,image);
+
+    public Single<UploadImage> UpladFileRequest(String token, int id, MultipartBody.Part image) {
+        return amanElSharkServices.uploadInvoiceRequest(token, id, image);
     }
+
     public Single<PackageDetails> PackageDetails(String token, int id) {
-        return amanElSharkServices.getPackageDetails(token,id);
+        return amanElSharkServices.getPackageDetails(token, id);
     }
+
     public Single<RequestPayment> RequestPayment(String token, RequestPayment requestPayment) {
-        return amanElSharkServices.addPaymentRequest(token,requestPayment);
+        return amanElSharkServices.addPaymentRequest(token, requestPayment);
     }
+
     public Single<DetailsRequest> DetailsRequest(String token, int id) {
-        return amanElSharkServices.getRequestDetails(token,id);
+        return amanElSharkServices.getRequestDetails(token, id);
     }
 //    public Single<RequestVocation> sendvocationRequestmodelSingle(String type , String description, String from , String to , String id){
     //      return crmServices.sendVocationRequest(type,description,from,to,id);
