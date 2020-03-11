@@ -110,6 +110,9 @@ public class ProfileFragment extends Fragment implements CarListAdapter.OnCarLis
 
     private void getlistCar() {
         userViewModel.getLisCarsRequests(getActivity(), token).observe(getActivity(), listCars -> {
+            if(listCars.getData()==null){
+                Toast.makeText(getContext(), "no Cars", Toast.LENGTH_SHORT).show();
+            }else
             listCarsList.addAll(listCars.getData());
             recyclerView.setAdapter(carListAdapter);
         });

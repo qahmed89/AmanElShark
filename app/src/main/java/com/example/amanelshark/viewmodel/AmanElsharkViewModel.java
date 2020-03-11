@@ -227,6 +227,9 @@ public class AmanElsharkViewModel extends ViewModel {
                 .subscribeWith(new DisposableSingleObserver<Notifications>() {
                     @Override
                     public void onSuccess(Notifications notifications) {
+                        if (notifications.getData()==null){
+                            Toast.makeText(context, "no Data", Toast.LENGTH_SHORT).show();
+                        }else
 notificationsModel.setValue(notifications);
                     }
 
@@ -328,6 +331,9 @@ requestDetailsModel.setValue(detailsRequest);
                 .subscribeWith(new DisposableSingleObserver<ResponsRequest>() {
                     @Override
                     public void onSuccess(ResponsRequest responsRequest) {
+                        if (responsRequest.getData()==null){
+                            Toast.makeText(context, "no Data", Toast.LENGTH_SHORT).show();
+                        }else
                         responseRequestModel.setValue(responsRequest);
                     }
 
@@ -400,7 +406,9 @@ requestDetailsModel.setValue(detailsRequest);
                 .subscribeWith(new DisposableSingleObserver<ListCars>() {
                     @Override
                     public void onSuccess(ListCars listCars) {
-
+if (listCars==null){
+    Toast.makeText(context, "No cars", Toast.LENGTH_SHORT).show();
+}else
                         listCarsModel.setValue(listCars);
                     }
 
