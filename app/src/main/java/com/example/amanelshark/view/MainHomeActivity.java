@@ -18,11 +18,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.hardware.display.DisplayManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Switch;
 import android.widget.Toast;
 
@@ -65,13 +67,10 @@ public class MainHomeActivity extends AppCompatActivity {
     RequestFragment requestFragment = new RequestFragment();
     NotificationFragment notificationFragment = new NotificationFragment();
     SettingsFragment settingsFragment = new SettingsFragment();
-
     ActivityMainHomeBinding activityMainHomeBinding;
     String x, xx;
     int viewpager_postion = 5;
     BottomBarAdapter bottomBarAdapter;
-    // Pusher pusher;
-    //  Channel channel;
     SharedPreferences sharedPref;
     SharedPreferences.Editor editor;
     String token;
@@ -79,23 +78,27 @@ public class MainHomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE,
+                WindowManager.LayoutParams.FLAG_SECURE);
         setContentView(R.layout.activity_main_home);
 
-        // ...
         activityMainHomeBinding = DataBindingUtil.setContentView(this, R.layout.activity_main_home);
         sharedPref = getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
         editor = sharedPref.edit();
         token = sharedPref.getString(getString(R.string.token), "null");
+
         bottomBarAdapter = new BottomBarAdapter(getSupportFragmentManager());
         bottomBarAdapter.addFragments(profileFragment);
         bottomBarAdapter.addFragments(requestFragment);
         bottomBarAdapter.addFragments(notificationFragment);
         bottomBarAdapter.addFragments(settingsFragment);
         activityMainHomeBinding.viewPager2.setOffscreenPageLimit(4);
-        Intent intent = getIntent();
-        viewpager_postion = intent.getIntExtra("viewpager_position", 5);
         activityMainHomeBinding.viewPager2.setAdapter(bottomBarAdapter);
         activityMainHomeBinding.viewPager2.setPagingEnabled(false);
+
+        Intent intent = getIntent();
+        viewpager_postion = intent.getIntExtra("viewpager_position", 5);
+
         activityMainHomeBinding.bottomNavigationView.setOnNavigationItemSelectedListener(menuItem -> {
 
             switch (menuItem.getItemId()) {
@@ -140,7 +143,7 @@ public class MainHomeActivity extends AppCompatActivity {
                     activityMainHomeBinding.viewPager2.setCurrentItem(3);
                     activityMainHomeBinding.floatingbutton.setVisibility(View.GONE);
                     activityMainHomeBinding.toolbar.setTitle(R.string.settings_title_bar);
-activityMainHomeBinding.swip.setEnabled(false);
+                    activityMainHomeBinding.swip.setEnabled(false);
                     BadgeDrawable badgesss = activityMainHomeBinding.bottomNavigationView.getOrCreateBadge(menuItem.getItemId());
                     badgesss.setVisible(false);
 
@@ -169,9 +172,7 @@ activityMainHomeBinding.swip.setEnabled(false);
 //        authorizer.setHeaders(headers);
         PusherOptions options = new PusherOptions();
         options.setCluster("eu");
-//        options.setAuthorizer(authorizer);
-//        options.setWsPort(5001);
-//        options.setEncrypted(true);
+
         Pusher pusher = new Pusher("db9e201a6ca245d31338", options);
 
 
@@ -207,10 +208,7 @@ activityMainHomeBinding.swip.setEnabled(false);
             }
 
             System.out.println("Received event with data: " + event.toString());
-//                String title = data.get("title");
-//                String body = data.get("body");
-//                Services services = new Services();
-//                services.sss("asd","asss");
+
             // Create an Intent for the activity you want to start
             Intent resultIntent = new Intent(getApplicationContext(), MainHomeActivity.class);
 // Create the TaskStackBuilder and add the intent, which inflates the back stack
@@ -253,19 +251,17 @@ activityMainHomeBinding.swip.setEnabled(false);
             }
             if (activityMainHomeBinding.viewPager2.getCurrentItem() == 1) {
                 bottomBarAdapter.setFragmentsFragments(requestFragment, 1);
-                //  activityMainHomeBinding.viewPager2.getAdapter().startUpdate(requestFragment.getView());
                 activityMainHomeBinding.viewPager2.setAdapter(bottomBarAdapter);
                 activityMainHomeBinding.swip.setRefreshing(false);
                 activityMainHomeBinding.bottomNavigationView.setSelectedItemId(R.id.request);
             }
             if (activityMainHomeBinding.viewPager2.getCurrentItem() == 2) {
                 bottomBarAdapter.setFragmentsFragments(notificationFragment, 2);
-                //  activityMainHomeBinding.viewPager2.getAdapter().startUpdate(requestFragment.getView());
                 activityMainHomeBinding.viewPager2.setAdapter(bottomBarAdapter);
                 activityMainHomeBinding.swip.setRefreshing(false);
                 activityMainHomeBinding.bottomNavigationView.setSelectedItemId(R.id.notification);
             }
-         
+
         });
 
         String instanceId = "b9efe592-ffe7-4aeb-8ecc-c049a3d33448";
